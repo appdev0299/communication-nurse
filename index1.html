@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<?php include_once('config/head.php'); ?>
+
+<body class="starter-page-page">
+
+    <?php include_once('config/header.php'); ?>
+
+    <main class="main">
+
+        <!-- Page Title -->
+        <div class="page-title" data-aos="fade">
+            <div class="container d-lg-flex justify-content-between align-items-center">
+                <h1 class="mb-2 mb-lg-0">Starter Page</h1>
+                <nav class="breadcrumbs">
+                    <ol>
+                        <li><a href="index.html">Home</a></li>
+                        <li class="current">Starter Page</li>
+                    </ol>
+                </nav>
+            </div>
+        </div><!-- End Page Title -->
+
+        <!-- Contact Section -->
+        <section id="contact" class="contact section">
+            <!-- Section Title -->
+            <div class="container section-title" data-aos="fade-up">
+                <h2>แบบฟอร์มการรับบริการ</h2>
+                <p>หน่วยสื่อสารและภาพลักษณ์องค์กร</p>
+            </div><!-- End Section Title -->
+
+            <div class="container" data-aos="fade-up" data-aos-delay="100">
+                <div class="col-lg-12">
+                    <form id="myForm" action="" method="POST">
+                        <div class="formbold-steps center">
+                            <ul>
+                                <li class="formbold-step-menu1 active">
+                                    <span>1</span>
+                                    ข้อมูลส่วนตัว
+                                </li>
+                                <li class="formbold-step-menu2">
+                                    <span>2</span>
+                                    ความประสงค์ขอรับบริการ
+                                </li>
+                                <li class="formbold-step-menu3">
+                                    <span>3</span>
+                                    รายละเอียดไฟล์
+                                </li>
+                                <li class="formbold-step-menu4">
+                                    <span>4</span>
+                                    ตรวจสอบข้อมูล
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="formbold-form-step-1 active">
+                            <div class="formbold-input-flex">
+                                <div>
+                                    <label for="fullname" class="formbold-form-label">ชื่อ-สกุล</label>
+                                    <input type="text" name="fullname" placeholder="ชื่อ-สกุล" id="fullname" class="formbold-form-input" />
+                                </div>
+                                <div>
+                                    <label for="department" class="formbold-form-label">หน่วยงาน/สำนักวิชา</label>
+                                    <select name="department" id="department" class="formbold-form-input">
+                                        <option value="">กรุณาเลือกหน่วยงาน/สำนักวิชา</option>
+                                        <option value="nursing">คณะพยาบาลศาสตร์</option>
+                                        <option value="medicine">คณะแพทยศาสตร์</option>
+                                        <option value="engineering">คณะวิศวกรรมศาสตร์</option>
+                                        <option value="science">คณะวิทยาศาสตร์</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="formbold-input-flex">
+                                <div>
+                                    <label for="tel" class="formbold-form-label">โทรศัพท์</label>
+                                    <input type="number" name="tel" placeholder="โทรศัพท์" id="tel" class="formbold-form-input" />
+                                </div>
+                            </div>
+                            <div class="formbold-input-flex-radio row">
+                                <div class="col-md-4">
+                                    <input type="radio" name="dob" id="dob_academic" value="บุคลากรสายวิชาการ" class="formbold-form-input" />
+                                    <label for="dob_academic" class="formbold-form-label">บุคลากรสายวิชาการ</label>
+                                </div>
+                                <div class="col-md-4">
+                                    <input type="radio" name="dob" id="dob_support" value="บุคลากรสายสนับสนุน" class="formbold-form-input" />
+                                    <label for="dob_support" class="formbold-form-label">บุคลากรสายสนับสนุน</label>
+                                </div>
+                                <div class="col-md-4">
+                                    <input type="radio" name="dob" id="dob_student" value="นักศึกษา" class="formbold-form-input" />
+                                    <label for="dob_student" class="formbold-form-label">นักศึกษา</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="formbold-form-step-2">
+                            <div class="formbold-input-flex-checkbox row">
+                                <div class="col-md-3 ">
+                                    <input type="checkbox" name="sources" id="source_website" value="Website คณะพยาบาลศาสตร์" class="formbold-form-input" />
+                                    <label for="source_website" class="formbold-form-label">Website คณะพยาบาลศาสตร์</label>
+                                </div>
+                                <div class="col-md-3">
+                                    <input type="checkbox" name="sources" id="source_facebook_thai" value="Facebook Official (TH)" class="formbold-form-input" />
+                                    <label for="source_facebook_thai" class="formbold-form-label">Facebook Official (TH)</label>
+                                </div>
+                                <div class="col-md-3">
+                                    <input type="checkbox" name="sources" id="source_facebook_eng" value="Facebook Official (Eng)" class="formbold-form-input" />
+                                    <label for="source_facebook_eng" class="formbold-form-label">Facebook Official (Eng)</label>
+                                </div>
+                                <div class="col-md-3">
+                                    <input type="checkbox" name="sources" id="source_line" value="Line Official" class="formbold-form-input" />
+                                    <label for="source_line" class="formbold-form-label">Line Official</label>
+                                </div>
+                                <div class="col-md-3">
+                                    <input type="checkbox" name="sources" id="source_email" value="Email" class="formbold-form-input" />
+                                    <label for="source_email" class="formbold-form-label">Email</label>
+                                </div>
+                                <div class="col-md-3">
+                                    <input type="checkbox" name="sources" id="source_linkedin" value="LinkedIn" class="formbold-form-input" />
+                                    <label for="source_linkedin" class="formbold-form-label">LinkedIn</label>
+                                </div>
+                                <div class="col-md-3">
+                                    <input type="checkbox" name="sources" id="source_twitter" value="Twitter" class="formbold-form-input" />
+                                    <label for="source_twitter" class="formbold-form-label">Twitter</label>
+                                </div>
+                                <div class="col-md-3">
+                                    <input type="checkbox" name="sources" id="source_instagram" value="Instagram" class="formbold-form-input" />
+                                    <label for="source_instagram" class="formbold-form-label">Instagram</label>
+                                </div>
+                                <div class="col-md-3">
+                                    <input type="checkbox" name="sources" id="source_youtube" value="Youtube" class="formbold-form-input" />
+                                    <label for="source_youtube" class="formbold-form-label">Youtube</label>
+                                </div>
+                                <div class="col-md-3">
+                                    <input type="checkbox" name="sources" id="source_digital_signage" value="ป้ายดิจิทัล คณะ" class="formbold-form-input" />
+                                    <label for="source_digital_signage" class="formbold-form-label">ป้ายดิจิทัล คณะ</label>
+                                </div>
+                                <div class="col-md-3">
+                                    <input type="checkbox" name="sources" id="source_bulletin_board" value="ป้ายประชาสัมพันธ์" class="formbold-form-input" />
+                                    <label for="source_bulletin_board" class="formbold-form-label">ป้ายประชาสัมพันธ์</label>
+                                </div>
+                                <div class="col-md-3">
+                                    <input type="checkbox" name="sources" id="source_media_coordination" value="ประสานงานสื่อมวลชนเพื่อร่วมทำข่าว" class="formbold-form-input" />
+                                    <label for="source_media_coordination" class="formbold-form-label">ประสานงานสื่อมวลชนเพื่อร่วมทำข่าว</label>
+                                </div>
+                                <div class="col-md-3">
+                                    <input type="checkbox" name="sources" id="source_announcements" value="ประกาศเสียงตามสาย" class="formbold-form-input" />
+                                    <label for="source_announcements" class="formbold-form-label">ประกาศเสียงตามสาย</label>
+                                </div>
+                                <div class="col-md-3">
+                                    <input type="checkbox" name="sources" id="source_other" value="อื่นๆ" class="formbold-form-input" />
+                                    <label for="source_other" class="formbold-form-label">อื่นๆ</label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="formbold-form-step-3">
+                            <div class="formbold-input-flex-radio row">
+                                <div class="col-md-6">
+                                    <input type="radio" name="option" id="option_file" class="formbold-form-input" />
+                                    <label for="option_file" class="formbold-form-label">อัปโหลดไฟล์</label>
+                                    <div class="col-md-12" id="fileUploadDiv" style="display: none;">
+                                        <input type="file" name="fileToUpload" placeholder="fileToUpload" class="formbold-form-input" />
+                                        <input type="file" name="fileToUpload" placeholder="fileToUpload" class="formbold-form-input" />
+                                        <input type="file" name="fileToUpload" placeholder="fileToUpload" class="formbold-form-input" />
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <input type="radio" name="option" id="option_url" class="formbold-form-input" />
+                                    <label for="option_url" class="formbold-form-label">แชร์ผ่าน OneDrive, GoogleDrive หรืออื่นๆ</label>
+                                    <div class="col-md-12" id="fileUploadURLDiv" style="display: none;">
+                                        <input type="text" name="fileToUploadURL" placeholder="fileToUploadURL" class="formbold-form-input" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="formbold-form-step-4">
+                            <h2>ตรวจสอบข้อมูล</h2>
+                            <div>
+                                <p>ชื่อ-สกุล: <span id="review_fullname"></span></p>
+                                <p>หน่วยงาน/สำนักวิชา: <span id="review_department"></span></p>
+                                <p>โทรศัพท์: <span id="review_tel"></span></p>
+                                <p>ประเภท: <span id="review_dob"></span></p>
+                                <p>แหล่งที่มา: <span id="review_sources"></span></p>
+                            </div>
+                        </div>
+
+
+                        <div class="formbold-form-btn-wrapper">
+                            <button class="formbold-back-btn">
+                                Back
+                            </button>
+
+                            <button class="formbold-btn">
+                                Next Step
+                                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <g clip-path="url(#clip0_1675_1807)">
+                                        <path d="M10.7814 7.33312L7.20541 3.75712L8.14808 2.81445L13.3334 7.99979L8.14808 13.1851L7.20541 12.2425L10.7814 8.66645H2.66675V7.33312H10.7814Z" fill="white" />
+                                    </g>
+                                    <defs>
+                                        <clipPath id="clip0_1675_1807">
+                                            <rect width="16" height="16" fill="white" />
+                                        </clipPath>
+                                    </defs>
+                                </svg>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+
+            </div>
+            </div>
+        </section>
+
+    </main>
+
+    <?php include_once('config/footer.php'); ?>
+
+    <!-- Scroll Top -->
+    <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+    <!-- Preloader -->
+    <div id="preloader"></div>
+
+    <!-- Vendor JS Files -->
+    <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/vendor/php-email-form/validate.js"></script>
+    <script src="assets/vendor/aos/aos.js"></script>
+    <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
+    <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
+
+    <!-- Main JS File -->
+    <script src="assets/js/main.js"></script>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const optionFile = document.getElementById('option_file');
+            const optionURL = document.getElementById('option_url');
+            const fileUploadDiv = document.getElementById('fileUploadDiv');
+            const fileUploadURLDiv = document.getElementById('fileUploadURLDiv');
+
+            optionFile.addEventListener('change', function() {
+                if (optionFile.checked) {
+                    fileUploadDiv.style.display = 'block';
+                    fileUploadURLDiv.style.display = 'none';
+                }
+            });
+
+            optionURL.addEventListener('change', function() {
+                if (optionURL.checked) {
+                    fileUploadDiv.style.display = 'none';
+                    fileUploadURLDiv.style.display = 'block';
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>
