@@ -3,14 +3,14 @@
     <div class="container footer-top">
         <div class="row gy-4">
             <div class="col-lg-4 col-md-6 footer-about">
-                <a href="index.php" class="logo d-flex align-items-center me-auto">
-                    <img src="assets/img/logo.png" alt="">
+                <a href="../home/index" class="logo d-flex align-items-center me-auto">
+                    <img src="../assets/img/logo.png" alt="">
                 </a>
                 <div class="footer-contact pt-3">
-                    <p>A108 Adam Street</p>
-                    <p>New York, NY 535022</p>
-                    <p class="mt-3"><strong>Phone:</strong> <span>+1 5589 55488 55</span></p>
-                    <p><strong>Email:</strong> <span>info@example.com</span></p>
+                    <p>110/406 คณะพยาบาลศาสตร์ มหาวิทยาลัยเชียงใหม่</p>
+                    <p>ถนนอินทวโรรส ตำบลสุเทพ อำเภอเมือง จังหวัดเชียงใหม่ 50200</p>
+                    <p class="mt-3"><strong>โทรศัพท์:</strong> <span>053-949219</span></p>
+                    <p><strong>Email:</strong> <span>communication.nurse@gmail.com</span></p>
                 </div>
                 <div class="social-links d-flex mt-4">
                     <a href=""><i class="bi bi-twitter-x"></i></a>
@@ -26,7 +26,6 @@
                     <li><a href="#">หน้าหลัก</a></li>
                     <li><a href="#">เกี่ยวกับเรา</a></li>
                     <li><a href="#">เงื่อนไขการใช้บริการ</a></li>
-                    <li><a href="#">ช่องทางการติดต่อ</a></li>
                 </ul>
             </div>
 
@@ -42,14 +41,8 @@
     </div>
 
     <div class="container copyright text-center mt-4">
-        <p>© <span>Copyright</span> <strong class="px-1 sitename">QuickStart</strong><span>All Rights Reserved</span></p>
-        <div class="credits">
-            <!-- All the links in the footer should remain intact. -->
-            <!-- You can delete the links only if you've purchased the pro version. -->
-            <!-- Licensing information: https://bootstrapmade.com/license/ -->
-            <!-- Purchase the pro version with working PHP/AJAX contact form: [buy-url] -->
-            Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
-        </div>
+        <p>© <span>Copyright</span> <strong class="px-1 sitename">Corporate Communications Faculty of Nursing CMU</strong><span>All Rights Reserved</span></p>
+
     </div>
 
 </footer>

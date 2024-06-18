@@ -1,18 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<?php include_once('config/head.php'); ?>
+<?php include_once('../config/head.php'); ?>
 
 <body class="index-page">
 
-    <?php include_once('config/header.php'); ?>
+    <?php include_once('../config/header.php'); ?>
 
     <main class="main">
 
         <!-- Hero Section -->
         <section id="hero" class="hero section">
             <div class="hero-bg">
-                <img src="assets/img/hero-bg-light.png" alt="">
+                <img src="../assets/img/hero-bg-light.png" alt="">
             </div>
         </section><!-- /Hero Section -->
 
@@ -40,7 +40,7 @@
                     </div>
 
                     <div class="col-lg-6 order-1 order-lg-2" data-aos="fade-up" data-aos-delay="200">
-                        <img src="assets/img/features-2.jpg" class="img-fluid" alt="">
+                        <img src="../assets/img/features-2.jpg" class="img-fluid" alt="">
                     </div>
 
                 </div><!-- Features Item -->
@@ -68,7 +68,7 @@
                             <div>
                                 <h3>ประชาสัมพันธ์สื่อออนไลน์</h3>
                                 <p>เว็บไซต์, เฟซบุ๊ก, ทวิตเตอร์, อินสตาแกรม, ยูทูป</p>
-                                <a href="ccfn-form-online.php" class="read-more stretched-link">เลือกบริการ <i class="bi bi-arrow-right"></i></a>
+                                <a href="../service/ccfn-form-online-social" class="read-more stretched-link">เลือกบริการ <i class="bi bi-arrow-right"></i></a>
                             </div>
                         </div>
                     </div><!-- End Service Item -->
@@ -79,7 +79,7 @@
                             <div>
                                 <h3>ออกแบบสื่อประชาสัมพันธ์</h3>
                                 <p>อินโฟกราฟิก, โปสเตอร์, ป้ายรถไฟฟ้า, ป้ายไวนิล</p>
-                                <a href="ccfn-form-online.php" class="read-more stretched-link">เลือกบริการ <i class="bi bi-arrow-right"></i></a>
+                                <a href="../service/ccfn-form-online" class="read-more stretched-link">เลือกบริการ <i class="bi bi-arrow-right"></i></a>
                             </div>
                         </div>
                     </div>
@@ -91,7 +91,7 @@
 
     </main>
 
-    <?php include_once('config/footer.php'); ?>
+    <?php include_once('../config/footer.php'); ?>
 
     <!-- Scroll Top -->
     <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
@@ -100,14 +100,14 @@
     <div id="preloader"></div>
 
     <!-- Vendor JS Files -->
-    <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <script src="assets/vendor/php-email-form/validate.js"></script>
-    <script src="assets/vendor/aos/aos.js"></script>
-    <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
-    <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
+    <script src="../assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="../assets/vendor/php-email-form/validate.js"></script>
+    <script src="../assets/vendor/aos/aos.js"></script>
+    <script src="../assets/vendor/glightbox/js/glightbox.min.js"></script>
+    <script src="../assets/vendor/swiper/swiper-bundle.min.js"></script>
 
     <!-- Main JS File -->
-    <script src="assets/js/main.js"></script>
+    <script src="../assets/js/main.js"></script>
 
 </body>
 

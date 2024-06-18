@@ -1,15 +1,18 @@
 <header id="header" class="header d-flex align-items-center fixed-top">
     <div class="container-fluid container-xl position-relative d-flex align-items-center">
-        <a href="index.php" class="logo d-flex align-items-center me-auto">
-            <img src="assets/img/logo.png"  alt="">
+        <a href="../home/index" class="logo d-flex align-items-center me-auto">
+            <img src="../assets/img/logo.png" alt="">
         </a>
         <nav id="navmenu" class="navmenu">
             <ul>
-                <li><a href="index.php#hero" class="active">หน้าหลัก</a></li>
-                <li><a href="index.php#about">เกี่ยวกับเรา</a></li>
-                <li><a href="index.php#features">เงื่อนไขการใช้บริการ</a></li>
-                <li><a href="index.php#services">บริการออนไลน์</a></li>
-                <li><a href="index.php#contact">ช่องทางการติดต่อ</a></li>
+                <li><a href="../home/index#hero" class="active">หน้าหลัก</a></li>
+                <li><a href="../home/index#about">เกี่ยวกับเรา</a></li>
+                <li class="dropdown"><a href="../home/index#services"><span>บริการออนไลน์</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
+                    <ul>
+                        <li><a href="../service/ccfn-form-online-social">ประชาสัมพันธ์สื่อออนไลน์</a></li>
+                        <li><a href="../service/ccfn-form-online">ออกแบบสื่อประชาสัมพันธ์</a></li>
+                    </ul>
+                </li>
                 <li class="dropdown"><a href="#"><span>CI</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
                     <ul>
                         <li><a href="#">Dropdown 1</a></li>
