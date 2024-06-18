@@ -38,7 +38,6 @@
                     <div class="col-lg-12">
                         <form method="post" class="php-email-form" enctype="multipart/form-data" data-aos-delay="400">
                             <div class="row gy-4">
-
                                 <div class="col-md-6">
                                     <input type="text" name="fullname" id="fullname" class="form-control" placeholder="ชื่อ-สกุล">
                                 </div>
@@ -102,9 +101,9 @@
                                 </div>
 
                                 <div class="col-md-6" id="fileUploadDiv" style="display: none;">
-                                    <input type="file" class="form-control" name="fileToUpload1" id="fileToUpload1" accept="upload/*">
-                                    <input type="file" class="form-control" name="fileToUpload2" id="fileToUpload2" accept="upload/*">
-                                    <input type="file" class="form-control" name="fileToUpload3" id="fileToUpload3" accept="upload/*">
+                                    <input type="file" class="form-control" name="fileToUpload1" id="fileToUpload1" accept="image/*">
+                                    <input type="file" class="form-control" name="fileToUpload2" id="fileToUpload2" accept="image/*">
+                                    <input type="file" class="form-control" name="fileToUpload3" id="fileToUpload3" accept="image/*">
                                 </div>
 
                                 <div class="col-md-12">
@@ -174,6 +173,12 @@
                                     <textarea class="form-control" name="details" rows="6" placeholder="รายละเอียดข่าว"></textarea>
                                 </div>
 
+                                <div>
+                                    <input type="hidden" name="status_user">
+                                    <input type="hidden" name="status_admin">
+                                    <input type="hidden" name="status_ss">
+                                </div>
+
                                 <div class="col-md-12 text-center">
                                     <div class="loading">Loading</div>
                                     <div class="error-message"></div>
@@ -182,7 +187,7 @@
                                 </div>
                             </div>
                         </form>
-                        <?php include_once('save_data.php'); ?>
+                        <?php include_once('save_data_s.php'); ?>
                     </div><!-- End Contact Form -->
 
                 </div>
