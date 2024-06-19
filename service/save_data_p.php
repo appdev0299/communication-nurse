@@ -3,7 +3,60 @@ include_once('../config/connect.php'); // Include database connection
 
 // Check if form was submitted
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Retrieve form data and sanitize
+    // Initialize an array to store missing fields
+    $missing_fields = [];
+
+    // Check each required field
+    if (empty($_POST['fullname'])) {
+        $missing_fields[] = "ชื่อ-สกุล";
+    }
+
+    if (empty($_POST['department'])) {
+        $missing_fields[] = "ภาควิชา/หน่วยงาน";
+    }
+
+    if (empty($_POST['tel'])) {
+        $missing_fields[] = "โทรศัพท์";
+    }
+
+    if (empty($_POST['personnel'])) {
+        $missing_fields[] = "ประเภทบุคลากร";
+    }
+
+    if (empty($_POST['email'])) {
+        $missing_fields[] = "อีเมล";
+    }
+
+    if (empty($_POST['social'])) {
+        $missing_fields[] = "ช่องทางประชาสัมพันธ์";
+    }
+
+    if (empty($_POST['communicate'])) {
+        $missing_fields[] = "หมวดการสื่อสาร";
+    }
+
+    // If any fields are missing, display an error and stop further execution
+    if (!empty($missing_fields)) {
+        $error_message = "รายละเอียด : " . implode(', ', $missing_fields);
+
+        echo "
+        <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css'>
+        <script src='https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.all.min.js'></script>
+        <script>
+            Swal.fire({
+                icon: 'error',
+                title: 'กรุณากรอกข้อมูลให้ครบ',
+                text: '$error_message',
+                showConfirmButton: true,
+                confirmButtonText: 'ตกลง'
+            }).then(function() {
+                window.history.back();
+            });
+        </script>";
+
+        die(); // หยุดการทำงานต่อไป
+    }
+
     $fullname = htmlspecialchars($_POST['fullname']);
     $department = htmlspecialchars($_POST['department']);
     $tel = htmlspecialchars($_POST['tel']);
@@ -41,19 +94,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         if (!move_uploaded_file($file_tmp, $file_dest)) {
             // File upload failed
             echo "
-            <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css'>
-            <script src='https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.all.min.js'></script>
-            <script>
-                Swal.fire({
-                    position: 'top-end',
-                    icon: 'error',
-                    title: 'File Upload Failed',
-                    showConfirmButton: false,
-                    timer: 3500
-                }).then(function() {
-                    window.location.href = 'ccfn-form-online-production'; // Redirect to a specific page after error
-                });
-            </script>";
+        <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css'>
+        <script src='https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.all.min.js'></script>
+        <script>
+            Swal.fire({
+                icon: 'error',
+                title: 'กรุณาอัพโหลดไพล์',
+                showConfirmButton: true
+            }).then(function() {
+                window.history.back();
+            });
+        </script>";
             die(); // Stop further execution
         }
     }

@@ -17,7 +17,7 @@
                 <h1 class="mb-2 mb-lg-0">บริการออนไลน์</h1>
                 <nav class="breadcrumbs">
                     <ol>
-                        <li><a href="../hoem/index">หน้าหลัก</a></li>
+                        <li><a href="../home/index">หน้าหลัก</a></li>
                         <li class="current">บริการออนไลน์</li>
                     </ol>
                 </nav>
@@ -33,10 +33,9 @@
                     <div class="col-lg-2" data-aos="fade-up" data-aos-delay="100">
 
                         <div class="service-box">
-                            <h4>Download Catalog</h4>
+                            <h4>ดาวน์โหลดแบบฟอร์ม</h4>
                             <div class="download-catalog">
-                                <a href="#"><i class="bi bi-filetype-pdf"></i><span>Catalog PDF</span></a>
-                                <a href="#"><i class="bi bi-file-earmark-word"></i><span>Catalog DOC</span></a>
+                                <a href="#"><i class="bi bi-filetype-pdf"></i><span>แบบฟอร์มการรับบริการหน่วยสื่อสารและภาพลักษณ์องค์กร</span></a>
                             </div>
                         </div>
 
@@ -52,65 +51,83 @@
                         $stmt->execute();
                         $row = $stmt->fetch(PDO::FETCH_ASSOC);
 
+                        if ($row) {
+                            $file = $row['production_file'];
+                            $file_path = '../files/' . $file;
 
-
+                            // ตรวจสอบว่าไฟล์มีอยู่จริง
+                            if (file_exists($file_path)) {
+                                $file_link = htmlspecialchars($file_path);
+                            } else {
+                                $file_link = '#';
+                            }
                     ?>
-                        <div class="col-lg-10 ps-lg-5" data-aos="fade-up" data-aos-delay="200">
-                            <div class="timeline-grid">
-                                <div>
-                                    <ul>
-                                        <?php if ($row['status_user'] == 1) : ?>
-                                            <li><i class="bi bi-check-circle"></i> <span>ร้องขอสำเร็จ</span></li>
-                                        <?php elseif ($row['status_user'] == 0) : ?>
-                                            <li><i class="bi bi-exclamation-circle"></i> <span>เกิดข้อผิดพลาด</span></li>
-                                        <?php else : ?>
-                                            <li><i class="bi bi-question-circle"></i> <span>สถานะไม่ทราบ</span></li>
-                                        <?php endif; ?>
-                                    </ul>
-                                </div>
-                                <div>
-                                    <ul>
-                                        <?php if ($row['status_admin'] == 1) : ?>
-                                            <li><i class="bi bi-check-circle"></i> <span>ผ่านการตรวจสอบจากเจ้าหน้าที่</span></li>
-                                        <?php elseif ($row['status_admin'] == 0) : ?>
-                                            <li><i class="bi bi-exclamation-circle"></i> <span>ไม่ผ่านการตรวจสอบจากเจ้าหน้าที่</span></li>
-                                        <?php else : ?>
-                                            <li><i class="bi bi-question-circle"></i> <span>สถานะไม่ทราบ</span></li>
-                                        <?php endif; ?>
-                                    </ul>
-                                </div>
-                                <div>
-                                    <ul>
-                                        <?php if ($row['status_ss'] == 1) : ?>
-                                            <li><i class="bi bi-check-circle"></i> <span>ร้องขอสำเร็จ</span></li>
-                                        <?php elseif ($row['status_ss'] == 0) : ?>
-                                            <li><i class="bi bi-exclamation-circle"></i> <span>เกิดข้อผิดพลาด</span></li>
-                                        <?php else : ?>
-                                            <li><i class="bi bi-question-circle"></i> <span>สถานะไม่ทราบ</span></li>
-                                        <?php endif; ?>
-                                    </ul>
-                                </div>
-                            </div>
+                            <div class="col-lg-10 ps-lg-5" data-aos="fade-up" data-aos-delay="200">
+                                <div class="timeline-grid">
+                                    <div>
+                                        <ul>
+                                            <?php if ($row['status_user'] == 1) : ?>
+                                                <li><i class="bi bi-check-circle"></i> <span>ร้องขอสำเร็จ</span></li>
+                                            <?php elseif ($row['status_user'] == 0) : ?>
+                                                <li><i class="bi bi-exclamation-circle"></i> <span>เกิดข้อผิดพลาด</span></li>
+                                            <?php else : ?>
+                                                <li><i class="bi bi-question-circle"></i> <span>สถานะไม่ทราบ</span></li>
+                                            <?php endif; ?>
+                                        </ul>
+                                    </div>
+                                    <div>
+                                        <ul>
+                                            <?php if ($row['status_admin'] == 1) : ?>
+                                                <li><i class="bi bi-check-circle"></i> <span>ผ่านการตรวจสอบจากเจ้าหน้าที่</span></li>
+                                            <?php elseif ($row['status_admin'] == 0) : ?>
+                                                <li><i class="bi bi-exclamation-circle"></i> <span>ไม่ผ่านการตรวจสอบจากเจ้าหน้าที่</span></li>
+                                            <?php elseif ($row['status_admin'] == 2) : ?>
+                                                <!-- ปิดการแสดงผลเมื่อ status_admin เท่ากับ 2 -->
+                                            <?php else : ?>
+                                                <li><i class="bi bi-question-circle"></i> <span>สถานะไม่ทราบ</span></li>
+                                            <?php endif; ?>
+                                        </ul>
+                                    </div>
 
-                            <hr>
-                            <h5><?= $row['fullname']; ?> | <?= $row['email']; ?></h5>
-                            <p>
-                                <?= $row['personnel']; ?> | <?= $row['department']; ?> | <?= $row['tel']; ?>
-                            </p>
-                            <hr>
-                            <p>
-                                ประชาสัมพันธ์สื่อผ่านช่องทาง : <?= $row['social']; ?>
-                            </p>
-                            <p>
-                                หนวดการสื่อสาร : <?= $row['communicate']; ?>
-                            </p>
-                            <p>
-                                เผยแพร่วันที่ : <?= $row['date_a']; ?>
-                            </p>
-             
-                            <hr>
-                        </div>
+                                    <div>
+                                        <ul>
+                                            <?php if ($row['status_ss'] == 1) : ?>
+                                                <li><i class="bi bi-check-circle"></i> <span>สำเร็จ</span></li>
+                                            <?php elseif ($row['status_ss'] == 0) : ?>
+                                                <li><i class="bi bi-exclamation-circle"></i> <span>เกิดข้อผิดพลาด</span></li>
+                                            <?php elseif ($row['status_ss'] == 2) : ?>
+                                                <!-- ปิดการแสดงผลเมื่อ status_admin เท่ากับ 2 -->
+                                            <?php else : ?>
+                                                <li><i class="bi bi-question-circle"></i> <span>สถานะไม่ทราบ</span></li>
+                                            <?php endif; ?>
+                                        </ul>
+                                    </div>
+                                </div>
+
+                                <hr>
+                                <h5><?= htmlspecialchars($row['fullname']); ?> <?= htmlspecialchars($row['email']); ?></h5>
+                                <p>
+                                    <?= htmlspecialchars($row['personnel']); ?> <?= htmlspecialchars($row['department']); ?> | <?= htmlspecialchars($row['tel']); ?>
+                                </p>
+                                <hr>
+                                <p>
+                                    ประชาสัมพันธ์สื่อผ่านช่องทาง : <?= htmlspecialchars($row['social']); ?>
+                                </p>
+                                <p>
+                                    หนวดการสื่อสาร : <?= htmlspecialchars($row['communicate']); ?>
+                                </p>
+                                <p>
+                                    เผยแพร่วันที่ : <?= htmlspecialchars($row['date_a']); ?>
+                                </p>
+                                <p>
+                                    รายละเอียดไฟล์ : <a href="<?= $file_link; ?>" target="_blank"> <i class="bi bi-filetype-pdf"></i><span> <?= htmlspecialchars($file); ?></span></a>
+                                </p>
+                                <hr>
+                            </div>
                     <?php
+                        } else {
+                            echo '<p>ไม่พบข้อมูลที่ตรงกับ ID นี้</p>';
+                        }
                     }
                     ?>
                 </div>

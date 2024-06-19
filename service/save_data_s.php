@@ -3,6 +3,65 @@ include_once('../config/connect.php'); // Include database connection
 
 // Check if form was submitted
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $missing_fields = [];
+
+    // Check each required field
+    if (empty($_POST['fullname'])) {
+        $missing_fields[] = "ชื่อ-สกุล";
+    }
+
+    if (empty($_POST['department'])) {
+        $missing_fields[] = "ภาควิชา/หน่วยงาน";
+    }
+
+    if (empty($_POST['tel'])) {
+        $missing_fields[] = "โทรศัพท์";
+    }
+
+    if (empty($_POST['personnel'])) {
+        $missing_fields[] = "ประเภทบุคลากร";
+    }
+
+    if (empty($_POST['email'])) {
+        $missing_fields[] = "อีเมล";
+    }
+
+    if (empty($_POST['social'])) {
+        $missing_fields[] = "ช่องทางประชาสัมพันธ์";
+    }
+
+    if (empty($_POST['communicate'])) {
+        $missing_fields[] = "หมวดการสื่อสาร";
+    }
+
+    if (empty($_POST['title'])) {
+        $missing_fields[] = "หัวข้อข่าว";
+    }
+    if (empty($_POST['details'])) {
+        $missing_fields[] = "รายละเอียดข่าว";
+    }
+
+    // If any fields are missing, display an error and stop further execution
+    if (!empty($missing_fields)) {
+        $error_message = "รายละเอียด : " . implode(', ', $missing_fields);
+
+        echo "
+        <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css'>
+        <script src='https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.all.min.js'></script>
+        <script>
+            Swal.fire({
+                icon: 'error',
+                title: 'กรุณากรอกข้อมูลให้ครบ',
+                text: '$error_message',
+                showConfirmButton: true,
+                confirmButtonText: 'ตกลง'
+            }).then(function() {
+                window.history.back();
+            });
+        </script>";
+
+        die(); // หยุดการทำงานต่อไป
+    }
     // Check if option is set and valid
     if (isset($_POST['option']) && ($_POST['option'] == 'file' || $_POST['option'] == 'url')) {
         // Initialize variables
@@ -63,7 +122,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $status_ss = 0;
 
             // Prepare SQL statement for data insertion
-            $stmt = $conn->prepare("INSERT INTO ccfn_form (fullname, department, tel, personnel, email, social, `option`, title, details, date_a, communicate, file_names, upload_url, status_user, status_admin, status_ss) 
+            $stmt = $conn->prepare("INSERT INTO ccfn_form_s (fullname, department, tel, personnel, email, social, `option`, title, details, date_a, communicate, file_names, upload_url, status_user, status_admin, status_ss) 
                                     VALUES (:fullname, :department, :tel, :personnel, :email, :social, :option, :title, :details, :date_a, :communicate, :file_names, :upload_url, :status_user, :status_admin, :status_ss)");
 
             // Bind parameters
@@ -111,19 +170,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
     } else {
         echo "
-            <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css'>
-            <script src='https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.all.min.js'></script>
-            <script>
-                Swal.fire({
-                    position: 'top-end',
-                    icon: 'error',
-                    title: 'แบบคำขอไม่ถูกต้องกรุณากรอกรายละเอียดให้ครบ',
-                    showConfirmButton: false,
-                    timer: 3500
-                }).then(function() {
-                    window.location.href = 'ccfn-form-online-social'; // Redirect to success page or any other page
-                });
-            </script>";
+        <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css'>
+        <script src='https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.all.min.js'></script>
+        <script>
+            Swal.fire({
+                icon: 'error',
+                title: 'แบบคำขอไม่ถูกต้องกรุณากรอกรายละเอียดให้ครบ',
+                text: 'เลือกตัวเลือก อัปโหลดไฟล์ หรือ แชร์ผ่าน OneDrive, GoogleDrive หรืออื่นๆ',
+                showConfirmButton: true,
+                confirmButtonText: 'ตกลง'
+            }).then(function() {
+                window.history.back();
+            });
+        </script>";
     }
 }
-?>

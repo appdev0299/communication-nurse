@@ -2013,7 +2013,19 @@ section,
   /* ระยะห่างระหว่างแต่ละรายการ */
 }
 
+.btn-custom {
+  background-color: #FF6A00;
+  color: white;
+  border-color: #FF6A00;
+  /* เพิ่มสีเส้นขอบเพื่อให้ตรงกับสีพื้นหลัง */
+}
 
+.btn-custom:hover {
+  background-color: #f8bb8f;
+  /* สีเมื่อเอาเมาส์ชี้ไป */
+  border-color: #f8bb8f;
+  /* เพิ่มสีเส้นขอบเพื่อให้ตรงกับสีพื้นหลัง */
+}
 
 /*--------------------------------------------------------------
 # Starter Section Section

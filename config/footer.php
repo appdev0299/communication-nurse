@@ -13,28 +13,27 @@
                     <p><strong>Email:</strong> <span>communication.nurse@gmail.com</span></p>
                 </div>
                 <div class="social-links d-flex mt-4">
-                    <a href=""><i class="bi bi-twitter-x"></i></a>
-                    <a href=""><i class="bi bi-facebook"></i></a>
+                    <a href="https://twitter.com/nursecmu"><i class="bi bi-twitter-x"></i></a>
+                    <a href="https://www.facebook.com/nursecmu"><i class="bi bi-facebook"></i></a>
                     <a href=""><i class="bi bi-instagram"></i></a>
-                    <a href=""><i class="bi bi-linkedin"></i></a>
+                    <a href="https://www.linkedin.com/company/facultyofnursingchiangmaiuniversity"><i class="bi bi-linkedin"></i></a>
                 </div>
             </div>
 
             <div class="col-lg-2 col-md-3 footer-links">
                 <h4>เมนู</h4>
                 <ul>
-                    <li><a href="#">หน้าหลัก</a></li>
-                    <li><a href="#">เกี่ยวกับเรา</a></li>
-                    <li><a href="#">เงื่อนไขการใช้บริการ</a></li>
-                </ul>
+                    <li><a href="../home/index#hero">หน้าหลัก</a></li>
+                    <li><a href="../home/index#about">เกี่ยวกับเรา</a></li>
+                    <li><a href="../home/index#services">ประชาสัมพันธ์ข่าวสาร/กิจกรรม</a></li>
+                    <li><a href="../home/index#services">ออกแบบสื่อประชาสัมพันธ์</a></li>
+                    <li><a href="../ci-details/details">Brand CI</a></li>
             </div>
 
             <div class="col-lg-2 col-md-3 footer-links">
-                <h4>บริการออนไลน์</h4>
+                <h4>บริการสำคัญ</h4>
                 <ul>
-                    <li><a href="#">ประชาสัมพันธ์ข่าวสาร/กิจกรรม</a></li>
-                    <li><a href="#">ออกแบบสื่อประชาสัมพันธ์</a></li>
-                    <li><a href="#">CI</a></li>
+                    <li><a href="#">บริจาค</a></li>
                 </ul>
             </div>
         </div>

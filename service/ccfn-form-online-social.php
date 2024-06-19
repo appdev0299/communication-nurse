@@ -16,7 +16,7 @@
                 <h1 class="mb-2 mb-lg-0">บริการออนไลน์</h1>
                 <nav class="breadcrumbs">
                     <ol>
-                        <li><a href="../hoem/index">หน้าหลัก</a></li>
+                        <li><a href="../home/index">หน้าหลัก</a></li>
                         <li class="current">บริการออนไลน์</li>
                     </ol>
                 </nav>
@@ -39,28 +39,36 @@
                         <form method="post" class="php-email-form" enctype="multipart/form-data" data-aos-delay="400">
                             <div class="row gy-4">
                                 <div class="col-md-6">
+                                    <label for="fullname" class="form-label">ชื่อ-สกุล</label>
                                     <input type="text" name="fullname" id="fullname" class="form-control" placeholder="ชื่อ-สกุล">
                                 </div>
 
                                 <div class="col-md-6">
-                                    <input type="email" class="form-control" name="email" id="email" placeholder="Your Email">
+                                    <label for="email" class="form-label">อีเมล</label>
+                                    <input type="email" class="form-control" name="email" id="email">
                                 </div>
 
                                 <div class="col-md-6">
+                                    <label for="department" class="form-label">ภาควิชา/หน่วยงาน</label>
                                     <select name="department" id="department" class="form-control">
-                                        <option value="">กรุณาเลือกหน่วยงาน/สำนักวิชา</option>
-                                        <option value="คณะพยาบาลศาสตร์">คณะพยาบาลศาสตร์</option>
-                                        <option value="คณะแพทยศาสตร์">คณะแพทยศาสตร์</option>
-                                        <option value="คณะวิศวกรรมศาสตร์">คณะวิศวกรรมศาสตร์</option>
-                                        <option value="คณะวิทยาศาสตร์">คณะวิทยาศาสตร์</option>
+                                        <option value="">กรุณาเลือกข้อมูล</option>
+                                        <option value="งานบริหารทั่วไป">งานบริหารทั่วไป</option>
+                                        <option value="งานการเงินการคลังและพัสดุ">งานการเงิน การคลัง และพัสดุ</option>
+                                        <option value="งานนโยบายและแผนและประกันคุณภาพการศึกษา">งานนโยบายและแผน และประกันคุณภาพการศึกษา</option>
+                                        <option value="งานบริการการศึกษาและพัฒนาคุณภาพนักศึกษา">งานบริการการศึกษา และพัฒนาคุณภาพนักศึกษา</option>
+                                        <option value="งานบริหารงานวิจัยบริการวิชาการและวิเทศสัมพันธ์">งานบริหารงานวิจัย บริการวิชาการ และวิเทศสัมพันธ์</option>
+                                        <option value="ศูนย์บริการพยาบาล">ศูนย์บริการพยาบาล</option>
+                                        <option value="ศูนย์ความเป็นเลิศทางการพยาบาล">ศูนย์ความเป็นเลิศทางการพยาบาล</option>
                                     </select>
                                 </div>
 
                                 <div class="col-md-6">
-                                    <input type="number" class="form-control" name="tel" id="tel" placeholder="โทรศัพท์">
+                                    <label for="tel" class="form-label">โทรศัพท์</label>
+                                    <input type="number" class="form-control" name="tel" id="tel">
                                 </div>
 
                                 <div class="col-md-6">
+                                    <label for="personnel" class="form-label">ประเภทบุคลากร</label>
                                     <select name="personnel" id="personnel" class="form-control">
                                         <option value="">กรุณาเลือกข้อมูล บุคลากร</option>
                                         <option value="บุคลากรสายวิชาการ">บุคลากรสายวิชาการ</option>
@@ -70,7 +78,8 @@
                                 </div>
 
                                 <div class="col-md-6">
-                                    <select name="social[]" id="social" class="form-control" multiple placeholder="เลือกช่องทางสื่อสาร">
+                                    <label for="social" class="form-label">ช่องทางประชาสัมพันธ์</label>
+                                    <select name="social[]" id="social" class="form-control" multiple>
                                         <option value="Website คณะพยาบาลศาสตร์">Website</option>
                                         <option value="Facebook Official (TH)">Facebook Official (TH)</option>
                                         <option value="Facebook Official (Eng)">Facebook Official (Eng)</option>
@@ -121,56 +130,35 @@
                                 </div>
 
                                 <div class="col-md-6" id="fileUploadURLDiv" style="display: none;">
-                                    <input type="text" class="form-control" name="upload_url" id="upload_url" placeholder="แชร์ผ่าน OneDrive, GoogleDrive หรืออื่นๆ">
+                                    <input type="text" class="form-control" name="upload_url" id="upload_url">
                                 </div>
 
                                 <div class="col-md-6">
-                                    <input type="date" name="date_a" id="date_a" placeholder="วันที่ต้องการใช้งาน" class="form-control">
+                                    <label for="social" class="form-label">วันที่ต้องการใช้งาน</label>
+                                    <input type="date" name="date_a" id="date_a" class="form-control">
                                 </div>
 
-                                <script>
-                                    document.addEventListener('DOMContentLoaded', (event) => {
-                                        var today = new Date();
-                                        var minDate = new Date();
-                                        minDate.setDate(minDate.getDate() + 1); // เพิ่ม 1 วันจากวันที่ปัจจุบัน
-
-                                        today.setDate(today.getDate() + 3); // เพิ่ม 3 วันจากวันที่ปัจจุบัน
-                                        var year = today.getFullYear();
-                                        var month = ('0' + (today.getMonth() + 1)).slice(-2);
-                                        var day = ('0' + today.getDate()).slice(-2);
-                                        var formattedDate = year + '-' + month + '-' + day;
-
-                                        var minYear = minDate.getFullYear();
-                                        var minMonth = ('0' + (minDate.getMonth() + 1)).slice(-2);
-                                        var minDay = ('0' + minDate.getDate()).slice(-2);
-                                        var formattedMinDate = minYear + '-' + minMonth + '-' + minDay;
-
-                                        var dateInput = document.getElementById('date_a');
-                                        dateInput.value = formattedDate;
-                                        dateInput.min = formattedMinDate;
-                                    });
-                                </script>
-
-
-
                                 <div class="col-md-6">
+                                    <label for="communicate" class="form-label">หมวดการสื่อสาร</label>
                                     <select name="communicate" id="communicate" class="form-control">
                                         <option value="">กรุณาเลือกข้อมูล หมวดการสื่อสาร</option>
                                         <option value="ด้านผู้บริหาร">ด้านผู้บริหาร</option>
                                         <option value="ด้านบุคลากร">ด้านบุคลากร</option>
                                         <option value="ด้านผลิตภัณฑ์ (การศึกษา การวิจัย บริการวิชาการ)">ด้านผลิตภัณฑ์ (การศึกษา การวิจัย บริการวิชาการ)</option>
-                                        <option value="ประชุม / อบรม / สัมมนา">ประชุม / อบรม / สัมมนา</option>
+                                        <option value="ประชุม/อบรม/สัมมนา">ประชุม / อบรม / สัมมนา</option>
                                         <option value="กิจกรรมที่สร้างสรรค์ต่อสังคม">กิจกรรมที่สร้างสรรค์ต่อสังคม</option>
                                         <option value="อื่นๆ">อื่นๆ</option>
                                     </select>
                                 </div>
 
                                 <div class="col-md-6">
-                                    <input type="text" name="title" id="title" class="form-control" placeholder="หัวข้อข่าว">
+                                    <label for="title" class="form-label">หัวข้อข่าว</label>
+                                    <input type="text" name="title" id="title" class="form-control">
                                 </div>
 
                                 <div class="col-md-12">
-                                    <textarea class="form-control" name="details" rows="6" placeholder="รายละเอียดข่าว"></textarea>
+                                    <label for="title" class="form-label">รายละเอียดข่าว</label>
+                                    <textarea class="form-control" name="details" rows="6"></textarea>
                                 </div>
 
                                 <div>
@@ -182,7 +170,6 @@
                                 <div class="col-md-12 text-center">
                                     <div class="loading">Loading</div>
                                     <div class="error-message"></div>
-                                    <div class="sent-message">Your message has been sent. Thank you!</div>
                                     <button type="submit">ยืนยันข้อมูล</button>
                                 </div>
                             </div>
@@ -217,6 +204,28 @@
     <script src="https://cdn.jsdelivr.net/gh/habibmhamadi/multi-select-tag@3.0.1/dist/js/multi-select-tag.js"></script>
     <script>
         new MultiSelectTag('social') // id
+    </script>
+    <script>
+        document.addEventListener('DOMContentLoaded', (event) => {
+            var today = new Date();
+            var minDate = new Date();
+            minDate.setDate(minDate.getDate() + 1); // เพิ่ม 1 วันจากวันที่ปัจจุบัน
+
+            today.setDate(today.getDate() + 3); // เพิ่ม 3 วันจากวันที่ปัจจุบัน
+            var year = today.getFullYear();
+            var month = ('0' + (today.getMonth() + 1)).slice(-2);
+            var day = ('0' + today.getDate()).slice(-2);
+            var formattedDate = year + '-' + month + '-' + day;
+
+            var minYear = minDate.getFullYear();
+            var minMonth = ('0' + (minDate.getMonth() + 1)).slice(-2);
+            var minDay = ('0' + minDate.getDate()).slice(-2);
+            var formattedMinDate = minYear + '-' + minMonth + '-' + minDay;
+
+            var dateInput = document.getElementById('date_a');
+            dateInput.value = formattedDate;
+            dateInput.min = formattedMinDate;
+        });
     </script>
     <script>
         document.addEventListener("DOMContentLoaded", function() {

@@ -40,7 +40,7 @@
                     </div>
 
                     <div class="col-lg-6 order-1 order-lg-2" data-aos="fade-up" data-aos-delay="200">
-                        <img src="../assets/img/features-2.jpg" class="img-fluid" alt="">
+                        <img src="../assets/img/features-3.jpg" class="img-fluid" alt="">
                     </div>
 
                 </div><!-- Features Item -->
