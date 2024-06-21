@@ -7,6 +7,7 @@
             <ul>
                 <li><a href="../home/index#hero" class="active">หน้าหลัก</a></li>
                 <li><a href="../home/index#about">เกี่ยวกับเรา</a></li>
+                <li><a href="../status/index">ตรวจสถานะ</a></li>
                 <li class="dropdown"><a href="../home/index#services"><span>บริการออนไลน์</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
                     <ul>
                         <li><a href="../service/ccfn-form-online-social">ประชาสัมพันธ์สื่อออนไลน์</a></li>
@@ -19,3 +20,10 @@
         </nav>
     </div>
 </header>
+<style>
+    .no-bullets {
+        list-style-type: none;
+        padding-left: 0;
+        margin-left: 0;
+    }
+</style>

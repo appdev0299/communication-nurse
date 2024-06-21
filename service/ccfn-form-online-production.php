@@ -106,8 +106,73 @@
 
                                 <div class="col-md-6">
                                     <label for="social" class="form-label">วันที่ต้องการใช้งาน</label>
-                                    <input type="date" name="date_a" id="date_a" placeholder="วันที่ต้องการใช้งาน" class="form-control">
+                                    <input type="date" name="date_a" id="date_a" class="form-control">
                                 </div>
+
+                                <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+                                <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.all.min.js"></script>
+
+                                <script>
+                                    document.addEventListener('DOMContentLoaded', (event) => {
+                                        var today = new Date();
+                                        var minDate = new Date();
+                                        minDate.setDate(minDate.getDate() + 1); // เพิ่ม 1 วันจากวันที่ปัจจุบัน
+
+                                        today.setDate(today.getDate() + 3); // เพิ่ม 3 วันจากวันที่ปัจจุบัน
+                                        var year = today.getFullYear();
+                                        var month = ('0' + (today.getMonth() + 1)).slice(-2);
+                                        var day = ('0' + today.getDate()).slice(-2);
+                                        var formattedDate = year + '-' + month + '-' + day;
+
+                                        var minYear = minDate.getFullYear();
+                                        var minMonth = ('0' + (minDate.getMonth() + 1)).slice(-2);
+                                        var minDay = ('0' + minDate.getDate()).slice(-2);
+                                        var formattedMinDate = minYear + '-' + minMonth + '-' + minDay;
+
+                                        var dateInput = document.getElementById('date_a');
+                                        dateInput.value = formattedDate;
+                                        dateInput.min = formattedMinDate;
+
+                                        // ตรวจสอบวันที่ที่ช้ำกันเกิน 3 ครั้ง
+                                        fetchUnavailableDates();
+
+                                        dateInput.addEventListener('change', function() {
+                                            checkDateAvailability(this.value);
+                                        });
+                                    });
+
+                                    function fetchUnavailableDates() {
+                                        var xhr = new XMLHttpRequest();
+                                        xhr.open('POST', 'check_date_availability_p.php', true);
+                                        xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+                                        xhr.onload = function() {
+                                            if (xhr.status === 200) {
+                                                var unavailableDates = JSON.parse(xhr.responseText);
+                                                disableUnavailableDates(unavailableDates);
+                                            }
+                                        };
+                                        xhr.send();
+                                    }
+
+                                    function disableUnavailableDates(unavailableDates) {
+                                        var dateInput = document.getElementById('date_a');
+                                        dateInput.addEventListener('input', function() {
+                                            var selectedDate = new Date(this.value);
+                                            var formattedDate = selectedDate.toISOString().split('T')[0];
+                                            if (unavailableDates.includes(formattedDate)) {
+                                                Swal.fire({
+                                                    icon: 'error',
+                                                    title: 'วันที่เลือกไม่สามารถใช้งานได้',
+                                                    text: 'เนื่องจาก วันที่เลือกมีจำนวนคำร้องขอเต็มแล้ว',
+                                                    showConfirmButton: true,
+                                                    confirmButtonText: 'ตกลง'
+                                                }).then(function() {
+                                                    dateInput.value = ''; // ล้างค่า
+                                                });
+                                            }
+                                        });
+                                    }
+                                </script>
 
                                 <div class="col-md-6">
                                     <label for="communicate" class="form-label">หมวดการสื่อสาร</label>

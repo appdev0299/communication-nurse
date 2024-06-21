@@ -12,7 +12,7 @@
         <!-- Hero Section -->
         <section id="hero" class="hero section">
             <div class="hero-bg">
-                <img src="../assets/img/hero-bg-light.png" alt="">
+                <img src="../assets/img/hero-bg-light-01.jpg" alt="">
             </div>
         </section><!-- /Hero Section -->
 

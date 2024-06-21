@@ -69,26 +69,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (isset($_POST['social']) && is_array($_POST['social'])) {
         $social = implode(', ', $_POST['social']);
     }
-
-    // Retrieve other form fields
     $date_a = htmlspecialchars($_POST['date_a']);
     $communicate = htmlspecialchars($_POST['communicate']);
-
-    // Determine file destination based on option
     if ($option == 'send_email') {
-        // Process email sending logic (not implemented in this example)
-        // Replace this with your email handling code
-        $file_dest = 'Email'; // Placeholder for email sending logic
+        $file_dest = 'Email';
     } elseif ($option == 'send_url') {
-        // Process cloud storage logic (not implemented in this example)
-        // Replace this with your cloud storage handling code
-        $file_dest = 'OneDrive or GoogleDrive'; // Placeholder for cloud storage logic
+        $file_dest = 'OneDrive or GoogleDrive';
     } else {
-        // Default to file upload to directory
-        $upload_dir = '../files/'; // Directory where uploaded files will be saved (adjust path as necessary)
-        $file_name = $_FILES['production']['name']; // Original file name
-        $file_tmp = $_FILES['production']['tmp_name']; // Temporary file location on the server
-        $file_dest = $upload_dir . $file_name; // Destination path on the server
+        $upload_dir = '../files/';
+        $file_name = $_FILES['production']['name'];
+        $file_tmp = $_FILES['production']['tmp_name'];
+        $file_dest = $upload_dir . $file_name;
 
         // Move uploaded file to destination
         if (!move_uploaded_file($file_tmp, $file_dest)) {
