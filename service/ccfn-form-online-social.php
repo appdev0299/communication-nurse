@@ -1,3 +1,6 @@
+<?php
+require_once '../oauth/session.php'
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -40,12 +43,12 @@
                             <div class="row gy-4">
                                 <div class="col-md-6">
                                     <label for="fullname" class="form-label">ชื่อ-สกุล</label>
-                                    <input type="text" name="fullname" id="fullname" class="form-control" placeholder="ชื่อ-สกุล">
+                                    <input type="text" name="fullname" id="fullname" class="form-control" placeholder="ชื่อ-สกุล" value="<?php echo isset($_SESSION['login_info']['firstname_EN'])  ? htmlspecialchars($_SESSION['login_info']['firstname_EN'] . ' ' . $_SESSION['login_info']['lastname_EN']) : ''; ?>">
                                 </div>
 
                                 <div class="col-md-6">
                                     <label for="email" class="form-label">อีเมล</label>
-                                    <input type="email" class="form-control" name="email" id="email">
+                                    <input type="email" class="form-control" name="email" id="email" value="<?php echo isset($_SESSION['login_info']['cmuitaccount']) ? htmlspecialchars($_SESSION['login_info']['cmuitaccount']) : ''; ?>">
                                 </div>
 
                                 <div class="col-md-6">
@@ -70,32 +73,63 @@
                                 <div class="col-md-6">
                                     <label for="personnel" class="form-label">ประเภทบุคลากร</label>
                                     <select name="personnel" id="personnel" class="form-control">
-                                        <option value="">กรุณาเลือกข้อมูล บุคลากร</option>
-                                        <option value="บุคลากรสายวิชาการ">บุคลากรสายวิชาการ</option>
-                                        <option value="บุคลากรสายสนับสนุน">บุคลากรสายสนับสนุน</option>
-                                        <option value="นักศึกษา">นักศึกษา</option>
+                                        <option value="<?php echo isset($_SESSION['login_info']['itaccounttype_TH']) ? htmlspecialchars($_SESSION['login_info']['itaccounttype_TH']) : ''; ?>"><?php echo isset($_SESSION['login_info']['itaccounttype_TH']) ? htmlspecialchars($_SESSION['login_info']['itaccounttype_TH']) : ''; ?></option>
                                     </select>
                                 </div>
 
                                 <div class="col-md-6">
-                                    <label for="social" class="form-label">ช่องทางประชาสัมพันธ์</label>
-                                    <select name="social[]" id="social" class="form-control" multiple>
-                                        <option value="Website คณะพยาบาลศาสตร์">Website</option>
-                                        <option value="Facebook Official (TH)">Facebook Official (TH)</option>
-                                        <option value="Facebook Official (Eng)">Facebook Official (Eng)</option>
-                                        <option value="Line Official">Line Official</option>
-                                        <option value="Email">Email</option>
-                                        <option value="LinkedIn">LinkedIn</option>
-                                        <option value="Twitter">Twitter</option>
-                                        <option value="Instagram">Instagram</option>
-                                        <option value="Youtube">Youtube</option>
-                                        <option value="ป้ายดิจิทัล คณะ">ป้ายดิจิทัล คณะ</option>
-                                        <option value="ป้ายประชาสัมพันธ์">ป้ายประชาสัมพันธ์</option>
-                                        <option value="ประกาศเสียงตามสาย">ประกาศเสียงตามสาย</option>
-                                        <option value="ประสานงานสื่อมวลชนเพื่อร่วมทำข่าว">ประสานงานสื่อมวลชนเพื่อร่วมทำข่าว</option>
-                                        <option value="อื่นๆ">อื่นๆ</option>
+                                    <label for="communicate" class="form-label">หมวดการสื่อสาร</label>
+                                    <select name="communicate" id="communicate" class="form-control" onchange="changeSocialOptions(this.value)">
+                                        <option value="">กรุณาเลือกข้อมูล หมวดการสื่อสาร</option>
+                                        <option value="comm1">ด้านผู้บริหาร</option>
+                                        <option value="comm2">ด้านบุคลากร</option>
+                                        <option value="comm3">ด้านผลิตภัณฑ์ (การศึกษา การวิจัย บริการวิชาการ)</option>
+                                        <option value="comm4">ประชุม / อบรม / สัมมนา</option>
+                                        <option value="comm5">กิจกรรมที่สร้างสรรค์ต่อสังคม</option>
                                     </select>
                                 </div>
+                                <div class="col-md-6">
+                                    <label class="form-label">ช่องทางประชาสัมพันธ์</label>
+                                    <div id="social-options" class="form-group"></div>
+                                </div>
+
+                                <script>
+                                    const options = {
+                                        comm1: ["Website", "Facebook Official (TH)", "Facebook Official (En)"],
+                                        comm2: ["Website", "Facebook Official (TH)", "Facebook Official (En)"],
+                                        comm3: ["Website", "Facebook Official (TH)", "Facebook Official (En)", "Line Official", "LinkedIn", "Instagram", "Twitter"],
+                                        comm4: ["Line Official", "Website", "เสียงตามสาย", "ป้ายดิจิทัล"],
+                                        comm5: ["Website", "Facebook Official (TH)", "Facebook Official (En)"]
+                                    };
+
+                                    function changeSocialOptions(value) {
+                                        var socialOptions = document.getElementById("social-options");
+                                        socialOptions.innerHTML = ""; // Clear previous options
+                                        if (options[value]) {
+                                            options[value].forEach(function(option) {
+                                                var checkbox = document.createElement("input");
+                                                checkbox.type = "checkbox";
+                                                checkbox.className = "form-check-input"; // Set the class here
+                                                checkbox.name = "social[]";
+                                                checkbox.value = option;
+                                                checkbox.id = option;
+
+                                                var label = document.createElement("label");
+                                                label.className = "form-check-label"; // Optionally set the label class
+                                                label.htmlFor = option;
+                                                label.appendChild(document.createTextNode(option));
+
+                                                var div = document.createElement("div");
+                                                div.className = "form-check"; // Optional div class for Bootstrap form-check
+                                                div.appendChild(checkbox);
+                                                div.appendChild(label);
+
+                                                socialOptions.appendChild(div);
+                                            });
+                                        }
+                                    }
+                                </script>
+
                                 <div class="col-md-12">
                                     <input class="form-check-input" type="radio" name="option" id="option_file" value="file">
                                     <label class="form-check-label" for="option_file">
@@ -130,6 +164,7 @@
                                 </div>
 
                                 <div class="col-md-6" id="fileUploadURLDiv" style="display: none;">
+                                    <label for="upload_url" class="form-label">URL OneDrive, GoogleDrive หรืออื่นๆ</label>
                                     <input type="text" class="form-control" name="upload_url" id="upload_url">
                                 </div>
 
@@ -138,18 +173,7 @@
                                     <input type="date" name="date_a" id="date_a" class="form-control">
                                 </div>
 
-                                <div class="col-md-6">
-                                    <label for="communicate" class="form-label">หมวดการสื่อสาร</label>
-                                    <select name="communicate" id="communicate" class="form-control">
-                                        <option value="">กรุณาเลือกข้อมูล หมวดการสื่อสาร</option>
-                                        <option value="ด้านผู้บริหาร">ด้านผู้บริหาร</option>
-                                        <option value="ด้านบุคลากร">ด้านบุคลากร</option>
-                                        <option value="ด้านผลิตภัณฑ์ (การศึกษา การวิจัย บริการวิชาการ)">ด้านผลิตภัณฑ์ (การศึกษา การวิจัย บริการวิชาการ)</option>
-                                        <option value="ประชุม/อบรม/สัมมนา">ประชุม / อบรม / สัมมนา</option>
-                                        <option value="กิจกรรมที่สร้างสรรค์ต่อสังคม">กิจกรรมที่สร้างสรรค์ต่อสังคม</option>
-                                        <option value="อื่นๆ">อื่นๆ</option>
-                                    </select>
-                                </div>
+
 
                                 <div class="col-md-6">
                                     <label for="title" class="form-label">หัวข้อข่าว</label>
@@ -175,7 +199,8 @@
                             </div>
                         </form>
                         <?php include_once('save_data_s.php'); ?>
-                    </div><!-- End Contact Form -->
+                        <?php include_once('sent-email.php'); ?>
+                    </div>
 
                 </div>
 
@@ -201,10 +226,8 @@
 
     <!-- Main JS File -->
     <script src="../assets/js/main.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/habibmhamadi/multi-select-tag@3.0.1/dist/js/multi-select-tag.js"></script>
-    <script>
-        new MultiSelectTag('social') // id
-    </script>
+
+
     <script>
         document.addEventListener('DOMContentLoaded', (event) => {
             var today = new Date();

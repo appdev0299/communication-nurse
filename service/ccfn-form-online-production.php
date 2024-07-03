@@ -89,7 +89,7 @@
                                         <option value="Twitter">Twitter</option>
                                         <option value="Instagram">Instagram</option>
                                         <option value="Youtube">Youtube</option>
-                                        <option value="ป้ายดิจิทัล คณะ">ป้ายดิจิทัล คณะ</option>
+                                        <option value="ป้ายดิจิทัล คณะ">ป้ายดิจิทัล</option>
                                         <option value="ป้ายประชาสัมพันธ์">ป้ายประชาสัมพันธ์</option>
                                         <option value="อื่นๆ">อื่นๆ</option>
                                     </select>

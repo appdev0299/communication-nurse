@@ -1,3 +1,93 @@
+<?php
+require_once "../phpmailer/PHPMailerAutoload.php";
+include_once '../config/connect.php';
+
+// Check if ID is received via GET parameter
+if (isset($_GET['id'])) {
+    $id = $_GET['id'];
+
+    try {
+        // Prepare SQL statement to fetch fullname based on the provided ID
+        $stmt = $conn->prepare("SELECT fullname,email FROM ccfn_form_s WHERE id = :id");
+        $stmt->bindParam(':id', $id);
+        $stmt->execute();
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        if ($result) {
+            $fullname = $result['fullname'];
+            $email_receiver = $result['email'];
+            // Your existing PHPMailer setup continues here
+            $mail = new PHPMailer;
+            $mail->CharSet = "UTF-8";
+            $mail->isSMTP();
+            $mail->Host = 'smtp.gmail.com';
+            $mail->Port = 587;
+            $mail->SMTPSecure = 'tls';
+            $mail->SMTPAuth = true;
+
+            $gmail_username = "nursecmu.edonation@gmail.com";
+            $gmail_password = "hhhp ynrg cqpb utzi";
+
+            $sender = "noreply@NurseCMU E-Donation";
+            $email_sender = "nursecmu.edonation@gmail.com";
+            $email_receiver = $email_receiver;
+
+            $subject = "Booking Id: $id NRC: New Booking"; // Modify the subject as needed
+
+            $mail->Username = $gmail_username;
+            $mail->Password = $gmail_password;
+            $mail->setFrom($email_sender, $sender);
+            $mail->addAddress($email_receiver);
+            $mail->Subject = $subject;
+
+            // Email content HTML
+            $email_content = "
+                <!DOCTYPE html>
+                <html>
+                <head>
+                    <meta charset='utf-8'>
+                </head>
+                <body>
+                    <h1 style='background: #FF6A00; padding: 10px 0 10px 10px; margin-bottom: 10px; font-size: 20px; color: white;'>
+                        <p>Research Support Services Booking</p>
+                    </h1>
+                    <div style='padding: 20px;'>
+                        <div style='margin-top: 10px;'>
+                            <h3 style='font-size: 18px;'>Automatic e-mail booking confirmation research support services booking</h3>
+                            <h4 style='font-size: 16px; margin-top: 10px;'>Dear Recipient</h4>
+                            <p style='font-size: 16px; margin-top: 10px;'>Fullname: $fullname</p>
+                        </div>
+
+                        <div style='margin-top: 10px;'>
+                        </div>
+                    </div>
+                    <div style='background: #FF6A00; color: #ffffff; padding: 30px;'>
+                        <div style='text-align: center'>
+                            2023 © Research Support Services Booking
+                        </div>
+                    </div>
+                </body>
+                </html>
+            ";
+
+            $mail->msgHTML($email_content);
+
+            if (!$mail->send()) {
+                echo "Email sending failed: " . $mail->ErrorInfo;
+            } else {
+                echo "Email sent successfully.";
+            }
+        } else {
+            echo "Fullname not found for ID: $id";
+        }
+    } catch (PDOException $e) {
+        echo "Error fetching fullname: " . $e->getMessage();
+    }
+} else {
+    echo "ID parameter not found.";
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
