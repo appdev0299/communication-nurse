@@ -1,3 +1,4 @@
+<?php include_once('sent-email-p.php'); ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -29,22 +30,12 @@
             <div class="container">
 
                 <div class="row gy-5">
-
-                    <div class="col-lg-2" data-aos="fade-up" data-aos-delay="100">
-
-                        <div class="service-box">
-                            <h4>ดาวน์โหลดแบบฟอร์ม</h4>
-                            <div class="download-catalog">
-                                <a href="#"><i class="bi bi-filetype-pdf"></i><span>แบบฟอร์มการรับบริการหน่วยสื่อสารและภาพลักษณ์องค์กร</span></a>
-                            </div>
-                        </div>
-
-                    </div>
                     <?php
                     require_once '../config/connect.php';
 
                     if (isset($_GET['id'])) {
                         $id = $_GET['id'];
+                        $ref = $_GET['ref'];
 
                         $stmt = $conn->prepare("SELECT * FROM ccfn_form_p WHERE id = :id");
                         $stmt->bindParam(':id', $id, PDO::PARAM_INT);
@@ -62,6 +53,18 @@
                                 $file_link = '#';
                             }
                     ?>
+                            <div class="col-lg-2" data-aos="fade-up" data-aos-delay="100">
+
+                                <div class="service-box">
+                                    <h4>ดาวน์โหลดแบบฟอร์ม</h4>
+                                    <div class="download-catalog">
+                                        <a href="pdf-form-p.php?id=<?= $id ?>&ref=<?= $ref ?>" target="_blank">
+                                            <i class="bi bi-filetype-pdf"></i><span>แบบฟอร์มการรับบริการหน่วยสื่อสารและภาพลักษณ์องค์กร</span>
+                                        </a>
+                                    </div>
+                                </div>
+
+                            </div>
                             <div class="col-lg-10 ps-lg-5" data-aos="fade-up" data-aos-delay="200">
                                 <div class="timeline-grid">
                                     <div>

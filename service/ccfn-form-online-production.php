@@ -1,3 +1,6 @@
+<?php
+require_once '../oauth/session.php'
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -40,12 +43,12 @@
                             <div class="row gy-4">
                                 <div class="col-md-6">
                                     <label for="fullname" class="form-label">ชื่อ-สกุล</label>
-                                    <input type="text" name="fullname" id="fullname" class="form-control">
+                                    <input type="text" name="fullname" id="fullname" class="form-control" value="<?php echo isset($_SESSION['login_info']['firstname_EN'])  ? htmlspecialchars($_SESSION['login_info']['firstname_EN'] . ' ' . $_SESSION['login_info']['lastname_EN']) : ''; ?>">
                                 </div>
 
                                 <div class="col-md-6">
                                     <label for="email" class="form-label">อีเมล</label>
-                                    <input type="email" class="form-control" name="email" id="email">
+                                    <input type="email" class="form-control" name="email" id="email" value="<?php echo isset($_SESSION['login_info']['cmuitaccount']) ? htmlspecialchars($_SESSION['login_info']['cmuitaccount']) : ''; ?>">
                                 </div>
 
                                 <div class="col-md-6">
@@ -70,10 +73,7 @@
                                 <div class="col-md-6">
                                     <label for="personnel" class="form-label">ประเภทบุคลากร</label>
                                     <select name="personnel" id="personnel" class="form-control">
-                                        <option value="">กรุณาเลือกข้อมูล</option>
-                                        <option value="บุคลากรสายวิชาการ">บุคลากรสายวิชาการ</option>
-                                        <option value="บุคลากรสายสนับสนุน">บุคลากรสายสนับสนุน</option>
-                                        <option value="นักศึกษา">นักศึกษา</option>
+                                        <option value="<?php echo isset($_SESSION['login_info']['itaccounttype_TH']) ? htmlspecialchars($_SESSION['login_info']['itaccounttype_TH']) : ''; ?>"><?php echo isset($_SESSION['login_info']['itaccounttype_TH']) ? htmlspecialchars($_SESSION['login_info']['itaccounttype_TH']) : ''; ?></option>
                                     </select>
                                 </div>
 
@@ -90,7 +90,6 @@
                                         <option value="Instagram">Instagram</option>
                                         <option value="Youtube">Youtube</option>
                                         <option value="ป้ายดิจิทัล คณะ">ป้ายดิจิทัล</option>
-                                        <option value="ป้ายประชาสัมพันธ์">ป้ายประชาสัมพันธ์</option>
                                         <option value="อื่นๆ">อื่นๆ</option>
                                     </select>
                                 </div>

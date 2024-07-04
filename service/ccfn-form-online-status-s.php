@@ -1,93 +1,4 @@
-<?php
-require_once "../phpmailer/PHPMailerAutoload.php";
-include_once '../config/connect.php';
-
-// Check if ID is received via GET parameter
-if (isset($_GET['id'])) {
-    $id = $_GET['id'];
-
-    try {
-        // Prepare SQL statement to fetch fullname based on the provided ID
-        $stmt = $conn->prepare("SELECT fullname,email FROM ccfn_form_s WHERE id = :id");
-        $stmt->bindParam(':id', $id);
-        $stmt->execute();
-        $result = $stmt->fetch(PDO::FETCH_ASSOC);
-
-        if ($result) {
-            $fullname = $result['fullname'];
-            $email_receiver = $result['email'];
-            // Your existing PHPMailer setup continues here
-            $mail = new PHPMailer;
-            $mail->CharSet = "UTF-8";
-            $mail->isSMTP();
-            $mail->Host = 'smtp.gmail.com';
-            $mail->Port = 587;
-            $mail->SMTPSecure = 'tls';
-            $mail->SMTPAuth = true;
-
-            $gmail_username = "nursecmu.edonation@gmail.com";
-            $gmail_password = "hhhp ynrg cqpb utzi";
-
-            $sender = "noreply@NurseCMU E-Donation";
-            $email_sender = "nursecmu.edonation@gmail.com";
-            $email_receiver = $email_receiver;
-
-            $subject = "Booking Id: $id NRC: New Booking"; // Modify the subject as needed
-
-            $mail->Username = $gmail_username;
-            $mail->Password = $gmail_password;
-            $mail->setFrom($email_sender, $sender);
-            $mail->addAddress($email_receiver);
-            $mail->Subject = $subject;
-
-            // Email content HTML
-            $email_content = "
-                <!DOCTYPE html>
-                <html>
-                <head>
-                    <meta charset='utf-8'>
-                </head>
-                <body>
-                    <h1 style='background: #FF6A00; padding: 10px 0 10px 10px; margin-bottom: 10px; font-size: 20px; color: white;'>
-                        <p>Research Support Services Booking</p>
-                    </h1>
-                    <div style='padding: 20px;'>
-                        <div style='margin-top: 10px;'>
-                            <h3 style='font-size: 18px;'>Automatic e-mail booking confirmation research support services booking</h3>
-                            <h4 style='font-size: 16px; margin-top: 10px;'>Dear Recipient</h4>
-                            <p style='font-size: 16px; margin-top: 10px;'>Fullname: $fullname</p>
-                        </div>
-
-                        <div style='margin-top: 10px;'>
-                        </div>
-                    </div>
-                    <div style='background: #FF6A00; color: #ffffff; padding: 30px;'>
-                        <div style='text-align: center'>
-                            2023 © Research Support Services Booking
-                        </div>
-                    </div>
-                </body>
-                </html>
-            ";
-
-            $mail->msgHTML($email_content);
-
-            if (!$mail->send()) {
-                echo "Email sending failed: " . $mail->ErrorInfo;
-            } else {
-                echo "Email sent successfully.";
-            }
-        } else {
-            echo "Fullname not found for ID: $id";
-        }
-    } catch (PDOException $e) {
-        echo "Error fetching fullname: " . $e->getMessage();
-    }
-} else {
-    echo "ID parameter not found.";
-}
-?>
-
+<?php include_once('sent-email-s.php'); ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -120,21 +31,13 @@ if (isset($_GET['id'])) {
 
                 <div class="row gy-5">
 
-                    <div class="col-lg-2" data-aos="fade-up" data-aos-delay="100">
-
-                        <div class="service-box">
-                            <h4>ดาวน์โหลดแบบฟอร์ม</h4>
-                            <div class="download-catalog">
-                                <a href="#"><i class="bi bi-filetype-pdf"></i><span>แบบฟอร์มการรับบริการหน่วยสื่อสารและภาพลักษณ์องค์กร</span></a>
-                            </div>
-                        </div>
-
-                    </div>
                     <?php
                     require_once '../config/connect.php';
 
                     if (isset($_GET['id'])) {
-                        $id = $_GET['id'];
+                        $$id = $_GET['id'];
+                        $ref = $_GET['ref'];
+
 
                         $stmt = $conn->prepare("SELECT * FROM ccfn_form_s WHERE id = :id");
                         $stmt->bindParam(':id', $id, PDO::PARAM_INT);
@@ -144,8 +47,18 @@ if (isset($_GET['id'])) {
                         // ตรวจสอบว่าพบข้อมูลหรือไม่ก่อนแสดงผล
                         if ($row) {
                             $fileNames = explode(',', $row['file_names']); // แยกอาเรย์ของ file_names โดยใช้ comma (,) เป็นตัวแยก
-
                     ?>
+
+                            <div class="col-lg-2" data-aos="fade-up" data-aos-delay="100">
+                                <div class="service-box">
+                                    <h4>ดาวน์โหลดแบบฟอร์ม</h4>
+                                    <div class="download-catalog">
+                                        <a href="pdf-form-s.php?id=<?= $id ?>&ref=<?= $ref ?>" target="_blank">
+                                            <i class="bi bi-filetype-pdf"></i><span>แบบฟอร์มการรับบริการหน่วยสื่อสารและภาพลักษณ์องค์กร</span>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
                             <div class="col-lg-10 ps-lg-5" data-aos="fade-up" data-aos-delay="200">
                                 <div class="timeline-grid">
                                     <div>
@@ -232,6 +145,7 @@ if (isset($_GET['id'])) {
                     }
                     ?>
                 </div>
+
 
             </div>
 

@@ -1,31 +1,75 @@
 <!DOCTYPE html>
-<html lang="en">
+                <html lang='th'>
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Centered Heading with Background</title>
-    <style>
-        h1 {
-            background: #f7f7f7;
-            padding: 5px;
-            font-size: 16px;
-            color: rgb(0, 0, 0);
-            text-align: center;
-            /* จัดตำแหน่งให้ข้อความอยู่ตรงกลาง */
-            font-family: "Noto Sans Thai", sans-serif;
-            /* เพิ่ม font-family ตามที่คุณต้องการ */
-        }
-    </style>
-    <!-- Import Google Font -->
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@100;300;400;500;700&display=swap"
-        rel="stylesheet">
-</head>
+                <head>
+                    <meta charset='UTF-8'>
+                    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+                    <title>Centered Heading with Background</title>
+                    <style>
+                        body {
+                            font-family: 'Noto Sans Thai', sans-serif;
+                            background-color: #f4f4f4;
+                            margin: 0;
+                            padding: 0;
+                        }
+                        .container {
+                            max-width: 600px;
+                            margin: 0 auto;
+                            background-color: #ffffff;
+                            padding: 20px;
+                            border: 1px solid #dddddd;
+                        }
+                        .header {
+                            text-align: center;
+                            padding: 10px 0;
+                            border-bottom: 1px solid #dddddd;
+                        }
+                        .logo {
+                            max-width: 150px;
+                            margin-bottom: 10px;
+                        }
+                        .content {
+                            padding: 20px;
+                            line-height: 1.6;
+                        }
+                        .footer {
+                            text-align: center;
+                            padding: 10px 0;
+                            border-top: 1px solid #dddddd;
+                            font-size: 12px;
+                            color: #999999;
+                        }
+                        .button {
+                            display: inline-block;
+                            padding: 10px 20px;
+                            background-color: #007bff;
+                            color: #ffffff;
+                            text-decoration: none;
+                            border-radius: 5px;
+                        }
+                    </style>
+                    <link href='https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@100;300;400;500;700&display=swap' rel='stylesheet'>
+                </head>
+                <body>
+                    <div class='container'>
+                        <div class='header'>
+                            <h1>ขอบคุณสำหรับการใช้บริการ</h1>
+                        </div>
+                        <div class='content'>
+                            <p>สวัสดี $fullname</p>
+                            <p>ขอบคุณสำหรับการใช้บริการร้องขอประชาสัมพันธ์ ของหน่วยสื่อสารและภาพลักษณ์องค์กร</p>
+                            <p>อีเมลนี้เป็นระบบอัตโนมัติ กรุณาอย่าตอบกลับ</p>
+                            <p style='text-align: center;'>
+                                <a href='[Verification Link]' class='button'>ตรวจสอบข้อมูล</a>
+                            </p>
+                            <p>ขอแสดงความนับถือ,</p>
+                            <p>หน่วยสื่อสารและภาพลักษณ์องค์กร</p>
+                        </div>
+                        <div class='footer'>
+                            <p>&copy; 2024 หน่วยสื่อสารและภาพลักษณ์องค์กร. สงวนลิขสิทธิ์</p>
+                            <p>คณะพยาบาลศาสตร์ มหาวิทยาลัยเชียงใหม่ 110/406 ถนนอินทวโรรส ตำบลสุเทพ อำเภอเมือง จังหวัดเชียงใหม่ 50200</p>
+                        </div>
+                    </div>
+                </body>
 
-<body>
-    <h1>
-        <p>หน่วยสื่อสารและภาพลักษณ์องค์กร คณะพยาบาลศาสตร์ มช.</p>
-    </h1>
-</body>
-
-</html>
+                </html>

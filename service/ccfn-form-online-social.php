@@ -199,11 +199,8 @@ require_once '../oauth/session.php'
                             </div>
                         </form>
                         <?php include_once('save_data_s.php'); ?>
-                        <?php include_once('sent-email.php'); ?>
                     </div>
-
                 </div>
-
             </div>
 
         </section>

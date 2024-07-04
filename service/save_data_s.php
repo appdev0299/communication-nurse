@@ -115,22 +115,34 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $details = htmlspecialchars($_POST['details']);
         $date_a = htmlspecialchars($_POST['date_a']);
         $communicate = htmlspecialchars($_POST['communicate']);
-
+        function generateRandomString($length = 15)
+        {
+            $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+            $charactersLength = strlen($characters);
+            $randomString = '';
+            for ($i = 0; $i < $length; $i++) {
+                $randomString .= $characters[rand(0, $charactersLength - 1)];
+            }
+            return $randomString;
+        }
         try {
+            $status_email = 0;
             $status_user = 1;
             $status_admin = 0;
             $status_ss = 0;
+            $ref = generateRandomString();
+
 
             // Prepare SQL statement for data insertion
-            $stmt = $conn->prepare("INSERT INTO ccfn_form_s (fullname, department, tel, personnel, email, social, `option`, title, details, date_a, communicate, file_names, upload_url, status_user, status_admin, status_ss) 
-                                    VALUES (:fullname, :department, :tel, :personnel, :email, :social, :option, :title, :details, :date_a, :communicate, :file_names, :upload_url, :status_user, :status_admin, :status_ss)");
+            $stmt = $conn->prepare("INSERT INTO ccfn_form_s (fullname, department, tel, personnel, email, social, `option`, title, details, date_a, communicate, file_names, upload_url, status_user, status_admin, status_ss, status_email, ref) 
+                        VALUES (:fullname, :department, :tel, :personnel, :email, :social, :option, :title, :details, :date_a, :communicate, :file_names, :upload_url, :status_user, :status_admin, :status_ss, :status_email, :ref)");
 
             // Bind parameters
             $stmt->bindParam(':fullname', $fullname);
             $stmt->bindParam(':department', $department);
             $stmt->bindParam(':tel', $tel);
             $stmt->bindParam(':personnel', $personnel);
-            $stmt->bindParam(':email', $email); // Bind email parameter
+            $stmt->bindParam(':email', $email);
             $stmt->bindParam(':social', $social);
             $stmt->bindParam(':option', $_POST['option']);
             $stmt->bindParam(':title', $title);
@@ -142,6 +154,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $stmt->bindParam(':status_user', $status_user);
             $stmt->bindParam(':status_admin', $status_admin);
             $stmt->bindParam(':status_ss', $status_ss);
+            $stmt->bindParam(':status_email', $status_email);
+            $stmt->bindParam(':ref', $ref);
 
             // Execute SQL statement
             $stmt->execute();
@@ -161,7 +175,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     showConfirmButton: false,
                     timer: 3000
                 }).then(function() {
-                    window.location.href = 'ccfn-form-online-status-s?id=$last_id';
+                    window.location.href = 'ccfn-form-online-status-s?id=$last_id&ref=$ref';
                 });
             </script>";
         } catch (PDOException $e) {
