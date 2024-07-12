@@ -15,11 +15,11 @@
         <!-- Page Title -->
         <div class="page-title" data-aos="fade">
             <div class="container d-lg-flex justify-content-between align-items-center">
-                <h1 class="mb-2 mb-lg-0">บริการออนไลน์</h1>
+                <h1 class="mb-2 mb-lg-0"><?php echo $lang['services'] ?></h1>
                 <nav class="breadcrumbs">
                     <ol>
-                        <li><a href="../home/index">หน้าหลัก</a></li>
-                        <li class="current">บริการออนไลน์</li>
+                        <li><a href="../home/index?lang=<?php echo $_SESSION['lang']; ?>"><?php echo $lang['home'] ?></a></li>
+                        <li class="current"><?php echo $lang['about2'] ?></li>
                     </ol>
                 </nav>
             </div>

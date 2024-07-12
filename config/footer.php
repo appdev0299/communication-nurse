@@ -2,15 +2,14 @@
 
     <div class="container footer-top">
         <div class="row gy-4">
-            <div class="col-lg-4 col-md-6 footer-about">
+            <div class="col-lg-3 col-md-6 footer-about">
                 <a href="../home/index" class="logo d-flex align-items-center me-auto">
                     <img src="../assets/img/logo.png" alt="">
                 </a>
                 <div class="footer-contact pt-3">
-                    <p>110/406 คณะพยาบาลศาสตร์ มหาวิทยาลัยเชียงใหม่</p>
-                    <p>ถนนอินทวโรรส ตำบลสุเทพ อำเภอเมือง จังหวัดเชียงใหม่ 50200</p>
-                    <p class="mt-3"><strong>โทรศัพท์:</strong> <span>053-949219</span></p>
-                    <p><strong>Email:</strong> <span>communication.nurse@gmail.com</span></p>
+                    <p><?php echo $lang['address'] ?></p>
+                    <p class="mt-3"><strong><?php echo $lang['phone'] ?> : </strong> <span>053-949219</span></p>
+                    <p><strong><?php echo $lang['email'] ?> :</strong> <span>communication.nurse@gmail.com</span></p>
                 </div>
                 <div class="social-links d-flex mt-4">
                     <a href="https://twitter.com/nursecmu"><i class="bi bi-twitter-x"></i></a>
@@ -21,20 +20,13 @@
             </div>
 
             <div class="col-lg-2 col-md-3 footer-links">
-                <h4>เมนู</h4>
+                <h4><?php echo $lang['menu'] ?></h4>
                 <ul>
-                    <li><a href="../home/index#hero">หน้าหลัก</a></li>
-                    <li><a href="../home/index#about">เกี่ยวกับเรา</a></li>
-                    <li><a href="../home/index#services">ประชาสัมพันธ์ข่าวสาร/กิจกรรม</a></li>
-                    <li><a href="../home/index#services">ออกแบบสื่อประชาสัมพันธ์</a></li>
-                    <li><a href="../ci-details/details">Brand CI</a></li>
-            </div>
-
-            <div class="col-lg-2 col-md-3 footer-links">
-                <h4>บริการสำคัญ</h4>
-                <ul>
-                    <li><a href="#">บริจาค</a></li>
-                </ul>
+                    <li><a href="../home/?lang=<?php echo $_SESSION['lang']; ?>" class="active"><?php echo $lang['home'] ?></a></li>
+                    <li><a href="../team/?lang=<?php echo $_SESSION['lang']; ?>"><?php echo $lang['team'] ?></a></li>
+                    <li><a href="../status/?lang=<?php echo $_SESSION['lang']; ?>"><?php echo $lang['check_status'] ?></a></li>
+                    <li><a href="../service/ccfn-form-online-social?lang=<?php echo $_SESSION['lang']; ?>">Online Media Relations</a></li>
+                    <li><a href="../service/ccfn-form-online-production?lang=<?php echo $_SESSION['lang']; ?>">Media Production Design</a></li>
             </div>
         </div>
     </div>

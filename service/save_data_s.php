@@ -126,16 +126,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             return $randomString;
         }
         try {
-            $status_email = 0;
-            $status_user = 1;
-            $status_admin = 0;
-            $status_ss = 0;
+            $status_user = 1; // ร้องขอสำเร็จ 0 1
+            $status_Sendline_user = 0; // ส่งlineหลังร้องขอเสร็จ 0 1
+            $status_admin = 0; // รอแอดมินตรวจ 0 1
+            $status_Sendline_admin = 0; // ส่งlineหลังแอดมินตรวจ 0 1
+            $status_ss = 0; // ทำงานเสร็จทั้งหมด 0 1
+            $status_Sendline_ss = 0; // ส่งlineหลังเสร็จทั้งหมด 0 1
+            $status_email = 0; // ส่งเมล 0 1
+
             $ref = generateRandomString();
 
-
             // Prepare SQL statement for data insertion
-            $stmt = $conn->prepare("INSERT INTO ccfn_form_s (fullname, department, tel, personnel, email, social, `option`, title, details, date_a, communicate, file_names, upload_url, status_user, status_admin, status_ss, status_email, ref) 
-                        VALUES (:fullname, :department, :tel, :personnel, :email, :social, :option, :title, :details, :date_a, :communicate, :file_names, :upload_url, :status_user, :status_admin, :status_ss, :status_email, :ref)");
+            $stmt = $conn->prepare("INSERT INTO ccfn_form_s (fullname, department, tel, personnel, email, social, `option`, title, details, date_a, communicate, file_names, upload_url, status_user, status_Sendline_user, status_admin, status_Sendline_admin, status_ss, status_Sendline_ss, status_email, ref) 
+            VALUES (:fullname, :department, :tel, :personnel, :email, :social, :option, :title, :details, :date_a, :communicate, :file_names, :upload_url, :status_user, :status_Sendline_user, :status_admin, :status_Sendline_admin, :status_ss, :status_Sendline_ss, :status_email, :ref)");
 
             // Bind parameters
             $stmt->bindParam(':fullname', $fullname);
@@ -152,8 +155,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $stmt->bindParam(':file_names', $file_names_str);
             $stmt->bindParam(':upload_url', $_POST['upload_url']);
             $stmt->bindParam(':status_user', $status_user);
+            $stmt->bindParam(':status_Sendline_user', $status_Sendline_user);
             $stmt->bindParam(':status_admin', $status_admin);
+            $stmt->bindParam(':status_Sendline_admin', $status_Sendline_admin);
             $stmt->bindParam(':status_ss', $status_ss);
+            $stmt->bindParam(':status_Sendline_ss', $status_Sendline_ss);
             $stmt->bindParam(':status_email', $status_email);
             $stmt->bindParam(':ref', $ref);
 
@@ -162,6 +168,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
             // Get the ID of the last inserted row
             $last_id = $conn->lastInsertId();
+
+            // Get the previous page's lang parameter if it exists
+            $lang = isset($_SESSION['lang']) ? $_SESSION['lang'] : '';
 
             // Display success message using SweetAlert2
             echo "
@@ -175,7 +184,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     showConfirmButton: false,
                     timer: 3000
                 }).then(function() {
-                    window.location.href = 'ccfn-form-online-status-s?id=$last_id&ref=$ref';
+                    window.location.href = 'ccfn-form-online-status-s?id=$last_id&ref=$ref&lang=' + encodeURIComponent('$lang');
                 });
             </script>";
         } catch (PDOException $e) {

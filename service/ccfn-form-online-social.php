@@ -1,11 +1,10 @@
 <?php
-require_once '../oauth/session.php'
+require_once '../oauth/sessionlogin.php'
 ?>
 <!DOCTYPE html>
 <html lang="en">
 
 <?php include_once('../config/head.php'); ?>
-
 
 <body class="starter-page-page">
 
@@ -16,11 +15,11 @@ require_once '../oauth/session.php'
         <!-- Page Title -->
         <div class="page-title" data-aos="fade">
             <div class="container d-lg-flex justify-content-between align-items-center">
-                <h1 class="mb-2 mb-lg-0">บริการออนไลน์</h1>
+                <h1 class="mb-2 mb-lg-0"><?php echo $lang['services'] ?></h1>
                 <nav class="breadcrumbs">
                     <ol>
-                        <li><a href="../home/index">หน้าหลัก</a></li>
-                        <li class="current">บริการออนไลน์</li>
+                        <li><a href="../home/index?lang=<?php echo $_SESSION['lang']; ?>"><?php echo $lang['home'] ?></a></li>
+                        <li class="current"><?php echo $lang['about1'] ?></li>
                     </ol>
                 </nav>
             </div>
@@ -32,8 +31,8 @@ require_once '../oauth/session.php'
 
             <!-- Section Title -->
             <div class="container section-title" data-aos="fade-up">
-                <h2>ประชาสัมพันธ์สื่อออนไลน์</h2>
-                <p>เว็บไซต์, เฟซบุ๊ก, ทวิตเตอร์, อินสตาแกรม, ยูทูป</p>
+                <h2><?php echo $lang['about1'] ?></h2>
+                <p><?php echo $lang['social1'] ?></p>
             </div><!-- End Section Title -->
 
             <div class="container" data-aos="fade-up" data-aos-delay="100">
@@ -42,104 +41,58 @@ require_once '../oauth/session.php'
                         <form method="post" class="php-email-form" enctype="multipart/form-data" data-aos-delay="400">
                             <div class="row gy-4">
                                 <div class="col-md-6">
-                                    <label for="fullname" class="form-label">ชื่อ-สกุล</label>
-                                    <input type="text" name="fullname" id="fullname" class="form-control" placeholder="ชื่อ-สกุล" value="<?php echo isset($_SESSION['login_info']['firstname_EN'])  ? htmlspecialchars($_SESSION['login_info']['firstname_EN'] . ' ' . $_SESSION['login_info']['lastname_EN']) : ''; ?>">
+                                    <label for="fullname" class="form-label"><?php echo $lang['fullname']; ?></label>
+                                    <input type="text" name="fullname" id="fullname" class="form-control" value="<?php echo $prefix_th . ' ' . $fname_th . ' ' . $lname_th; ?>">
                                 </div>
 
                                 <div class="col-md-6">
-                                    <label for="email" class="form-label">อีเมล</label>
-                                    <input type="email" class="form-control" name="email" id="email" value="<?php echo isset($_SESSION['login_info']['cmuitaccount']) ? htmlspecialchars($_SESSION['login_info']['cmuitaccount']) : ''; ?>">
+                                    <label for="email" class="form-label"><?php echo $lang['email']; ?></label>
+                                    <input type="email" class="form-control" name="email" id="email" value="<?php echo $cmu_account; ?>">
                                 </div>
 
                                 <div class="col-md-6">
-                                    <label for="department" class="form-label">ภาควิชา/หน่วยงาน</label>
-                                    <select name="department" id="department" class="form-control">
-                                        <option value="">กรุณาเลือกข้อมูล</option>
-                                        <option value="งานบริหารทั่วไป">งานบริหารทั่วไป</option>
-                                        <option value="งานการเงินการคลังและพัสดุ">งานการเงิน การคลัง และพัสดุ</option>
-                                        <option value="งานนโยบายและแผนและประกันคุณภาพการศึกษา">งานนโยบายและแผน และประกันคุณภาพการศึกษา</option>
-                                        <option value="งานบริการการศึกษาและพัฒนาคุณภาพนักศึกษา">งานบริการการศึกษา และพัฒนาคุณภาพนักศึกษา</option>
-                                        <option value="งานบริหารงานวิจัยบริการวิชาการและวิเทศสัมพันธ์">งานบริหารงานวิจัย บริการวิชาการ และวิเทศสัมพันธ์</option>
-                                        <option value="ศูนย์บริการพยาบาล">ศูนย์บริการพยาบาล</option>
-                                        <option value="ศูนย์ความเป็นเลิศทางการพยาบาล">ศูนย์ความเป็นเลิศทางการพยาบาล</option>
-                                    </select>
+                                    <label for="department" class="form-label"><?php echo $lang['department']; ?></label>
+                                    <input type="text" class="form-control" name="department" id="department" value="<?php echo $job; ?>">
                                 </div>
 
                                 <div class="col-md-6">
-                                    <label for="tel" class="form-label">โทรศัพท์</label>
-                                    <input type="number" class="form-control" name="tel" id="tel">
+                                    <label for="tel" class="form-label"><?php echo $lang['phone']; ?></label>
+                                    <input type="text" class="form-control" name="tel" id="tel" value="<?php echo $tel_office; ?>">
                                 </div>
 
                                 <div class="col-md-6">
-                                    <label for="personnel" class="form-label">ประเภทบุคลากร</label>
-                                    <select name="personnel" id="personnel" class="form-control">
-                                        <option value="<?php echo isset($_SESSION['login_info']['itaccounttype_TH']) ? htmlspecialchars($_SESSION['login_info']['itaccounttype_TH']) : ''; ?>"><?php echo isset($_SESSION['login_info']['itaccounttype_TH']) ? htmlspecialchars($_SESSION['login_info']['itaccounttype_TH']) : ''; ?></option>
-                                    </select>
+                                    <label for="personnel" class="form-label"><?php echo $lang['personnel']; ?></label>
+                                    <input type="text" class="form-control" name="personnel" id="personnel" value="<?php echo $position_name; ?>">
                                 </div>
 
                                 <div class="col-md-6">
-                                    <label for="communicate" class="form-label">หมวดการสื่อสาร</label>
+                                    <label for="communicate" class="form-label"><?php echo $lang['communicate']; ?></label>
                                     <select name="communicate" id="communicate" class="form-control" onchange="changeSocialOptions(this.value)">
-                                        <option value="">กรุณาเลือกข้อมูล หมวดการสื่อสาร</option>
-                                        <option value="comm1">ด้านผู้บริหาร</option>
-                                        <option value="comm2">ด้านบุคลากร</option>
-                                        <option value="comm3">ด้านผลิตภัณฑ์ (การศึกษา การวิจัย บริการวิชาการ)</option>
-                                        <option value="comm4">ประชุม / อบรม / สัมมนา</option>
-                                        <option value="comm5">กิจกรรมที่สร้างสรรค์ต่อสังคม</option>
+                                        <option value=""><?php echo $lang['select'] . ' ' . $lang['communicate']; ?></option>
+                                        <option value="comm1"><?php echo $lang['comm1']; ?></option>
+                                        <option value="comm2"><?php echo $lang['comm2']; ?></option>
+                                        <option value="comm3"><?php echo $lang['comm3']; ?></option>
+                                        <option value="comm4"><?php echo $lang['comm4']; ?></option>
+                                        <option value="comm5"><?php echo $lang['comm5']; ?></option>
                                     </select>
                                 </div>
+
                                 <div class="col-md-6">
-                                    <label class="form-label">ช่องทางประชาสัมพันธ์</label>
+                                    <label class="form-label"><?php echo $lang['social']; ?></label>
                                     <div id="social-options" class="form-group"></div>
                                 </div>
-
-                                <script>
-                                    const options = {
-                                        comm1: ["Website", "Facebook Official (TH)", "Facebook Official (En)"],
-                                        comm2: ["Website", "Facebook Official (TH)", "Facebook Official (En)"],
-                                        comm3: ["Website", "Facebook Official (TH)", "Facebook Official (En)", "Line Official", "LinkedIn", "Instagram", "Twitter"],
-                                        comm4: ["Line Official", "Website", "เสียงตามสาย", "ป้ายดิจิทัล"],
-                                        comm5: ["Website", "Facebook Official (TH)", "Facebook Official (En)"]
-                                    };
-
-                                    function changeSocialOptions(value) {
-                                        var socialOptions = document.getElementById("social-options");
-                                        socialOptions.innerHTML = ""; // Clear previous options
-                                        if (options[value]) {
-                                            options[value].forEach(function(option) {
-                                                var checkbox = document.createElement("input");
-                                                checkbox.type = "checkbox";
-                                                checkbox.className = "form-check-input"; // Set the class here
-                                                checkbox.name = "social[]";
-                                                checkbox.value = option;
-                                                checkbox.id = option;
-
-                                                var label = document.createElement("label");
-                                                label.className = "form-check-label"; // Optionally set the label class
-                                                label.htmlFor = option;
-                                                label.appendChild(document.createTextNode(option));
-
-                                                var div = document.createElement("div");
-                                                div.className = "form-check"; // Optional div class for Bootstrap form-check
-                                                div.appendChild(checkbox);
-                                                div.appendChild(label);
-
-                                                socialOptions.appendChild(div);
-                                            });
-                                        }
-                                    }
-                                </script>
 
                                 <div class="col-md-12">
                                     <input class="form-check-input" type="radio" name="option" id="option_file" value="file">
                                     <label class="form-check-label" for="option_file">
-                                        อัปโหลดไฟล์
+                                        <?php echo $lang['file_upload']; ?>
                                     </label>
                                 </div>
+
                                 <div class="col-md-12">
                                     <input class="form-check-input" type="radio" name="option" id="option_url" value="url">
                                     <label class="form-check-label" for="option_url">
-                                        แชร์ผ่าน OneDrive, GoogleDrive หรืออื่นๆ
+                                        <?php echo $lang['url_upload']; ?>
                                     </label>
                                 </div>
 
@@ -164,24 +117,22 @@ require_once '../oauth/session.php'
                                 </div>
 
                                 <div class="col-md-6" id="fileUploadURLDiv" style="display: none;">
-                                    <label for="upload_url" class="form-label">URL OneDrive, GoogleDrive หรืออื่นๆ</label>
+                                    <label for="upload_url" class="form-label"><?php echo $lang['url_upload']; ?></label>
                                     <input type="text" class="form-control" name="upload_url" id="upload_url">
                                 </div>
 
                                 <div class="col-md-6">
-                                    <label for="social" class="form-label">วันที่ต้องการใช้งาน</label>
+                                    <label for="date_a" class="form-label"><?php echo $lang['date_a']; ?></label>
                                     <input type="date" name="date_a" id="date_a" class="form-control">
                                 </div>
 
-
-
                                 <div class="col-md-6">
-                                    <label for="title" class="form-label">หัวข้อข่าว</label>
+                                    <label for="title" class="form-label"><?php echo $lang['title']; ?></label>
                                     <input type="text" name="title" id="title" class="form-control">
                                 </div>
 
                                 <div class="col-md-12">
-                                    <label for="title" class="form-label">รายละเอียดข่าว</label>
+                                    <label for="details" class="form-label"><?php echo $lang['details']; ?></label>
                                     <textarea class="form-control" name="details" rows="6"></textarea>
                                 </div>
 
@@ -194,7 +145,7 @@ require_once '../oauth/session.php'
                                 <div class="col-md-12 text-center">
                                     <div class="loading">Loading</div>
                                     <div class="error-message"></div>
-                                    <button type="submit">ยืนยันข้อมูล</button>
+                                    <button type="submit"><?php echo $lang['submit']; ?></button>
                                 </div>
                             </div>
                         </form>
@@ -224,6 +175,42 @@ require_once '../oauth/session.php'
     <!-- Main JS File -->
     <script src="../assets/js/main.js"></script>
 
+    <script>
+        const options = {
+            comm1: ["Website", "Facebook Official (TH)", "Facebook Official (En)"],
+            comm2: ["Website", "Facebook Official (TH)", "Facebook Official (En)"],
+            comm3: ["Website", "Facebook Official (TH)", "Facebook Official (En)", "Line Official", "LinkedIn", "Instagram", "Twitter"],
+            comm4: ["Line Official", "Website", "เสียงตามสาย", "ป้ายดิจิทัล"],
+            comm5: ["Website", "Facebook Official (TH)", "Facebook Official (En)"]
+        };
+
+        function changeSocialOptions(value) {
+            var socialOptions = document.getElementById("social-options");
+            socialOptions.innerHTML = ""; // Clear previous options
+            if (options[value]) {
+                options[value].forEach(function(option) {
+                    var checkbox = document.createElement("input");
+                    checkbox.type = "checkbox";
+                    checkbox.className = "form-check-input"; // Set the class here
+                    checkbox.name = "social[]";
+                    checkbox.value = option;
+                    checkbox.id = option;
+
+                    var label = document.createElement("label");
+                    label.className = "form-check-label"; // Optionally set the label class
+                    label.htmlFor = option;
+                    label.appendChild(document.createTextNode(option));
+
+                    var div = document.createElement("div");
+                    div.className = "form-check"; // Optional div class for Bootstrap form-check
+                    div.appendChild(checkbox);
+                    div.appendChild(label);
+
+                    socialOptions.appendChild(div);
+                });
+            }
+        }
+    </script>
 
     <script>
         document.addEventListener('DOMContentLoaded', (event) => {

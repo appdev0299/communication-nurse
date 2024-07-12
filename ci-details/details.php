@@ -13,11 +13,11 @@
         <!-- Page Title -->
         <div class="page-title" data-aos="fade">
             <div class="container d-lg-flex justify-content-between align-items-center">
-                <h1 class="mb-2 mb-lg-0">Ci Brand</h1>
+                <h1 class="mb-2 mb-lg-0"><?php echo $lang['ci'] ?></h1>
                 <nav class="breadcrumbs">
                     <ol>
-                        <li><a href="../home/index">หน้าหลัก</a></li>
-                        <li class="current">Ci Brand</li>
+                        <li><a href="../home/index"><?php echo $lang['home'] ?></a></li>
+                        <li class="current"><?php echo $lang['ci'] ?></li>
                     </ol>
                 </nav>
             </div>

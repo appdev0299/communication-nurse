@@ -110,10 +110,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         return $randomString;
     }
     try {
-        $status_user = 1;
-        $status_admin = 0;
-        $status_ss = 0;
-        $status_email = 0; // Initialize status_email as 0 (assuming it's an integer field)
+        $status_user = 1; // ร้องขอสำเร็จ
+        $status_admin = 0; // รอแอดมินตรวจ
+        $status_ss = 0; // ทำงานเสร็จทั้งหมด
+        $status_email = 0;
 
         $ref = generateRandomString();
 
@@ -131,11 +131,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $stmt->bindParam(':option', $option);
         $stmt->bindParam(':date_a', $date_a);
         $stmt->bindParam(':communicate', $communicate);
-        $stmt->bindParam(':production_file', $file_name); // Save just the file name to database
+        $stmt->bindParam(':production_file', $file_name);
         $stmt->bindParam(':status_user', $status_user);
         $stmt->bindParam(':status_admin', $status_admin);
         $stmt->bindParam(':status_ss', $status_ss);
-        $stmt->bindParam(':status_email', $status_email); // Correctly bind status_email
+        $stmt->bindParam(':status_email', $status_email);
         $stmt->bindParam(':ref', $ref);
 
         // Execute SQL statement

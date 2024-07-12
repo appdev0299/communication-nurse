@@ -15,11 +15,11 @@
         <!-- Page Title -->
         <div class="page-title" data-aos="fade">
             <div class="container d-lg-flex justify-content-between align-items-center">
-                <h1 class="mb-2 mb-lg-0">บริการออนไลน์</h1>
+                <h1 class="mb-2 mb-lg-0"><?php echo $lang['services'] ?></h1>
                 <nav class="breadcrumbs">
                     <ol>
-                        <li><a href="../home/index">หน้าหลัก</a></li>
-                        <li class="current">บริการออนไลน์</li>
+                        <li><a href="../home/index?lang=<?php echo $_SESSION['lang']; ?>"><?php echo $lang['home'] ?></a></li>
+                        <li class="current"><?php echo $lang['about1'] ?></li>
                     </ol>
                 </nav>
             </div>
@@ -37,8 +37,6 @@
                     if (isset($_GET['id'])) {
                         $$id = $_GET['id'];
                         $ref = $_GET['ref'];
-
-
                         $stmt = $conn->prepare("SELECT * FROM ccfn_form_s WHERE id = :id");
                         $stmt->bindParam(':id', $id, PDO::PARAM_INT);
                         $stmt->execute();
@@ -46,61 +44,35 @@
 
                         // ตรวจสอบว่าพบข้อมูลหรือไม่ก่อนแสดงผล
                         if ($row) {
-                            $fileNames = explode(',', $row['file_names']); // แยกอาเรย์ของ file_names โดยใช้ comma (,) เป็นตัวแยก
+                            $fileNames = explode(',', $row['file_names']);
+                            $status_user_text = '';
+                            switch ($row['status_user']) {
+                                case 1:
+                                    $status_user_text = 'คำร้องสำเร็จ';
+                                    break;
+                                case 0:
+                                    $status_user_text = 'คำร้องขอผิดพลาด';
+                                    break;
+                                default:
+                                    $status_user_text = 'สถานะไม่ทราบ';
+                                    break;
+                            }
                     ?>
 
                             <div class="col-lg-2" data-aos="fade-up" data-aos-delay="100">
                                 <div class="service-box">
-                                    <h4>ดาวน์โหลดแบบฟอร์ม</h4>
+                                    <h4><?php echo $lang['dpdf'] ?></h4>
                                     <div class="download-catalog">
                                         <a href="pdf-form-s.php?id=<?= $id ?>&ref=<?= $ref ?>" target="_blank">
-                                            <i class="bi bi-filetype-pdf"></i><span>แบบฟอร์มการรับบริการหน่วยสื่อสารและภาพลักษณ์องค์กร</span>
+                                            <i class="bi bi-filetype-pdf"></i><span><?php echo $lang['pdf'] ?></span>
                                         </a>
                                     </div>
                                 </div>
                             </div>
                             <div class="col-lg-10 ps-lg-5" data-aos="fade-up" data-aos-delay="200">
                                 <div class="timeline-grid">
-                                    <div>
-                                        <ul>
-                                            <?php if ($row['status_user'] == 1) : ?>
-                                                <li><i class="bi bi-check-circle"></i> <span>ร้องขอสำเร็จ</span></li>
-                                            <?php elseif ($row['status_user'] == 0) : ?>
-                                                <li><i class="bi bi-exclamation-circle"></i> <span>เกิดข้อผิดพลาด</span></li>
-                                            <?php else : ?>
-                                                <li><i class="bi bi-question-circle"></i> <span>สถานะไม่ทราบ</span></li>
-                                            <?php endif; ?>
-                                        </ul>
-                                    </div>
-                                    <div>
-                                        <ul>
-                                            <?php if ($row['status_admin'] == 1) : ?>
-                                                <li><i class="bi bi-check-circle"></i> <span>ผ่านการตรวจสอบจากเจ้าหน้าที่</span></li>
-                                            <?php elseif ($row['status_admin'] == 0) : ?>
-                                                <li><i class="bi bi-exclamation-circle"></i> <span>ไม่ผ่านการตรวจสอบจากเจ้าหน้าที่</span></li>
-                                            <?php elseif ($row['status_admin'] == 2) : ?>
-                                                <!-- ปิดการแสดงผลเมื่อ status_admin เท่ากับ 2 -->
-                                            <?php else : ?>
-                                                <li><i class="bi bi-question-circle"></i> <span>สถานะไม่ทราบ</span></li>
-                                            <?php endif; ?>
-                                        </ul>
-                                    </div>
-
-                                    <div>
-                                        <ul>
-                                            <?php if ($row['status_ss'] == 1) : ?>
-                                                <li><i class="bi bi-check-circle"></i> <span>สำเร็จ</span></li>
-                                            <?php elseif ($row['status_ss'] == 0) : ?>
-                                                <li><i class="bi bi-exclamation-circle"></i> <span>เกิดข้อผิดพลาด</span></li>
-                                            <?php elseif ($row['status_ss'] == 2) : ?>
-                                                <!-- ปิดการแสดงผลเมื่อ status_admin เท่ากับ 2 -->
-                                            <?php else : ?>
-                                                <li><i class="bi bi-question-circle"></i> <span>สถานะไม่ทราบ</span></li>
-                                            <?php endif; ?>
-                                        </ul>
-                                    </div>
+                                    <h5> <i class="bi bi-check-circle"></i> <?= $status_user_text; ?></h5>
                                 </div>
-
                                 <hr>
                                 <h5><?= $row['fullname']; ?> <?= $row['email']; ?></h5>
                                 <p>
@@ -108,20 +80,21 @@
                                 </p>
                                 <hr>
                                 <p>
-                                    ประชาสัมพันธ์สื่อผ่านช่องทาง : <?= $row['social']; ?>
+                                    <?php echo $lang['about1'] ?> : <?= $row['social']; ?>
                                 </p>
                                 <p>
-                                    หนวดการสื่อสาร : <?= $row['communicate']; ?>
+                                    <?php echo $lang['communicate'] ?> : <?= $row['communicate']; ?>
                                 </p>
                                 <p>
-                                    หัวข้อข่าว : <?= $row['title']; ?>
+                                    <?php echo $lang['title'] ?> : <?= $row['title']; ?>
                                 </p>
                                 <p>
-                                    รายละเอียดข่าว : <?= $row['details']; ?>
+                                    <?php echo $lang['details'] ?> : <?= $row['details']; ?>
                                 </p>
                                 <p>
-                                    เผยแพร่วันที่ : <?= $row['date_a']; ?>
+                                    <?php echo $lang['date_a'] ?> : <?= date('d/m/Y', strtotime($row['date_a'])); ?>
                                 </p>
+
                                 <div class="row">
                                     <?php foreach ($fileNames as $fileName) : ?>
                                         <div class="col-lg-4">
@@ -134,8 +107,6 @@
                                         </p>
                                     <?php endif; ?>
                                 </div>
-
-
                                 <hr>
                             </div>
                     <?php
@@ -145,12 +116,9 @@
                     }
                     ?>
                 </div>
-
-
             </div>
-
         </section>
-
+        <?php include_once('../oauth/lineoa.php'); ?>
     </main>
 
     <?php include_once('../config/footer.php'); ?>

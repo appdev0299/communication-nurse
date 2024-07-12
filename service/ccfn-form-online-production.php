@@ -1,5 +1,5 @@
 <?php
-require_once '../oauth/session.php'
+require_once '../oauth/sessionlogin.php'
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -16,11 +16,11 @@ require_once '../oauth/session.php'
         <!-- Page Title -->
         <div class="page-title" data-aos="fade">
             <div class="container d-lg-flex justify-content-between align-items-center">
-                <h1 class="mb-2 mb-lg-0">บริการออนไลน์</h1>
+                <h1 class="mb-2 mb-lg-0"><?php echo $lang['services'] ?></h1>
                 <nav class="breadcrumbs">
                     <ol>
-                        <li><a href="../home/index">หน้าหลัก</a></li>
-                        <li class="current">บริการออนไลน์</li>
+                        <li><a href="../home/index?lang=<?php echo $_SESSION['lang']; ?>"><?php echo $lang['home'] ?></a></li>
+                        <li class="current"><?php echo $lang['about2'] ?></li>
                     </ol>
                 </nav>
             </div>
@@ -42,43 +42,32 @@ require_once '../oauth/session.php'
                         <form method="post" class="php-email-form" enctype="multipart/form-data" data-aos-delay="400">
                             <div class="row gy-4">
                                 <div class="col-md-6">
-                                    <label for="fullname" class="form-label">ชื่อ-สกุล</label>
-                                    <input type="text" name="fullname" id="fullname" class="form-control" value="<?php echo isset($_SESSION['login_info']['firstname_EN'])  ? htmlspecialchars($_SESSION['login_info']['firstname_EN'] . ' ' . $_SESSION['login_info']['lastname_EN']) : ''; ?>">
+                                    <label for="fullname" class="form-label"><?php echo $lang['fullname']; ?></label>
+                                    <input type="text" name="fullname" id="fullname" class="form-control" value="<?php echo $prefix_th . ' ' . $fname_th . ' ' . $lname_th; ?>">
                                 </div>
 
                                 <div class="col-md-6">
-                                    <label for="email" class="form-label">อีเมล</label>
-                                    <input type="email" class="form-control" name="email" id="email" value="<?php echo isset($_SESSION['login_info']['cmuitaccount']) ? htmlspecialchars($_SESSION['login_info']['cmuitaccount']) : ''; ?>">
+                                    <label for="email" class="form-label"><?php echo $lang['email']; ?></label>
+                                    <input type="email" class="form-control" name="email" id="email" value="<?php echo $cmu_account; ?>">
                                 </div>
 
                                 <div class="col-md-6">
-                                    <label for="department" class="form-label">ภาควิชา/หน่วยงาน</label>
-                                    <select name="department" id="department" class="form-control">
-                                        <option value="">กรุณาเลือกข้อมูล</option>
-                                        <option value="งานบริหารทั่วไป">งานบริหารทั่วไป</option>
-                                        <option value="งานการเงินการคลังและพัสดุ">งานการเงิน การคลัง และพัสดุ</option>
-                                        <option value="งานนโยบายและแผนและประกันคุณภาพการศึกษา">งานนโยบายและแผน และประกันคุณภาพการศึกษา</option>
-                                        <option value="งานบริการการศึกษาและพัฒนาคุณภาพนักศึกษา">งานบริการการศึกษา และพัฒนาคุณภาพนักศึกษา</option>
-                                        <option value="งานบริหารงานวิจัยบริการวิชาการและวิเทศสัมพันธ์">งานบริหารงานวิจัย บริการวิชาการ และวิเทศสัมพันธ์</option>
-                                        <option value="ศูนย์บริการพยาบาล">ศูนย์บริการพยาบาล</option>
-                                        <option value="ศูนย์ความเป็นเลิศทางการพยาบาล">ศูนย์ความเป็นเลิศทางการพยาบาล</option>
-                                    </select>
+                                    <label for="department" class="form-label"><?php echo $lang['department']; ?></label>
+                                    <input type="text" class="form-control" name="department" id="department" value="<?php echo $job; ?>">
                                 </div>
 
                                 <div class="col-md-6">
-                                    <label for="tel" class="form-label">โทรศัพท์</label>
-                                    <input type="number" class="form-control" name="tel" id="tel">
+                                    <label for="tel" class="form-label"><?php echo $lang['phone']; ?></label>
+                                    <input type="text" class="form-control" name="tel" id="tel" value="<?php echo $tel_office; ?>">
                                 </div>
 
                                 <div class="col-md-6">
-                                    <label for="personnel" class="form-label">ประเภทบุคลากร</label>
-                                    <select name="personnel" id="personnel" class="form-control">
-                                        <option value="<?php echo isset($_SESSION['login_info']['itaccounttype_TH']) ? htmlspecialchars($_SESSION['login_info']['itaccounttype_TH']) : ''; ?>"><?php echo isset($_SESSION['login_info']['itaccounttype_TH']) ? htmlspecialchars($_SESSION['login_info']['itaccounttype_TH']) : ''; ?></option>
-                                    </select>
+                                    <label for="personnel" class="form-label"><?php echo $lang['personnel']; ?></label>
+                                    <input type="text" class="form-control" name="personnel" id="personnel" value="<?php echo $position_name; ?>">
                                 </div>
 
                                 <div class="col-md-6">
-                                    <label for="social" class="form-label">ช่องทางประชาสัมพันธ์</label>
+                                    <label for="social" class="form-label"><?php echo $lang['social']; ?></label>
                                     <select name="social[]" id="social" class="form-control" multiple>
                                         <option value="Website คณะพยาบาลศาสตร์">Website</option>
                                         <option value="Facebook Official (TH)">Facebook Official (TH)</option>
@@ -96,98 +85,33 @@ require_once '../oauth/session.php'
 
                                 <div class="col-md-12">
                                     <input class="form-check-input" type="radio" name="option" id="sent_email" value="sent_email" checked>
-                                    <label class="form-check-label" for="sent_email">ส่งไฟล์ผ่าน Email</label>
+                                    <label class="form-check-label" for="sent_email"><?php echo $lang['file_upload']; ?></label>
                                 </div>
                                 <div class="col-md-12">
                                     <input class="form-check-input" type="radio" name="option" id="sent_url" value="sent_url">
-                                    <label class="form-check-label" for="sent_url">ส่งไฟล์ผ่าน OneDrive, GoogleDrive</label>
+                                    <label class="form-check-label" for="sent_url"><?php echo $lang['url_upload']; ?></label>
                                 </div>
 
                                 <div class="col-md-6">
-                                    <label for="social" class="form-label">วันที่ต้องการใช้งาน</label>
+                                    <label for="date_a" class="form-label"><?php echo $lang['date_a']; ?></label>
                                     <input type="date" name="date_a" id="date_a" class="form-control">
                                 </div>
 
-                                <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
-                                <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.all.min.js"></script>
-
-                                <script>
-                                    document.addEventListener('DOMContentLoaded', (event) => {
-                                        var today = new Date();
-                                        var minDate = new Date();
-                                        minDate.setDate(minDate.getDate() + 1); // เพิ่ม 1 วันจากวันที่ปัจจุบัน
-
-                                        today.setDate(today.getDate() + 3); // เพิ่ม 3 วันจากวันที่ปัจจุบัน
-                                        var year = today.getFullYear();
-                                        var month = ('0' + (today.getMonth() + 1)).slice(-2);
-                                        var day = ('0' + today.getDate()).slice(-2);
-                                        var formattedDate = year + '-' + month + '-' + day;
-
-                                        var minYear = minDate.getFullYear();
-                                        var minMonth = ('0' + (minDate.getMonth() + 1)).slice(-2);
-                                        var minDay = ('0' + minDate.getDate()).slice(-2);
-                                        var formattedMinDate = minYear + '-' + minMonth + '-' + minDay;
-
-                                        var dateInput = document.getElementById('date_a');
-                                        dateInput.value = formattedDate;
-                                        dateInput.min = formattedMinDate;
-
-                                        // ตรวจสอบวันที่ที่ช้ำกันเกิน 3 ครั้ง
-                                        fetchUnavailableDates();
-
-                                        dateInput.addEventListener('change', function() {
-                                            checkDateAvailability(this.value);
-                                        });
-                                    });
-
-                                    function fetchUnavailableDates() {
-                                        var xhr = new XMLHttpRequest();
-                                        xhr.open('POST', 'check_date_availability_p.php', true);
-                                        xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-                                        xhr.onload = function() {
-                                            if (xhr.status === 200) {
-                                                var unavailableDates = JSON.parse(xhr.responseText);
-                                                disableUnavailableDates(unavailableDates);
-                                            }
-                                        };
-                                        xhr.send();
-                                    }
-
-                                    function disableUnavailableDates(unavailableDates) {
-                                        var dateInput = document.getElementById('date_a');
-                                        dateInput.addEventListener('input', function() {
-                                            var selectedDate = new Date(this.value);
-                                            var formattedDate = selectedDate.toISOString().split('T')[0];
-                                            if (unavailableDates.includes(formattedDate)) {
-                                                Swal.fire({
-                                                    icon: 'error',
-                                                    title: 'วันที่เลือกไม่สามารถใช้งานได้',
-                                                    text: 'เนื่องจาก วันที่เลือกมีจำนวนคำร้องขอเต็มแล้ว',
-                                                    showConfirmButton: true,
-                                                    confirmButtonText: 'ตกลง'
-                                                }).then(function() {
-                                                    dateInput.value = ''; // ล้างค่า
-                                                });
-                                            }
-                                        });
-                                    }
-                                </script>
-
                                 <div class="col-md-6">
-                                    <label for="communicate" class="form-label">หมวดการสื่อสาร</label>
+                                    <label for="communicate" class="form-label"><?php echo $lang['communicate']; ?></label>
                                     <select name="communicate" id="communicate" class="form-control">
-                                        <option value="">กรุณาเลือกข้อมูล หมวดการสื่อสาร</option>
-                                        <option value="ด้านผู้บริหาร">ด้านผู้บริหาร</option>
-                                        <option value="ด้านบุคลากร">ด้านบุคลากร</option>
-                                        <option value="ด้านผลิตภัณฑ์(การศึกษา การวิจัย บริการวิชาการ)">ด้านผลิตภัณฑ์ (การศึกษา การวิจัย บริการวิชาการ)</option>
-                                        <option value="ประชุม/อบรม/สัมมนา">ประชุม / อบรม / สัมมนา</option>
-                                        <option value="กิจกรรมที่สร้างสรรค์ต่อสังคม">กิจกรรมที่สร้างสรรค์ต่อสังคม</option>
-                                        <option value="อื่นๆ">อื่นๆ</option>
+                                        <option value=""><?php echo $lang['select'] . ' ' . $lang['communicate']; ?></option>
+                                        <option value="ด้านผู้บริหาร"><?php echo $lang['comm1']; ?></option>
+                                        <option value="ด้านบุคลากร"><?php echo $lang['comm2']; ?></option>
+                                        <option value="ด้านผลิตภัณฑ์(การศึกษา การวิจัย บริการวิชาการ)"><?php echo $lang['comm3']; ?></option>
+                                        <option value="ประชุม/อบรม/สัมมนา"><?php echo $lang['comm4']; ?></option>
+                                        <option value="กิจกรรมที่สร้างสรรค์ต่อสังคม"><?php echo $lang['comm5']; ?></option>
+                                        <option value="อื่นๆ">Other</option>
                                     </select>
                                 </div>
 
                                 <div class="col-md-12">
-                                    <label for="social" class="form-label">แนบไฟล์เอกสาร</label>
+                                    <label for="production" class="form-label"><?php echo $lang['file_upload']; ?></label>
                                     <input type="file" name="production" id="production" class="form-control">
                                 </div>
                                 <div>
@@ -199,34 +123,12 @@ require_once '../oauth/session.php'
                                 <div class="col-md-12 text-center">
                                     <div class="loading">Loading</div>
                                     <div class="error-message"></div>
-                                    <button type="submit">ยืนยันข้อมูล</button>
+                                    <button type="submit"><?php echo $lang['submit']; ?></button>
                                 </div>
                             </div>
                         </form>
 
-                        <script>
-                            // Set min date and default date
-                            document.addEventListener('DOMContentLoaded', (event) => {
-                                var today = new Date();
-                                var minDate = new Date();
-                                minDate.setDate(minDate.getDate() + 1); // Add 1 day from today
 
-                                today.setDate(today.getDate() + 3); // Add 3 days from today
-                                var year = today.getFullYear();
-                                var month = ('0' + (today.getMonth() + 1)).slice(-2);
-                                var day = ('0' + today.getDate()).slice(-2);
-                                var formattedDate = year + '-' + month + '-' + day;
-
-                                var minYear = minDate.getFullYear();
-                                var minMonth = ('0' + (minDate.getMonth() + 1)).slice(-2);
-                                var minDay = ('0' + minDate.getDate()).slice(-2);
-                                var formattedMinDate = minYear + '-' + minMonth + '-' + minDay;
-
-                                var dateInput = document.getElementById('date_a');
-                                dateInput.value = formattedDate;
-                                dateInput.min = formattedMinDate;
-                            });
-                        </script>
                         <?php include_once('save_data_p.php'); ?>
                     </div><!-- End Contact Form -->
 
@@ -256,6 +158,93 @@ require_once '../oauth/session.php'
     <script src="https://cdn.jsdelivr.net/gh/habibmhamadi/multi-select-tag@3.0.1/dist/js/multi-select-tag.js"></script>
     <script>
         new MultiSelectTag('social') // id
+    </script>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.all.min.js"></script>
+    <script>
+        // Set min date and default date
+        document.addEventListener('DOMContentLoaded', (event) => {
+            var today = new Date();
+            var minDate = new Date();
+            minDate.setDate(minDate.getDate() + 1); // Add 1 day from today
+
+            today.setDate(today.getDate() + 3); // Add 3 days from today
+            var year = today.getFullYear();
+            var month = ('0' + (today.getMonth() + 1)).slice(-2);
+            var day = ('0' + today.getDate()).slice(-2);
+            var formattedDate = year + '-' + month + '-' + day;
+
+            var minYear = minDate.getFullYear();
+            var minMonth = ('0' + (minDate.getMonth() + 1)).slice(-2);
+            var minDay = ('0' + minDate.getDate()).slice(-2);
+            var formattedMinDate = minYear + '-' + minMonth + '-' + minDay;
+
+            var dateInput = document.getElementById('date_a');
+            dateInput.value = formattedDate;
+            dateInput.min = formattedMinDate;
+        });
+    </script>
+    <script>
+        document.addEventListener('DOMContentLoaded', (event) => {
+            var today = new Date();
+            var minDate = new Date();
+            minDate.setDate(minDate.getDate() + 1); // เพิ่ม 1 วันจากวันที่ปัจจุบัน
+
+            today.setDate(today.getDate() + 3); // เพิ่ม 3 วันจากวันที่ปัจจุบัน
+            var year = today.getFullYear();
+            var month = ('0' + (today.getMonth() + 1)).slice(-2);
+            var day = ('0' + today.getDate()).slice(-2);
+            var formattedDate = year + '-' + month + '-' + day;
+
+            var minYear = minDate.getFullYear();
+            var minMonth = ('0' + (minDate.getMonth() + 1)).slice(-2);
+            var minDay = ('0' + minDate.getDate()).slice(-2);
+            var formattedMinDate = minYear + '-' + minMonth + '-' + minDay;
+
+            var dateInput = document.getElementById('date_a');
+            dateInput.value = formattedDate;
+            dateInput.min = formattedMinDate;
+
+            // ตรวจสอบวันที่ที่ช้ำกันเกิน 3 ครั้ง
+            fetchUnavailableDates();
+
+            dateInput.addEventListener('change', function() {
+                checkDateAvailability(this.value);
+            });
+        });
+
+        function fetchUnavailableDates() {
+            var xhr = new XMLHttpRequest();
+            xhr.open('POST', 'check_date_availability_p.php', true);
+            xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+            xhr.onload = function() {
+                if (xhr.status === 200) {
+                    var unavailableDates = JSON.parse(xhr.responseText);
+                    disableUnavailableDates(unavailableDates);
+                }
+            };
+            xhr.send();
+        }
+
+        function disableUnavailableDates(unavailableDates) {
+            var dateInput = document.getElementById('date_a');
+            dateInput.addEventListener('input', function() {
+                var selectedDate = new Date(this.value);
+                var formattedDate = selectedDate.toISOString().split('T')[0];
+                if (unavailableDates.includes(formattedDate)) {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'วันที่เลือกไม่สามารถใช้งานได้',
+                        text: 'เนื่องจาก วันที่เลือกมีจำนวนคำร้องขอเต็มแล้ว',
+                        showConfirmButton: true,
+                        confirmButtonText: 'ตกลง'
+                    }).then(function() {
+                        dateInput.value = ''; // ล้างค่า
+                    });
+                }
+            });
+        }
     </script>
 </body>
 

@@ -2027,6 +2027,18 @@ section,
   /* เพิ่มสีเส้นขอบเพื่อให้ตรงกับสีพื้นหลัง */
 }
 
+.table-cell-content {
+  padding: 10px;
+  text-align: left;
+}
+
+.table-cell-content div {
+  margin-bottom: 5px;
+  font-size: 14px;
+  line-height: 1.5;
+  color: #333;
+}
+
 /*--------------------------------------------------------------
 # Starter Section Section
 --------------------------------------------------------------*/
