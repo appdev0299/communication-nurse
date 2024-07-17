@@ -59,7 +59,7 @@
             </div>
             <!-- /Logo -->
             <div class="mb-3">
-              <a href="callback" class="btn btn-primary d-grid w-100" style="background-color: #371a94; border-color: #371a94;">Sign in CMU Account</a>
+              <a href="callback" class="btn btn-primary d-grid w-100" style="background-color: #696aad; border-color: #696aad;">Sign in CMU Account</a>
             </div>
             <form id="formAuthentication" class="mb-3" method="POST">
               <div class="mb-3">

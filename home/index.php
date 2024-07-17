@@ -12,12 +12,14 @@ require_once '../oauth/sessionlogin.php'
 
     <main class="main">
 
-        <!-- Hero Section -->
         <section id="hero" class="hero section">
-            <div class="hero-bg">
-                <img src="../assets/img/hero-bg-light-01.jpg" alt="">
-            </div>
-        </section><!-- /Hero Section -->
+           
+                <video autoplay muted loop width="100%" height="50%">
+                    <source src="../assets/img/interconference_Final.mp4" type="video/mp4">
+                </video>
+       
+        </section>
+
 
         <!-- Features Details Section -->
         <section id="about" class="features-details section">
