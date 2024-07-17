@@ -51,8 +51,8 @@ require_once '../oauth/sessionlogin.php'
                                 </div>
 
                                 <div class="col-md-6">
-                                    <label for="department" class="form-label"><?php echo $lang['department']; ?></label>
-                                    <input type="text" class="form-control" name="department" id="department" value="<?php echo $job; ?>">
+                                    <label for="department" class="form-label"><?php echo $lang['department']; ?> </label>
+                                    <input type="text" class="form-control" name="department" id="department" value="<?php echo $job; ?> <?php echo $unit; ?>">
                                 </div>
 
                                 <div class="col-md-6">
@@ -96,11 +96,21 @@ require_once '../oauth/sessionlogin.php'
                                     </label>
                                 </div>
 
-                                <div class="col-md-6" id="fileUploadDiv" style="display: none;">
-                                    <input type="file" class="form-control" name="fileToUpload1" id="fileToUpload1" accept="image/*">
-                                    <input type="file" class="form-control" name="fileToUpload2" id="fileToUpload2" accept="image/*">
-                                    <input type="file" class="form-control" name="fileToUpload3" id="fileToUpload3" accept="image/*">
+                                <div id="fileUploadDiv" style="display: none;">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <input type="file" class="form-control mb-2" name="fileToUpload1" id="fileToUpload1" accept="image/*">
+                                            <input type="file" class="form-control mb-2" name="fileToUpload2" id="fileToUpload2" accept="image/*">
+                                            <input type="file" class="form-control mb-2" name="fileToUpload3" id="fileToUpload3" accept="image/*">
+                                        </div>
+                                        <div class="col-md-6">
+                                            <input type="file" class="form-control mb-2" name="fileToUpload4" id="fileToUpload4" accept="image/*">
+                                            <input type="file" class="form-control mb-2" name="fileToUpload5" id="fileToUpload5" accept="image/*">
+                                            <input type="file" class="form-control mb-2" name="fileToUpload6" id="fileToUpload6" accept="image/*">
+                                        </div>
+                                    </div>
                                 </div>
+
 
                                 <div class="col-md-12">
                                     <div class="row">
@@ -113,6 +123,15 @@ require_once '../oauth/sessionlogin.php'
                                         <div class="col-md-4">
                                             <img id="preview3" src="#" alt="Image Preview 3" style="max-width: 50%; display: none;">
                                         </div>
+                                        <div class="col-md-4">
+                                            <img id="preview4" src="#" alt="Image Preview 4" style="max-width: 50%; display: none;">
+                                        </div>
+                                        <div class="col-md-4">
+                                            <img id="preview5" src="#" alt="Image Preview 5" style="max-width: 50%; display: none;">
+                                        </div>
+                                        <div class="col-md-4">
+                                            <img id="preview6" src="#" alt="Image Preview 6" style="max-width: 50%; display: none;">
+                                        </div>
                                     </div>
                                 </div>
 
@@ -123,7 +142,7 @@ require_once '../oauth/sessionlogin.php'
 
                                 <div class="col-md-6">
                                     <label for="date_a" class="form-label"><?php echo $lang['date_a']; ?></label>
-                                    <input type="date" name="date_a" id="date_a" class="form-control">
+                                    <input type="datetime-local" name="date_a" id="date_a" class="form-control">
                                 </div>
 
                                 <div class="col-md-6">
@@ -174,7 +193,6 @@ require_once '../oauth/sessionlogin.php'
 
     <!-- Main JS File -->
     <script src="../assets/js/main.js"></script>
-
     <script>
         const options = {
             comm1: ["Website", "Facebook Official (TH)", "Facebook Official (En)"],
@@ -209,9 +227,44 @@ require_once '../oauth/sessionlogin.php'
                     socialOptions.appendChild(div);
                 });
             }
+            loadSelectedOptions(); // เรียกใช้ฟังก์ชันเพื่อเช็คค่า
         }
-    </script>
 
+        function saveSelectedOptions() {
+            const checkboxes = document.querySelectorAll("#social-options input[type='checkbox']");
+            const selectedOptions = [];
+            checkboxes.forEach(function(checkbox) {
+                if (checkbox.checked) {
+                    selectedOptions.push(checkbox.value);
+                }
+            });
+            localStorage.setItem("selectedOptions", JSON.stringify(selectedOptions));
+        }
+
+        function loadSelectedOptions() {
+            const selectedOptions = JSON.parse(localStorage.getItem("selectedOptions") || "[]");
+            selectedOptions.forEach(function(value) {
+                const checkbox = document.getElementById(value);
+                if (checkbox) {
+                    checkbox.checked = true;
+                }
+            });
+        }
+
+        window.addEventListener("load", function() {
+            // เคลียร์ค่าของ select element
+            document.getElementById("communicate").selectedIndex = 0;
+
+            // เคลียร์ค่าของ checkbox
+            var socialOptions = document.getElementById("social-options");
+            socialOptions.innerHTML = "";
+
+            const value = document.getElementById("communicate").value; // เปลี่ยน id ให้ตรงกับ element ของคุณ
+            changeSocialOptions(value); // เรียกใช้ฟังก์ชันเพื่อสร้างตัวเลือกใหม่
+        });
+
+        document.addEventListener("change", saveSelectedOptions);
+    </script>
     <script>
         document.addEventListener('DOMContentLoaded', (event) => {
             var today = new Date();
@@ -219,15 +272,20 @@ require_once '../oauth/sessionlogin.php'
             minDate.setDate(minDate.getDate() + 1); // เพิ่ม 1 วันจากวันที่ปัจจุบัน
 
             today.setDate(today.getDate() + 3); // เพิ่ม 3 วันจากวันที่ปัจจุบัน
+
             var year = today.getFullYear();
             var month = ('0' + (today.getMonth() + 1)).slice(-2);
             var day = ('0' + today.getDate()).slice(-2);
-            var formattedDate = year + '-' + month + '-' + day;
+            var hours = ('0' + today.getHours()).slice(-2);
+            var minutes = ('0' + today.getMinutes()).slice(-2);
+            var formattedDate = year + '-' + month + '-' + day + 'T' + hours + ':' + minutes;
 
             var minYear = minDate.getFullYear();
             var minMonth = ('0' + (minDate.getMonth() + 1)).slice(-2);
             var minDay = ('0' + minDate.getDate()).slice(-2);
-            var formattedMinDate = minYear + '-' + minMonth + '-' + minDay;
+            var minHours = ('0' + minDate.getHours()).slice(-2);
+            var minMinutes = ('0' + minDate.getMinutes()).slice(-2);
+            var formattedMinDate = minYear + '-' + minMonth + '-' + minDay + 'T' + minHours + ':' + minMinutes;
 
             var dateInput = document.getElementById('date_a');
             dateInput.value = formattedDate;
@@ -268,6 +326,18 @@ require_once '../oauth/sessionlogin.php'
 
         document.getElementById('fileToUpload3').addEventListener('change', function(event) {
             previewImage(event, 'preview3');
+        });
+
+        document.getElementById('fileToUpload4').addEventListener('change', function(event) {
+            previewImage(event, 'preview4');
+        });
+
+        document.getElementById('fileToUpload5').addEventListener('change', function(event) {
+            previewImage(event, 'preview5');
+        });
+
+        document.getElementById('fileToUpload6').addEventListener('change', function(event) {
+            previewImage(event, 'preview6');
         });
 
         // ฟังก์ชันสำหรับแสดงภาพตัวอย่าง

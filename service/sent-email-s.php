@@ -131,7 +131,7 @@ if (isset($_GET['id'])) {
                     echo "Email sending failed: " . $mail->ErrorInfo;
                 }
             } else {
-                echo "No email sent as status_email is not 0.";
+                // echo "No email sent as status_email is not 0.";
             }
         } else {
             echo "Fullname not found for ID: $id";

@@ -110,16 +110,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         return $randomString;
     }
     try {
-        $status_user = 1; // ร้องขอสำเร็จ
-        $status_admin = 0; // รอแอดมินตรวจ
-        $status_ss = 0; // ทำงานเสร็จทั้งหมด
-        $status_email = 0;
+        $status_user = 1; // ร้องขอสำเร็จ 0 1
+        $status_sendline_user = 0; // ส่งlineหลังร้องขอเสร็จ 0 1
+        $status_admin = 0; // รอแอดมินตรวจ 0 1
+        $status_sendline_admin = 0; // ส่งlineหลังแอดมินตรวจ 0 1
+        $status_ss = 0; // ทำงานเสร็จทั้งหมด 0 1
+        $status_sendline_ss = 0; // ส่งlineหลังเสร็จทั้งหมด 0 1
+        $status_email = 0; // ส่งเมล 0 1
 
         $ref = generateRandomString();
 
         // Prepare SQL statement for data insertion
-        $stmt = $conn->prepare("INSERT INTO ccfn_form_p (fullname, department, tel, personnel, email, social, option, date_a, communicate, production_file, status_user, status_admin, status_ss, status_email, ref) 
-                        VALUES (:fullname, :department, :tel, :personnel, :email, :social, :option, :date_a, :communicate, :production_file, :status_user, :status_admin, :status_ss, :status_email, :ref)");
+        $stmt = $conn->prepare("INSERT INTO ccfn_form_p (fullname, department, tel, personnel, email, social, option, date_a, communicate, production_file, status_user, status_sendline_user, status_admin, status_sendline_admin, status_ss, status_sendline_ss, status_email, ref) 
+                        VALUES (:fullname, :department, :tel, :personnel, :email, :social, :option, :date_a, :communicate, :production_file, :status_user, :status_sendline_user, :status_admin, :status_sendline_admin, :status_ss, :status_sendline_ss, :status_email, :ref)");
 
         // Bind parameters
         $stmt->bindParam(':fullname', $fullname);
@@ -133,8 +136,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $stmt->bindParam(':communicate', $communicate);
         $stmt->bindParam(':production_file', $file_name);
         $stmt->bindParam(':status_user', $status_user);
+        $stmt->bindParam(':status_sendline_user', $status_sendline_user);
         $stmt->bindParam(':status_admin', $status_admin);
+        $stmt->bindParam(':status_sendline_admin', $status_sendline_admin);
         $stmt->bindParam(':status_ss', $status_ss);
+        $stmt->bindParam(':status_sendline_ss', $status_sendline_ss);
         $stmt->bindParam(':status_email', $status_email);
         $stmt->bindParam(':ref', $ref);
 
@@ -149,20 +155,20 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         // Display success message using SweetAlert2
         echo "
-<link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css'>
-<script src='https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.all.min.js'></script>
-<script>
-    Swal.fire({
-        position: 'top-end',
-        icon: 'success',
-        title: 'ส่งแบบฟอร์มร้องขอออกแบบสื่อประชาสัมพันธ์สำเร็จ',
-        text: 'รายละเอียดไฟล์: $file_display_name',
-        showConfirmButton: false,
-        timer: 3000
-    }).then(function() {
-                    window.location.href = 'ccfn-form-online-status-p?id=$last_id&ref=$ref';
-    });
-</script>";
+        <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css'>
+        <script src='https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.all.min.js'></script>
+        <script>
+            Swal.fire({
+                position: 'top-end',
+                icon: 'success',
+                title: 'ส่งแบบฟอร์มร้องขอออกแบบสื่อประชาสัมพันธ์สำเร็จ',
+                text: 'รายละเอียดไฟล์: $file_display_name',
+                showConfirmButton: false,
+                timer: 3000
+            }).then(function() {
+                            window.location.href = 'ccfn-form-online-status-p?id=$last_id&ref=$ref';
+            });
+        </script>";
     } catch (PDOException $e) {
         // Display error message
         die("Error saving data: " . $e->getMessage());

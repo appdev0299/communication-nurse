@@ -69,27 +69,42 @@ require_once '../oauth/sessionlogin.php'
                                 <div class="col-md-6">
                                     <label for="social" class="form-label"><?php echo $lang['social']; ?></label>
                                     <select name="social[]" id="social" class="form-control" multiple>
-                                        <option value="Website คณะพยาบาลศาสตร์">Website</option>
-                                        <option value="Facebook Official (TH)">Facebook Official (TH)</option>
-                                        <option value="Facebook Official (Eng)">Facebook Official (Eng)</option>
-                                        <option value="Line Official">Line Official</option>
-                                        <option value="Email">Email</option>
-                                        <option value="LinkedIn">LinkedIn</option>
-                                        <option value="Twitter">Twitter</option>
-                                        <option value="Instagram">Instagram</option>
-                                        <option value="Youtube">Youtube</option>
-                                        <option value="ป้ายดิจิทัล คณะ">ป้ายดิจิทัล</option>
-                                        <option value="อื่นๆ">อื่นๆ</option>
+                                        <option value="Website">ขนาด Website</option>
+                                        <option value="Facebook">ขนาด Facebook Official</option>
+                                        <option value="Line Official">ขนาด Line Official</option>
+                                        <option value="LinkedIn">ขนาด LinkedIn</option>
+                                        <option value="Twitter">ขนาด Twitter</option>
+                                        <option value="Instagram">ขนาด Instagram</option>
+                                        <option value="Youtube">ขนาด Youtube</option>
+                                        <option value="other">อื่นๆ (โปรดระบุ)</option>
                                     </select>
+                                    <input type="text" name="other_social" id="other_social" class="form-control mt-2" placeholder="โปรดระบุ" style="display:none;">
                                 </div>
+
+                                <script>
+                                    document.addEventListener('DOMContentLoaded', (event) => {
+                                        const socialSelect = document.getElementById('social');
+                                        const otherInput = document.getElementById('other_social');
+
+                                        socialSelect.addEventListener('change', function() {
+                                            const selectedValues = Array.from(socialSelect.selectedOptions).map(option => option.value);
+                                            if (selectedValues.includes('other')) {
+                                                otherInput.style.display = 'block';
+                                            } else {
+                                                otherInput.style.display = 'none';
+                                            }
+                                        });
+                                    });
+                                </script>
+
 
                                 <div class="col-md-12">
                                     <input class="form-check-input" type="radio" name="option" id="sent_email" value="sent_email" checked>
-                                    <label class="form-check-label" for="sent_email"><?php echo $lang['file_upload']; ?></label>
+                                    <label class="form-check-label" for="sent_email"><?php echo $lang['sent_email']; ?></label>
                                 </div>
                                 <div class="col-md-12">
                                     <input class="form-check-input" type="radio" name="option" id="sent_url" value="sent_url">
-                                    <label class="form-check-label" for="sent_url"><?php echo $lang['url_upload']; ?></label>
+                                    <label class="form-check-label" for="sent_url"><?php echo $lang['sent_url']; ?></label>
                                 </div>
 
                                 <div class="col-md-6">
@@ -99,14 +114,13 @@ require_once '../oauth/sessionlogin.php'
 
                                 <div class="col-md-6">
                                     <label for="communicate" class="form-label"><?php echo $lang['communicate']; ?></label>
-                                    <select name="communicate" id="communicate" class="form-control">
+                                    <select name="communicate" id="communicate" class="form-control" onchange="changeSocialOptions(this.value)">
                                         <option value=""><?php echo $lang['select'] . ' ' . $lang['communicate']; ?></option>
-                                        <option value="ด้านผู้บริหาร"><?php echo $lang['comm1']; ?></option>
-                                        <option value="ด้านบุคลากร"><?php echo $lang['comm2']; ?></option>
-                                        <option value="ด้านผลิตภัณฑ์(การศึกษา การวิจัย บริการวิชาการ)"><?php echo $lang['comm3']; ?></option>
-                                        <option value="ประชุม/อบรม/สัมมนา"><?php echo $lang['comm4']; ?></option>
-                                        <option value="กิจกรรมที่สร้างสรรค์ต่อสังคม"><?php echo $lang['comm5']; ?></option>
-                                        <option value="อื่นๆ">Other</option>
+                                        <option value="comm1"><?php echo $lang['comm1']; ?></option>
+                                        <option value="comm2"><?php echo $lang['comm2']; ?></option>
+                                        <option value="comm3"><?php echo $lang['comm3']; ?></option>
+                                        <option value="comm4"><?php echo $lang['comm4']; ?></option>
+                                        <option value="comm5"><?php echo $lang['comm5']; ?></option>
                                     </select>
                                 </div>
 
@@ -130,7 +144,7 @@ require_once '../oauth/sessionlogin.php'
 
 
                         <?php include_once('save_data_p.php'); ?>
-                    </div><!-- End Contact Form -->
+                    </div>
 
                 </div>
 
@@ -163,35 +177,12 @@ require_once '../oauth/sessionlogin.php'
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.all.min.js"></script>
     <script>
-        // Set min date and default date
-        document.addEventListener('DOMContentLoaded', (event) => {
-            var today = new Date();
-            var minDate = new Date();
-            minDate.setDate(minDate.getDate() + 1); // Add 1 day from today
-
-            today.setDate(today.getDate() + 3); // Add 3 days from today
-            var year = today.getFullYear();
-            var month = ('0' + (today.getMonth() + 1)).slice(-2);
-            var day = ('0' + today.getDate()).slice(-2);
-            var formattedDate = year + '-' + month + '-' + day;
-
-            var minYear = minDate.getFullYear();
-            var minMonth = ('0' + (minDate.getMonth() + 1)).slice(-2);
-            var minDay = ('0' + minDate.getDate()).slice(-2);
-            var formattedMinDate = minYear + '-' + minMonth + '-' + minDay;
-
-            var dateInput = document.getElementById('date_a');
-            dateInput.value = formattedDate;
-            dateInput.min = formattedMinDate;
-        });
-    </script>
-    <script>
         document.addEventListener('DOMContentLoaded', (event) => {
             var today = new Date();
             var minDate = new Date();
             minDate.setDate(minDate.getDate() + 1); // เพิ่ม 1 วันจากวันที่ปัจจุบัน
 
-            today.setDate(today.getDate() + 3); // เพิ่ม 3 วันจากวันที่ปัจจุบัน
+            today.setDate(today.getDate() + 5); // เพิ่ม 3 วันจากวันที่ปัจจุบัน
             var year = today.getFullYear();
             var month = ('0' + (today.getMonth() + 1)).slice(-2);
             var day = ('0' + today.getDate()).slice(-2);
@@ -216,8 +207,7 @@ require_once '../oauth/sessionlogin.php'
 
         function fetchUnavailableDates() {
             var xhr = new XMLHttpRequest();
-            xhr.open('POST', 'check_date_availability_p.php', true);
-            xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+            xhr.open('GET', 'check_date_availability_p.php', true);
             xhr.onload = function() {
                 if (xhr.status === 200) {
                     var unavailableDates = JSON.parse(xhr.responseText);
@@ -237,15 +227,17 @@ require_once '../oauth/sessionlogin.php'
                         icon: 'error',
                         title: 'วันที่เลือกไม่สามารถใช้งานได้',
                         text: 'เนื่องจาก วันที่เลือกมีจำนวนคำร้องขอเต็มแล้ว',
-                        showConfirmButton: true,
+                        showConfirmButton: false,
+                        timer: 3000,
                         confirmButtonText: 'ตกลง'
                     }).then(function() {
-                        dateInput.value = ''; // ล้างค่า
+                        dateInput.value = '';
                     });
                 }
             });
         }
     </script>
+
 </body>
 
 </html>

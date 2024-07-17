@@ -11,4 +11,5 @@ foreach ($result as $row) {
     $unavailable_dates[] = $row['date_a'];
 }
 
+header('Content-Type: application/json');
 echo json_encode($unavailable_dates);

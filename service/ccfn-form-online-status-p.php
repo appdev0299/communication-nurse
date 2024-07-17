@@ -45,86 +45,92 @@
                         if ($row) {
                             $file = $row['production_file'];
                             $file_path = '../files/' . $file;
-
-                            // ตรวจสอบว่าไฟล์มีอยู่จริง
+                            $status_user_text = '';
+                            switch ($row['status_user']) {
+                                case 1:
+                                    $status_user_text = 'คำร้องสำเร็จ';
+                                    break;
+                                case 2:
+                                    $status_user_text = 'กำเนินการตามคำร้องขอ';
+                                    break;
+                                case 3:
+                                    $status_user_text = 'ส่งกลับเพื่อแก้ไข';
+                                    break;
+                                case 0:
+                                    $status_user_text = 'คำร้องขอผิดพลาด';
+                                    break;
+                                default:
+                                    $status_user_text = 'สถานะไม่ทราบ';
+                                    break;
+                            }
                             if (file_exists($file_path)) {
                                 $file_link = htmlspecialchars($file_path);
                             } else {
                                 $file_link = '#';
                             }
+
                     ?>
                             <div class="col-lg-2" data-aos="fade-up" data-aos-delay="100">
-
                                 <div class="service-box">
-                                    <h4>ดาวน์โหลดแบบฟอร์ม</h4>
+                                    <h4><?php echo $lang['dpdf'] ?></h4>
                                     <div class="download-catalog">
                                         <a href="pdf-form-p.php?id=<?= $id ?>&ref=<?= $ref ?>" target="_blank">
-                                            <i class="bi bi-filetype-pdf"></i><span>แบบฟอร์มการรับบริการหน่วยสื่อสารและภาพลักษณ์องค์กร</span>
+                                            <i class="bi bi-filetype-pdf"></i><span><?php echo $lang['pdf'] ?></span>
                                         </a>
                                     </div>
                                 </div>
-
                             </div>
                             <div class="col-lg-10 ps-lg-5" data-aos="fade-up" data-aos-delay="200">
-                                <div class="timeline-grid">
-                                    <div>
-                                        <ul>
-                                            <?php if ($row['status_user'] == 1) : ?>
-                                                <li><i class="bi bi-check-circle"></i> <span>ร้องขอสำเร็จ</span></li>
-                                            <?php elseif ($row['status_user'] == 0) : ?>
-                                                <li><i class="bi bi-exclamation-circle"></i> <span>เกิดข้อผิดพลาด</span></li>
-                                            <?php else : ?>
-                                                <li><i class="bi bi-question-circle"></i> <span>สถานะไม่ทราบ</span></li>
-                                            <?php endif; ?>
-                                        </ul>
-                                    </div>
-                                    <div>
-                                        <ul>
-                                            <?php if ($row['status_admin'] == 1) : ?>
-                                                <li><i class="bi bi-check-circle"></i> <span>ผ่านการตรวจสอบจากเจ้าหน้าที่</span></li>
-                                            <?php elseif ($row['status_admin'] == 0) : ?>
-                                                <li><i class="bi bi-exclamation-circle"></i> <span>ไม่ผ่านการตรวจสอบจากเจ้าหน้าที่</span></li>
-                                            <?php elseif ($row['status_admin'] == 2) : ?>
-                                                <!-- ปิดการแสดงผลเมื่อ status_admin เท่ากับ 2 -->
-                                            <?php else : ?>
-                                                <li><i class="bi bi-question-circle"></i> <span>สถานะไม่ทราบ</span></li>
-                                            <?php endif; ?>
-                                        </ul>
-                                    </div>
-
-                                    <div>
-                                        <ul>
-                                            <?php if ($row['status_ss'] == 1) : ?>
-                                                <li><i class="bi bi-check-circle"></i> <span>สำเร็จ</span></li>
-                                            <?php elseif ($row['status_ss'] == 0) : ?>
-                                                <li><i class="bi bi-exclamation-circle"></i> <span>เกิดข้อผิดพลาด</span></li>
-                                            <?php elseif ($row['status_ss'] == 2) : ?>
-                                                <!-- ปิดการแสดงผลเมื่อ status_admin เท่ากับ 2 -->
-                                            <?php else : ?>
-                                                <li><i class="bi bi-question-circle"></i> <span>สถานะไม่ทราบ</span></li>
-                                            <?php endif; ?>
-                                        </ul>
-                                    </div>
-                                </div>
-
+                                <h5> <i class="bi bi-check-circle"></i> <?= $status_user_text; ?></h5>
                                 <hr>
-                                <h5><?= htmlspecialchars($row['fullname']); ?> <?= htmlspecialchars($row['email']); ?></h5>
+                                <h5><?= $row['fullname']; ?></h5>
+                                <h6> <?= $row['email']; ?></h6>
+
                                 <p>
-                                    <?= htmlspecialchars($row['personnel']); ?> <?= htmlspecialchars($row['department']); ?> | <?= htmlspecialchars($row['tel']); ?>
+                                    <?= $row['personnel']; ?> <?= $row['department']; ?> | <?= $row['tel']; ?>
                                 </p>
                                 <hr>
                                 <p>
-                                    ประชาสัมพันธ์สื่อผ่านช่องทาง : <?= htmlspecialchars($row['social']); ?>
+                                    <b><?php echo $lang['size'] ?> </b>: <?= htmlspecialchars($row['social']); ?>
                                 </p>
                                 <p>
-                                    หนวดการสื่อสาร : <?= htmlspecialchars($row['communicate']); ?>
+                                    <b><?php echo $lang['communicate'] ?> </b>:
+                                    <?php
+                                    if ($row['communicate'] == "comm1") {
+                                        echo "ด้านผู้บริหาร";
+                                    } elseif ($row['communicate'] == "comm2") {
+                                        echo "ด้านบุคลากร";
+                                    } elseif ($row['communicate'] == "comm3") {
+                                        echo "ด้านผลิตภัณฑ์ (การศึกษา การวิจัย บริการวิชาการ)";
+                                    } elseif ($row['communicate'] == "comm4") {
+                                        echo "ประชุม / อบรม / สัมมนา";
+                                    } elseif ($row['communicate'] == "comm5") {
+                                        echo "กิจกรรมที่สร้างสรรค์ต่อสังคม";
+                                    } else {
+                                        echo "ไม่ทราบ";
+                                    }
+                                    ?>
                                 </p>
                                 <p>
-                                    เผยแพร่วันที่ : <?= htmlspecialchars($row['date_a']); ?>
+                                    <b>รายละเอียดไฟล์ : </b><a href="<?= $file_link; ?>" target="_blank"> <i class="bi bi-filetype-pdf"></i><span> <?= htmlspecialchars($file); ?></span></a>
                                 </p>
-                                <p>
-                                    รายละเอียดไฟล์ : <a href="<?= $file_link; ?>" target="_blank"> <i class="bi bi-filetype-pdf"></i><span> <?= htmlspecialchars($file); ?></span></a>
-                                </p>
+                                <h5>
+                                    <?php
+                                    $months = [
+                                        1 => 'มกราคม', 2 => 'กุมภาพันธ์', 3 => 'มีนาคม', 4 => 'เมษายน',
+                                        5 => 'พฤษภาคม', 6 => 'มิถุนายน', 7 => 'กรกฎาคม', 8 => 'สิงหาคม',
+                                        9 => 'กันยายน', 10 => 'ตุลาคม', 11 => 'พฤศจิกายน', 12 => 'ธันวาคม'
+                                    ];
+
+                                    $timestamp = strtotime($row['date_a']);
+                                    $day = date('d', $timestamp);
+                                    $month = $months[(int)date('m', $timestamp)];
+                                    $year = date('Y', $timestamp) + 543;
+
+
+                                    echo $lang['date_a'] . " : " . $day . " " . $month . " " . $year;
+                                    ?>
+                                </h5>
                                 <hr>
                             </div>
                     <?php
@@ -138,7 +144,7 @@
             </div>
 
         </section>
-
+        <?php include_once('linenotify/lineoa_1_p.php'); ?>
     </main>
 
     <?php include_once('../config/footer.php'); ?>
