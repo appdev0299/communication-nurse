@@ -44,7 +44,7 @@ if (isset($_GET['id'])) {
                     'email' => $email,
                     'message' => $message,
                     'weblink' => 'https://app.nurse.cmu.ac.th/appdev/communication-nurse',
-                    'color' => '#FF6A00'
+                    'color' => '#70e000'
                 )),
                 CURLOPT_HTTPHEADER => array(
                     'Authorization: FON_ConnectAPI01',

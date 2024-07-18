@@ -420,73 +420,86 @@
 
   // Order Statistics Chart
   // --------------------------------------------------------------------
-  const chartOrderStatistics = document.querySelector('#orderStatisticsChart'),
-    orderChartConfig = {
-      chart: {
-        height: 165,
-        width: 130,
-        type: 'donut'
-      },
-      labels: ['Electronic', 'Sports', 'Decor', 'Fashion'],
-      series: [85, 15, 50, 50],
-      colors: [config.colors.primary, config.colors.secondary, config.colors.info, config.colors.success],
-      stroke: {
-        width: 5,
-        colors: cardColor
-      },
-      dataLabels: {
-        enabled: false,
-        formatter: function (val, opt) {
-          return parseInt(val) + '%';
-        }
-      },
-      legend: {
-        show: false
-      },
-      grid: {
-        padding: {
-          top: 0,
-          bottom: 0,
-          right: 15
-        }
-      },
-      plotOptions: {
-        pie: {
-          donut: {
-            size: '75%',
-            labels: {
-              show: true,
-              value: {
-                fontSize: '1.5rem',
-                fontFamily: 'Noto Sans Thai',
-                color: headingColor,
-                offsetY: -15,
-                formatter: function (val) {
-                  return parseInt(val) + '%';
-                }
-              },
-              name: {
-                offsetY: 20,
-                fontFamily: 'Noto Sans Thai'
-              },
-              total: {
-                show: true,
-                fontSize: '0.8125rem',
-                color: axisColor,
-                label: 'Weekly',
-                formatter: function (w) {
-                  return '38%';
-                }
+  // Select the element where the chart will be rendered
+  const chartOrderStatistics = document.querySelector('#orderStatisticsChart');
+
+  // Configuration for the donut chart
+  const orderChartConfig = {
+    chart: {
+      height: 165, // Height of the chart
+      width: 130, // Width of the chart
+      type: 'donut' // Type of the chart
+    },
+    labels: ['comm1', 'comm2', 'comm3', 'comm4', 'comm5'], // Labels for the segments
+    series: [85, 15, 50, 50, 35], // Data series for the segments
+    colors: [
+      config.colors.primary,
+      config.colors.secondary,
+      config.colors.info,
+      config.colors.success,
+      config.colors.warning
+    ], // Colors for the segments
+    stroke: {
+      width: 5, // Width of the border stroke
+      colors: cardColor // Color of the border stroke
+    },
+    dataLabels: {
+      enabled: false, // Disable data labels inside the chart
+      formatter: function (val, opt) {
+        return parseInt(val) + '%'; // Format the data labels as percentage
+      }
+    },
+    legend: {
+      show: false // Hide the legend
+    },
+    grid: {
+      padding: {
+        top: 0,
+        bottom: 0,
+        right: 15
+      } // Padding for the grid
+    },
+    plotOptions: {
+      pie: {
+        donut: {
+          size: '75%', // Size of the donut hole
+          labels: {
+            show: true, // Show labels inside the donut
+            value: {
+              fontSize: '1.5rem', // Font size of the value label
+              fontFamily: 'Noto Sans Thai', // Font family of the value label
+              color: headingColor, // Color of the value label
+              offsetY: -15, // Offset of the value label
+              formatter: function (val) {
+                return parseInt(val) + '%'; // Format the value label as percentage
+              }
+            },
+            name: {
+              offsetY: 20, // Offset of the name label
+              fontFamily: 'Noto Sans Thai' // Font family of the name label
+            },
+            total: {
+              show: true, // Show the total label
+              fontSize: '0.8125rem', // Font size of the total label
+              color: axisColor, // Color of the total label
+              label: 'Weekly', // Text of the total label
+              formatter: function (w) {
+                return '38%'; // Format the total label value
               }
             }
           }
         }
       }
-    };
+    }
+  };
+
+  // Check if the element exists before rendering the chart
   if (typeof chartOrderStatistics !== undefined && chartOrderStatistics !== null) {
     const statisticsChart = new ApexCharts(chartOrderStatistics, orderChartConfig);
-    statisticsChart.render();
+    statisticsChart.render(); // Render the chart
   }
+
+
 
   // Income Chart - Area chart
   // --------------------------------------------------------------------

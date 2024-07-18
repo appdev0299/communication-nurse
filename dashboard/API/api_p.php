@@ -1,21 +1,5 @@
 <?php
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "communication-nurse";
-
-try {
-    $conn = new PDO("mysql:host=$servername;dbname=$dbname;charset=utf8", $username, $password);
-    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    $conn->exec('SET NAMES utf8');
-} catch (PDOException $e) {
-    echo "Connection failed: " . $e->getMessage();
-    exit();
-}
-
-date_default_timezone_set('Asia/Bangkok');
-header("Content-Type: application/json; charset=UTF-8");
-
+require_once '../../config/connect.php';
 $method = $_SERVER['REQUEST_METHOD'];
 
 switch ($method) {

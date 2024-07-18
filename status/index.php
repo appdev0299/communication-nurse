@@ -26,6 +26,7 @@
             <div class="container">
                 <div class="row gy-5">
                     <div class="col-lg-12" data-aos="fade-up" data-aos-delay="100">
+
                         <div class="service-box">
                             <?php
                             require_once '../config/connect.php';
@@ -40,6 +41,62 @@
                             ?>
 
                             <div class="table-responsive">
+                                <table id="myTable" class="table table-bordered" style="width: 100%;">
+                                    <thead>
+                                        <tr>
+                                            <th>ลำดับ</th>
+                                            <th>ข้อมูลติดต่อ</th>
+                                            <th>รายละเอียด</th>
+                                            <th>#</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <?php
+                                        $index = 1; // ตัวแปรสำหรับเก็บลำดับ
+                                        foreach ($result as $t1) { ?>
+                                            <tr>
+                                                <td><?php echo $index++; ?></td>
+                                                <td>
+                                                    <div class="table-cell-content">
+                                                        <div><b><?php echo $t1['fullname']; ?></b></div>
+                                                        <div><?php echo $t1['department']; ?></div>
+                                                        <div><?php echo $t1['email']; ?> <?php echo $t1['tel']; ?></div>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="table-cell-content">
+                                                        <p><b><?php echo $lang['social']; ?></b> : <?php echo $t1['social']; ?></p>
+                                                        <textarea class="form-control" style="width: 750px;" rows="7" readonly>(<?php echo $lang['title']; ?> : <?php echo $t1['title']; ?>) <?php echo $t1['details']; ?></textarea>
+                                                    </div>
+                                                </td>
+
+                                                <td>
+                                                    <div class="dropdown">
+                                                        <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
+                                                            <i class="bx bx-dots-vertical-rounded"></i>
+                                                        </button>
+                                                        <div class="dropdown-menu">
+                                                            <a class="dropdown-item" href="../service/ccfn-form-online-status-s?id=<?php echo $t1['id']; ?>&ref=<?php echo $t1['ref']; ?>?lang=<?php echo $_SESSION['lang']; ?>"><i class="bx bx-edit-alt me-1"></i>ตรวจสอบ</a>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        <?php } ?>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <!-- <div class="service-box">
+                            <?php
+                            $stmt = $conn->prepare("SELECT * FROM ccfn_form_p WHERE email = :email");
+                            $stmt->bindParam(':email', $cmu_account);
+                            $stmt->execute();
+                            $result = $stmt->fetchAll();
+                            $result = array_reverse($result);
+                            ?>
+
+                            <div class="table-responsive">
+                                <h5>บริการออกแบบสื่อประชาสัมพันธ์</h5>
                                 <table id="myTable" class="table table-bordered" style="width: 100%;">
                                     <thead>
                                         <tr>
@@ -64,22 +121,23 @@
                                                 </td>
                                                 <td>
                                                     <div class="table-cell-content">
-                                                        <textarea class="form-control" style="height: 150px; width: 250px; border: none; resize: none;" disabled><?php echo $t1['title']; ?></textarea>
+                                                        <textarea class="form-control" style="height: 150px; width: 250px; border: none; resize: none;" disabled><?php echo $t1['communicate']; ?></textarea>
                                                     </div>
                                                 </td>
                                                 <td>
                                                     <div class="table-cell-content">
-                                                        <textarea class="form-control" style="height: 150px; width: 540px; border: none; resize: none;" disabled><?php echo $t1['details']; ?></textarea>
-                                                        <div><?php echo $t1['social']; ?></div>
+                                                        <a href="../files/<?php echo $t1['production_file']; ?>" target="_blank"> <i class="bi bi-filetype-pdf"></i><span><?php echo $t1['production_file']; ?></span></a>
                                                     </div>
                                                 </td>
-                                                <td><a class="btn btn-primary" href="#" role="button">ตรวจสอบ</a></td>
+                                                <td>
+                                                    <a class="btn btn-primary" href="../service/ccfn-form-online-status-p?id=<?php echo $t1['id']; ?>&ref=<?php echo $t1['ref']; ?>?lang=<?php echo $_SESSION['lang']; ?>" role="button">ตรวจสอบ</a>
+                                                </td>
                                             </tr>
                                         <?php } ?>
                                     </tbody>
                                 </table>
                             </div>
-                        </div>
+                        </div> -->
                     </div>
                 </div>
             </div>
