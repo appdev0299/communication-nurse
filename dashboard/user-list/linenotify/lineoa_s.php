@@ -4,7 +4,7 @@ include_once('../../config/connect.php');
 if (isset($_GET['id'])) {
     $id = $_GET['id'];
     try {
-        $stmt = $conn->prepare("SELECT status_sendline_admin, email, title, status_user FROM ccfn_form_s WHERE id = :id");
+        $stmt = $conn->prepare("SELECT status_sendline_admin, email,ref, title, status_user FROM ccfn_form_s WHERE id = :id");
         $stmt->bindParam(':id', $id, PDO::PARAM_INT);
         $stmt->execute();
         $result = $stmt->fetch(PDO::FETCH_ASSOC);
@@ -34,7 +34,7 @@ if (isset($_GET['id'])) {
                         $status_user_text = 'สถานะไม่ทราบ';
                         break;
                 }
-                $message = $status_user_text . ' : ' . ' ในหัวข้อ ' . $title;
+                $message = $status_user_text .  "\n" . 'เลขอ้างอิง :  ' . $ref . "\n" . 'เรื่อง : ' . $title;
 
                 $curl = curl_init();
                 curl_setopt_array($curl, array(
@@ -51,7 +51,7 @@ if (isset($_GET['id'])) {
                         'email' => $email,
                         'message' => $message,
                         'weblink' => 'https://app.nurse.cmu.ac.th/appdev/communication-nurse',
-                        'color' => '#FF6A00'
+                        'color' => '#ff7d00'
                     )),
                     CURLOPT_HTTPHEADER => array(
                         'Authorization: FON_ConnectAPI01',

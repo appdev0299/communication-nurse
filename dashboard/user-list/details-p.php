@@ -96,15 +96,45 @@
                                                     </div>
                                                     <div class="row mb-3">
                                                         <label class="col-sm-2 col-form-label" for="basic-default-communicate">หมวดการประชาสัมพันธ์</label>
+                                                        <?php
+                                                        $communicate_text = '';
+                                                        if ($row['communicate'] == 'comm1') {
+                                                            $communicate_text = 'ด้านผู้บริหาร';
+                                                        } elseif ($row['communicate'] == 'comm2') {
+                                                            $communicate_text = 'ด้านบุคลากร';
+                                                        } elseif ($row['communicate'] == 'comm3') {
+                                                            $communicate_text = 'ด้านผลิตภัณฑ์ (การศึกษา การวิจัย บริการวิชาการ)';
+                                                        } elseif ($row['communicate'] == 'comm4') {
+                                                            $communicate_text = 'ประชุม / อบรม / สัมมนา';
+                                                        } elseif ($row['communicate'] == 'comm5') {
+                                                            $communicate_text = 'ทํานุบํารุงศิลปวัฒนธรรม และ สิ่งแวดลอม';
+                                                        }
+                                                        ?>
                                                         <div class="col-sm-10">
-                                                            <input type="text" class="form-control communicate-mask" id="communicate" name="communicate" value="<?= htmlspecialchars($row['communicate']); ?>" />
+                                                            <input type="text" class="form-control communicate-mask" id="communicate" name="communicate" value="<?= htmlspecialchars($communicate_text); ?>" />
                                                         </div>
                                                     </div>
 
                                                     <div class="row mb-3">
                                                         <label class="col-sm-2 col-form-label" for="basic-default-date">วันที่ต้องการประชาสัมพันธ์</label>
                                                         <div class="col-sm-10">
-                                                            <input type="text" class="form-control date-mask" id="date_a" name="date_a" value="<?= htmlspecialchars($row['date_a']); ?>" />
+                                                            <?php
+                                                            $months = [
+                                                                1 => 'มกราคม', 2 => 'กุมภาพันธ์', 3 => 'มีนาคม', 4 => 'เมษายน',
+                                                                5 => 'พฤษภาคม', 6 => 'มิถุนายน', 7 => 'กรกฎาคม', 8 => 'สิงหาคม',
+                                                                9 => 'กันยายน', 10 => 'ตุลาคม', 11 => 'พฤศจิกายน', 12 => 'ธันวาคม'
+                                                            ];
+
+                                                            $timestamp = strtotime($row['date_a']);
+                                                            $day = date('d', $timestamp);
+                                                            $month = $months[(int)date('m', $timestamp)];
+                                                            $year = date('Y', $timestamp) + 543;
+                                                            $hour = date('H', $timestamp);
+                                                            $minute = date('i', $timestamp);
+
+                                                            $formattedDate = $day . " " . $month . " " . $year . " เวลา " . $hour . ":" . $minute . " น.";
+                                                            ?>
+                                                            <input type="text" class="form-control date-mask mt-2" id="date_a" name="date_a" value="<?= htmlspecialchars($formattedDate); ?>" />
                                                         </div>
                                                     </div>
 
@@ -123,9 +153,10 @@
                                                         <label class="col-sm-2 col-form-label" for="basic-default-date">สถานะ</label>
                                                         <div class="col-sm-10">
                                                             <select class="form-select" id="status_user" name="status_user" aria-label="Default select example">
-                                                                <option value="<?= $row['status_user']; ?>"><?= $row['status_user']; ?></option>
-                                                                <option value="2">ดำเนินการตามคำร้องขอ</option>
-                                                                <option value="3">ส่งกลับเพื่อแก้ไข</option>
+                                                                <option value="1" <?= $row['status_user'] == 1 ? 'selected' : ''; ?>>คำร้องสำเร็จ</option>
+                                                                <option value="2" <?= $row['status_user'] == 2 ? 'selected' : ''; ?>>ดำเนินการตามคำร้องขอ</option>
+                                                                <option value="3" <?= $row['status_user'] == 3 ? 'selected' : ''; ?>>ส่งกลับเพื่อแก้ไข</option>
+                                                                <option value="4" <?= $row['status_user'] == 4 ? 'selected' : ''; ?>>ส่งมอบ</option>
                                                             </select>
                                                         </div>
                                                     </div>

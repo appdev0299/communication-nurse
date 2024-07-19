@@ -65,7 +65,7 @@
                 </li>
                 <li class="menu-item">
                     <a href="../succeed/succeed-list-s" class="menu-link">
-                        <div data-i18n="Connections">สำเร็จ</div>
+                        <div data-i18n="Connections">ส่งมอบ</div>
                     </a>
                 </li>
             </ul>

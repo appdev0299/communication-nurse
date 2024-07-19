@@ -4,7 +4,7 @@ include_once('../config/connect.php');
 if (isset($_GET['id'])) {
     $id = $_GET['id'];
     try {
-        $stmt = $conn->prepare("SELECT status_sendline_user, email, communicate, status_user FROM ccfn_form_p WHERE id = :id");
+        $stmt = $conn->prepare("SELECT status_sendline_user, email,ref, communicate, status_user FROM ccfn_form_p WHERE id = :id");
         $stmt->bindParam(':id', $id, PDO::PARAM_INT);
         $stmt->execute();
         $result = $stmt->fetch(PDO::FETCH_ASSOC);
@@ -14,9 +14,16 @@ if (isset($_GET['id'])) {
             $communicate = $result['communicate'];
             $status_user = $result['status_user'];
             $status_user_text = '';
-            switch ($status_user) {
+            $communicate_text = '';
+            switch ($row['status_user']) {
                 case 1:
                     $status_user_text = 'คำร้องสำเร็จ';
+                    break;
+                case 2:
+                    $status_user_text = 'กำเนินการตามคำร้องขอ';
+                    break;
+                case 3:
+                    $status_user_text = 'ส่งกลับเพื่อแก้ไข';
                     break;
                 case 0:
                     $status_user_text = 'คำร้องขอผิดพลาด';
@@ -25,9 +32,21 @@ if (isset($_GET['id'])) {
                     $status_user_text = 'สถานะไม่ทราบ';
                     break;
             }
+            if ($communicate == 'comm1') {
+                $communicate_text = 'ด้านผู้บริหาร';
+            } elseif ($communicate == 'comm2') {
+                $communicate_text = 'ด้านบุคลากร';
+            } elseif ($communicate == 'comm3') {
+                $communicate_text = 'ด้านผลิตภัณฑ์ (การศึกษา การวิจัย บริการวิชาการ)';
+            } elseif ($communicate == 'comm4') {
+                $communicate_text = 'ประชุม / อบรม / สัมมนา';
+            } elseif ($communicate == 'comm5') {
+                $communicate_text = 'ทํานุบํารุงศิลปวัฒนธรรม และ สิ่งแวดลอม';
+            } else {
+                $communicate_text = 'ด้านไม่ทราบ';
+            }
 
-            // เปลี่ยนข้อความใน message เพื่อให้สอดคล้องกับที่คุณต้องการ
-            $message = $status_user_text . ' : ' . ' ในหัวข้อ ' . $communicate;
+            $message = $status_user_text .  "\n" . 'เลขอ้างอิง : ' . $ref . "\n" . 'ด้าน : ' . $communicate_text;
 
             $curl = curl_init();
             curl_setopt_array($curl, array(
@@ -44,7 +63,7 @@ if (isset($_GET['id'])) {
                     'email' => $email,
                     'message' => $message,
                     'weblink' => 'https://app.nurse.cmu.ac.th/appdev/communication-nurse',
-                    'color' => '#70e000'
+                    'color' => '#0ead69'
                 )),
                 CURLOPT_HTTPHEADER => array(
                     'Authorization: FON_ConnectAPI01',

@@ -105,7 +105,7 @@
                                     } elseif ($row['communicate'] == "comm4") {
                                         echo "ประชุม / อบรม / สัมมนา";
                                     } elseif ($row['communicate'] == "comm5") {
-                                        echo "กิจกรรมที่สร้างสรรค์ต่อสังคม";
+                                        echo "ทํานุบํารุงศิลปวัฒนธรรม และ สิ่งแวดลอม";
                                     } else {
                                         echo "ไม่ทราบ";
                                     }

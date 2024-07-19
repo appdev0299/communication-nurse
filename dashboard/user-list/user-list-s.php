@@ -101,7 +101,6 @@
                                                                 </button>
                                                                 <div class="dropdown-menu">
                                                                     <a class="dropdown-item" href="details-s?id=<?= $t1['id']; ?>?ref=<?= $t1['ref']; ?>"><i class="bx bx-edit-alt me-1"></i>เปิด</a>
-                                                                    <a class="dropdown-item" href="javascript:void(0);"><i class="bx bx-trash me-1"></i> Delete</a>
                                                                 </div>
                                                             </div>
                                                         </td>
