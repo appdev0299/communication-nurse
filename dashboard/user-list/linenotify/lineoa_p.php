@@ -27,6 +27,9 @@ if (isset($_GET['id'])) {
                     case 3:
                         $status_user_text = 'ส่งกลับเพื่อแก้ไข';
                         break;
+                    case 4:
+                        $status_user_text = 'ส่งมอบ';
+                        break;
                     case 0:
                         $status_user_text = 'คำร้องขอผิดพลาด';
                         break;

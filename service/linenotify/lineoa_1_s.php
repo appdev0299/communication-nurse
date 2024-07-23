@@ -4,7 +4,7 @@ include_once('../config/connect.php');
 if (isset($_GET['id'])) {
     $id = $_GET['id'];
     try {
-        $stmt = $conn->prepare("SELECT status_sendline_user, email,ref, title,communicate, status_user FROM ccfn_form_s WHERE id = :id");
+        $stmt = $conn->prepare("SELECT status_sendline_user, email,ref, title,communicate, status_user,date_a FROM ccfn_form_s WHERE id = :id");
         $stmt->bindParam(':id', $id, PDO::PARAM_INT);
         $stmt->execute();
         $result = $stmt->fetch(PDO::FETCH_ASSOC);
@@ -47,8 +47,11 @@ if (isset($_GET['id'])) {
             } else {
                 $communicate_text = 'ด้านไม่ทราบ';
             }
-
-            $message = $status_user_text .  "\n" . 'เลขอ้างอิง :  ' . $ref . "\n" . 'เรื่อง : ' . $title . "\n" . 'ด้าน : ' . $communicate_text;
+            // Convert date_a to Thai time format
+            $dateTime = new DateTime($date_a, new DateTimeZone('UTC')); // Assuming date_a is in UTC
+            $dateTime->setTimezone(new DateTimeZone('Asia/Bangkok'));
+            $formattedDateA = $dateTime->format('d/m/Y H:i:s');
+            $message = 'เลขอ้างอิง : ' . $ref . "\n" . 'เรื่อง : ' . $title . "\n" . 'วันที่ต้องการใช้ : ' . $formattedDateA . "\n" .  "\n" . '-ระบบการบริการออนไลน์ หน่วยสื่อสารและภาพลักษณ์องค์กร-';
 
             $curl = curl_init();
             curl_setopt_array($curl, array(
@@ -83,7 +86,7 @@ if (isset($_GET['id'])) {
             curl_close($curl);
 
             // อัปเดตสถานะการส่งไลน์ในฐานข้อมูล
-            $stmt = $conn->prepare("UPDATE ccfn_form_s SET status_Sendline_user = 1 WHERE id = :id");
+            $stmt = $conn->prepare("UPDATE ccfn_form_s SET status_sendline_user = 1 WHERE id = :id");
             $stmt->bindParam(':id', $id, PDO::PARAM_INT);
             $stmt->execute();
         } else {

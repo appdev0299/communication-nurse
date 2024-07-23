@@ -68,9 +68,6 @@
                                                         </td>
                                                         <td>
                                                             <ul class="list-unstyled users-list m-0 avatar-group d-flex align-items-center">
-                                                                <li data-bs-toggle="tooltip" data-popup="tooltip-custom" data-bs-placement="top" class="avatar avatar-sm pull-up" title="<?= $t1['details']; ?>">
-                                                                    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAOpJREFUSEvtltERgjAMhn8mUSdRJ0EnUSdRJxEnUSfR/neJB1xpSLGnD+allNJ8SZomVCgsVWH9iAFWAHYAOKbkEBb3loExwA3A3Noo6yYkBniOUE7F9JKShOQCuI/hMSFTALTehEwFmJBPAPqQjs5cQCoP/gDzlvxWiGgNy8ZG7D7JvAbwCM86v7T8cnmwAHAMyrYCmUkRXMu8iRRGN0Cr6znACKBHCrwDWLY8pCNuAKurFjVaTABDdJX3Wo80Si6AmTKRD74P8DScvgM8EybGW4ZaJjNnbFdTZTwfNh+OSUBO3Af3FP+reAEdsDIZdiGg0gAAAABJRU5ErkJggg==" />
-                                                                </li>
                                                                 <li class="user-details" style="padding: 10px;">
                                                                     <strong><?= $t1['ref']; ?></strong><br>
                                                                 </li>

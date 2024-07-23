@@ -68,7 +68,7 @@
                                                         </td>
                                                         <td>
                                                             <ul class="list-unstyled users-list m-0 avatar-group d-flex align-items-center">
-                                                              
+
                                                                 <li class="user-details" style="padding: 10px;">
                                                                     <strong><?= $t1['ref']; ?></strong><br>
                                                                 </li>
@@ -120,7 +120,6 @@
                                         </tr>
                                     </tfoot>
                                 </table>
-
                             </div>
                         </div>
                     </div>
