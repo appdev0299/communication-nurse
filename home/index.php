@@ -13,11 +13,18 @@ require_once '../oauth/sessionlogin.php'
     <main class="main">
 
         <section id="hero" class="hero section">
-           
-                <video autoplay muted loop width="100%" height="50%">
-                    <source src="../assets/img/interconference_Final.mp4" type="video/mp4">
-                </video>
-       
+            <div class="hero-bg">
+                <img src="../assets/img/hero-bg-light.svg" alt="">
+            </div>
+            <div class="container text-center">
+                <div class="d-flex flex-column justify-content-center align-items-center">
+                    <h1 data-aos="fade-up"><span><?php echo $lang['title_m'] ?></span></h1>
+                    <p data-aos="fade-up" data-aos-delay="100"><?php echo $lang['title1'] ?><br></p>
+                    <div class="d-flex" data-aos="fade-up" data-aos-delay="200">
+                    </div>
+                </div>
+            </div>
+
         </section>
 
 

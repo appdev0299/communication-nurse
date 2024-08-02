@@ -19,6 +19,7 @@ require_once '../oauth/session.php'
                     <ul>
                         <li><a href="../service/ccfn-form-online-social?lang=<?php echo $_SESSION['lang']; ?>"><?php echo $lang['about1'] ?></a></li>
                         <li><a href="../service/ccfn-form-online-production?lang=<?php echo $_SESSION['lang']; ?>"><?php echo $lang['about2'] ?></a></li>
+                        <li><a href="../mediastorage/?lang=<?php echo $_SESSION['lang']; ?>"><?php echo $lang['about3'] ?></a></li>
                     </ul>
                 </li>
                 <li><a href="../ci-details/details?lang=<?php echo $_SESSION['lang']; ?>"><?php echo $lang['ci'] ?></a></li>

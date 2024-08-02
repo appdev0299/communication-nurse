@@ -2,7 +2,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
 
-    <title>CCFN-Corporate Communications Faculty of Nursing CMU</title>
+    <title>Communications and Branding Department-NURSECMU</title>
 
     <meta name="description" content="" />
 

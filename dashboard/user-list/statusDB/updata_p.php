@@ -15,35 +15,31 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     if ($stmt->execute()) {
         echo "
-            <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/sweetalert2@11.7.27/dist/sweetalert2.min.css'>
-            <script src='https://cdn.jsdelivr.net/npm/sweetalert2@11.7.27/dist/sweetalert2.all.min.js'></script>
+            <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css'>
+            <script src='https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.all.min.js'></script>
             <script>
                 Swal.fire({
-                    title: 'สำเร็จ',
-                    text: 'บันทึกข้อมูลเรียบร้อยแล้ว',
                     icon: 'success',
-                    confirmButtonColor: '#003049',
-                    confirmButtonText: 'ตกลง'
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        window.location.href = window.location.href;
-                    }
+                    title: 'อัพเดทข้อมูลสำเร็จ',
+                    showConfirmButton: false,
+                    timer: 3000
+                }).then(function() {
+                    window.history.back();
                 });
-            </script>
-        ";
+            </script>";
     } else {
         echo "
-            <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/sweetalert2@11.7.27/dist/sweetalert2.min.css'>
-            <script src='https://cdn.jsdelivr.net/npm/sweetalert2@11.7.27/dist/sweetalert2.all.min.js'></script>
+            <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css'>
+            <script src='https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.all.min.js'></script>
             <script>
                 Swal.fire({
-                    title: 'ผิดพลาด',
-                    text: 'เกิดข้อผิดพลาดในการบันทึกข้อมูล',
                     icon: 'error',
-                    confirmButtonColor: '#003049',
-                    confirmButtonText: 'ตกลง'
+                    title: 'เกิดข้อผิดพลาดในการอัพเดทข้อมูล',
+                    showConfirmButton: false,
+                    timer: 3000
+                }).then(function() {
+                    window.history.back();
                 });
-            </script>
-        ";
+            </script>";
     }
 }

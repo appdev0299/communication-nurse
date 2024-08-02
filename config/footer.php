@@ -25,14 +25,14 @@
                     <li><a href="../home/?lang=<?php echo $_SESSION['lang']; ?>" class="active"><?php echo $lang['home'] ?></a></li>
                     <li><a href="../team/?lang=<?php echo $_SESSION['lang']; ?>"><?php echo $lang['team'] ?></a></li>
                     <li><a href="../status/?lang=<?php echo $_SESSION['lang']; ?>"><?php echo $lang['check_status'] ?></a></li>
-                    <li><a href="../service/ccfn-form-online-social?lang=<?php echo $_SESSION['lang']; ?>">Online Media Relations</a></li>
-                    <li><a href="../service/ccfn-form-online-production?lang=<?php echo $_SESSION['lang']; ?>">Media Production Design</a></li>
+                    <li><a href="../service/ccfn-form-online-social?lang=<?php echo $_SESSION['lang']; ?>"><?php echo $lang['about1'] ?></a></li>
+                    <li><a href="../service/ccfn-form-online-production?lang=<?php echo $_SESSION['lang']; ?>"><?php echo $lang['about2'] ?></a></li>
             </div>
         </div>
     </div>
 
     <div class="container copyright text-center mt-4">
-        <p>© <span>Copyright</span> <strong class="px-1 sitename">Corporate Communications Faculty of Nursing CMU</strong><span>All Rights Reserved</span></p>
+        <p>© <span>Copyright</span> <strong class="px-1 sitename">Communications and Branding Department-NURSECMU</strong><span>All Rights Reserved</span></p>
 
     </div>
 

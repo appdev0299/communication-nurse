@@ -2,10 +2,10 @@
 $lang = array(
     // menu
     "home" => "Home",
-    "team" => "Team",
-    "check_status" => "Check status",
-    "services" => "Online services",
-    "ci" => "Ci Brand",
+    "team" => "Administration",
+    "check_status" => "Check Status",
+    "services" => "PR Services ",
+    "ci" => "Branding Toolkit and Resources",
     "dpdf" => "Download form",
     "pdf" => "Form for receiving services from the Communication and Corporate Image Unit",
     "status_user1" => "Request successful",
@@ -24,33 +24,35 @@ $lang = array(
     "logout" => "Logout",
     // menu
     // home
-    "title_m" => "Corporate Image and Communications Department",
-    "about" => "Communication and Organizational Image Unit Founded on October 1, 2023, the Communication and Organizational Image Unit was established by merging personnel from the Public Relations and Organizational Image Communication departments of the Faculty of Nursing, Chiang Mai University. The unit is led by Assistant Professor Dr. Nonglak Chalermsuk, who serves as the Deputy Dean for Strategic Movement, Communication, and Organizational Image.",
-    "about1" => "Online Media Public Relations",
-    "about2" => "Public Relations Media Design",
+    "title1" => "Online public relations service system",
+    "title_m" => "Communications and Branding Department",
+    "about" => "The Department of Communications and Branding was established on October 1, 2023, by integrating the Public Relations Department and the Faculty of Nursing Branding Unit, Chiang Mai University. Dr. Nonglak Chaloumsuk, the Associate Dean for Strategic Driving, Communications, and Branding, leads the department. Our Services We offer comprehensive services including: ",
+    "about1" => "Public Relations and Digital Campaigns",
+    "about2" => "Branding Strategies & Graphic Design Services",
+    "about3" => "Media storage",
     "social1" => "Website, Facebook, Twitter, Instagram, YouTube",
     "social2" => "Infographics, Posters, Train Station Signs, Vinyl Banners",
     // home
     // foodter
     "address" => "Faculty of Nursing, CMU.110/406 Inthawaroros road, Suthep, Muang, Chiang Mai, Thailand 50200",
-    "phone" => "Phone",
+    "phone" => "Contact Number",
     "email" => "Email",
     // foodter
     // formonline
-    "fullname" => "Full Name",
-    "department" => "Department",
-    "personnel" => "Personnel Type",
-    "communicate" => "Communication Category",
-    "social" => "Social Media Channels",
+    "fullname" => "Name-Surname",
+    "department" => "Organization/Department",
+    "personnel" => "Requestor Details",
+    "communicate" => "Communication Objective ",
+    "social" => "Media/Channels",
     "size" => "Size",
     "file_upload" => "Upload File",
-    "url_upload" => "Share via OneDrive, GoogleDrive, etc.",
+    "url_upload" => "Share via OneDrive, Google Drive, and more",
     "sent_email" => "Send file via Email",
     "sent_url" => "Send file via OneDrive, GoogleDrive",
-    "date_a" => "Desired Usage Date",
-    "title" => "News Title",
-    "details" => "News Details",
-    "submit" => "Submit",
+    "date_a" => "Event Date",
+    "title" => "Topic/Headline/Subject",
+    "details" => "Details",
+    "submit" => "Send Information ",
     "select" => "Please Select",
     "comm1" => "Executive",
     "comm2" => "Staff",
@@ -65,6 +67,14 @@ $lang = array(
     "department6" => "Nursing Service Center",
     "department7" => "Center of Excellence in Nursing",
     // formonline
+
+    "data1" => "Log Number",
+    "data2" => "Contact Person",
+    "data3" => "Details",
+    "data4" => "Others",
+
+
+
     "lang_en" => "English",
     "lang_th" => "Thai"
 );

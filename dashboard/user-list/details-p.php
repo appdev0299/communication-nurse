@@ -160,7 +160,7 @@
                                                         </div>
                                                     </div>
                                                     <div class="row mb-3" id="status_admin" style="display: none;">
-                                                        <label class="col-sm-2 col-form-label" for="basic-default-date">สถานะผู้ดูแลระบบ</label>
+                                                        <label class="col-sm-2 col-form-label" for="basic-default-date">หมายเหตุ</label>
                                                         <div class="col-sm-10">
                                                             <input type="text" class="form-control" id="status_admin" name="status_admin" value="<?= $row['status_admin']; ?>" />
                                                         </div>
