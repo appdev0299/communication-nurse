@@ -1,5 +1,3 @@
-<meta http-equiv="Content-Type" content="text/html; charset=utf8">
-
 <?php
 session_start();
 
@@ -44,7 +42,29 @@ if (isset($_GET['error'])) {
         } else {
             $json = json_decode($response, true);
             $_SESSION['login_info'] = $json;
-            header("Location: ../home/");
+
+            $conn = new mysqli('localhost', 'root', '', 'communication-nurse');
+
+            if ($conn->connect_error) {
+                die("Connection failed: " . $conn->connect_error);
+            }
+
+            $cmuitaccount = $json['cmuitaccount'];
+            $sql = "SELECT * FROM admin WHERE cmuitaccount = ?";
+            $stmt = $conn->prepare($sql);
+            $stmt->bind_param("s", $cmuitaccount);
+            $stmt->execute();
+            $result = $stmt->get_result();
+
+            // ตรวจสอบว่ามี cmuitaccount ในฐานข้อมูลหรือไม่
+            if ($result->num_rows > 0) {
+                header("Location: callsession.php");
+            } else {
+                header("Location: ../home/");
+            }
+
+            $stmt->close();
+            $conn->close();
             exit;
         }
     } else {
@@ -84,4 +104,3 @@ function get_oauth_token($code, $oauth_url)
     $authObj = json_decode($json_response);
     return $authObj->access_token;
 }
-?>
