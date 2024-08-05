@@ -12,8 +12,14 @@ require_once '../oauth/session.php'
             <ul>
                 <li><a href="../home/?lang=<?php echo $_SESSION['lang']; ?>" class="active"><?php echo $lang['home'] ?></a></li>
                 <li><a href="../team/?lang=<?php echo $_SESSION['lang']; ?>"><?php echo $lang['team'] ?></a></li>
-                <li><a href="../status/?lang=<?php echo $_SESSION['lang']; ?>"><?php echo $lang['check_status'] ?></a></li>
+                <li class="dropdown">
+                    <a><span><?php echo $lang['check_status'] ?></span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
+                    <ul>
+                        <li><a href="../status/status_s?lang=<?php echo $_SESSION['lang']; ?>"><?php echo $lang['about1'] ?></a></li>
+                        <li><a href="../status/status_p?lang=<?php echo $_SESSION['lang']; ?>"><?php echo $lang['about2'] ?></a></li>
 
+                    </ul>
+                </li>
                 <li class="dropdown">
                     <a href="../home/index?lang=<?php echo $_SESSION['lang']; ?>"><span><?php echo $lang['services'] ?></span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
                     <ul>

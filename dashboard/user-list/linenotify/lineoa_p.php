@@ -30,7 +30,7 @@ if (isset($_GET['id'])) {
                 $status_user_text = 'คำร้องสำเร็จ';
                 break;
             case 2:
-                $status_user_text = 'กำเนินการตามคำร้องขอ';
+                $status_user_text = 'ดำเนินการตามคำร้องขอ';
                 break;
             case 3:
                 $status_user_text = 'ส่งกลับเพื่อแก้ไข';

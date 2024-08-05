@@ -168,8 +168,7 @@ require_once '../oauth/session.php'
                                 </div>
                             </div>
                         </form>
-                        <?php include_once('save_data_s.php');
-                        include_once('notifyservice.php'); ?>
+                        <?php include_once('save_data_s.php'); ?>
                     </div>
                 </div>
             </div>

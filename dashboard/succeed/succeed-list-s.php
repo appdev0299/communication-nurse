@@ -93,7 +93,7 @@
                                                             } elseif ($status_user == 1) {
                                                                 echo '<span class="badge bg-label-secondary me-1">คำร้องสำเร็จ</span>';
                                                             } elseif ($status_user == 2) {
-                                                                echo '<span class="badge bg-label-info me-1">กำเนินการตามคำร้องขอ</span>';
+                                                                echo '<span class="badge bg-label-info me-1">ดำเนินการตามคำร้องขอ</span>';
                                                             } elseif ($status_user == 3) {
                                                                 echo '<span class="badge bg-label-warning me-1">ส่งกลับเพื่อแก้ไข</span>';
                                                             } elseif ($status_user == 4) {

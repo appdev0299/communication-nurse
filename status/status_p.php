@@ -33,7 +33,7 @@
 
                             $cmu_account = $_SESSION['login_info']['cmuitaccount'];
 
-                            $stmt = $conn->prepare("SELECT * FROM ccfn_form_s WHERE email = :email");
+                            $stmt = $conn->prepare("SELECT * FROM ccfn_form_p WHERE email = :email");
                             $stmt->bindParam(':email', $cmu_account);
                             $stmt->execute();
                             $result = $stmt->fetchAll();
@@ -47,6 +47,7 @@
                                             <th><?php echo $lang['data1'] ?></th>
                                             <th><?php echo $lang['data2'] ?></th>
                                             <th><?php echo $lang['data3'] ?></th>
+                                            <th><?php echo $lang['data5'] ?></th>
                                             <th>#</th>
                                         </tr>
                                     </thead>
@@ -58,18 +59,50 @@
                                                 <td><?php echo $index++; ?></td>
                                                 <td>
                                                     <div class="table-cell-content">
-                                                        <div><b><?php echo $t1['fullname']; ?></b></div>
-                                                        <div><?php echo $t1['department']; ?></div>
-                                                        <div><?php echo $t1['email']; ?> <?php echo $t1['tel']; ?></div>
-                                                    </div>
-                                                </td>
-                                                <td>
-                                                    <div class="table-cell-content">
-                                                        <p><b><?php echo $lang['social']; ?></b> : <?php echo $t1['social']; ?></p>
-                                                        <textarea class="form-control" style="width: 750px;" rows="7" readonly>(<?php echo $lang['title']; ?> : <?php echo $t1['title']; ?>) <?php echo $t1['details']; ?></textarea>
+                                                        <div><b><?php echo htmlspecialchars($t1['fullname']); ?></b></div>
+                                                        <div><?php echo htmlspecialchars($t1['email']); ?> <?php echo htmlspecialchars($t1['tel']); ?></div>
+                                                        <div>
+                                                            <?php
+                                                            $status_user_text = '';
+                                                            $badge_class = '';
+                                                            switch ($t1['status_user']) {
+                                                                case 1:
+                                                                    $status_user_text = 'คำร้องสำเร็จ';
+                                                                    $badge_class = 'bg-success';
+                                                                    break;
+                                                                case 2:
+                                                                    $status_user_text = 'ดำเนินการตามคำร้องขอ';
+                                                                    $badge_class = 'bg-primary';
+                                                                    break;
+                                                                case 3:
+                                                                    $status_user_text = 'ส่งกลับเพื่อแก้ไข';
+                                                                    $badge_class = 'bg-warning';
+                                                                    break;
+                                                                case 4:
+                                                                    $status_user_text = 'ส่งมอบ';
+                                                                    $badge_class = 'bg-info';
+                                                                    break;
+                                                                case 0:
+                                                                    $status_user_text = 'คำร้องขอผิดพลาด';
+                                                                    $badge_class = 'bg-danger';
+                                                                    break;
+                                                                default:
+                                                                    $status_user_text = 'สถานะไม่ทราบ';
+                                                                    $badge_class = 'bg-secondary';
+                                                                    break;
+                                                            }
+                                                            ?>
+                                                            <span class="badge <?php echo htmlspecialchars($badge_class); ?>"><?php echo htmlspecialchars($status_user_text); ?></span>
+                                                        </div>
                                                     </div>
                                                 </td>
 
+                                                <td>
+                                                    <p><a href="../files/<?php echo $t1['production_file']; ?>" target="_blank"> <i class="bi bi-filetype-pdf"></i><span> <?php echo $t1['production_file']; ?></span></a></p>
+                                                </td>
+                                                <td>
+                                                    <p><?php echo $t1['created_at']; ?></p>
+                                                </td>
                                                 <td>
                                                     <div class="dropdown">
                                                         <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
@@ -86,58 +119,6 @@
                                 </table>
                             </div>
                         </div>
-                        <!-- <div class="service-box">
-                            <?php
-                            $stmt = $conn->prepare("SELECT * FROM ccfn_form_p WHERE email = :email");
-                            $stmt->bindParam(':email', $cmu_account);
-                            $stmt->execute();
-                            $result = $stmt->fetchAll();
-                            $result = array_reverse($result);
-                            ?>
-
-                            <div class="table-responsive">
-                                <h5>บริการออกแบบสื่อประชาสัมพันธ์</h5>
-                                <table id="myTable" class="table table-bordered" style="width: 100%;">
-                                    <thead>
-                                        <tr>
-                                            <th>ลำดับ</th>
-                                            <th>ข้อมูลติดต่อ</th>
-                                            <th>หัวข้อ</th>
-                                            <th>รายละเอียด</th>
-                                            <th>เพิ่มเติม</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <?php
-                                        $index = 1; // ตัวแปรสำหรับเก็บลำดับ
-                                        foreach ($result as $t1) { ?>
-                                            <tr>
-                                                <td><?php echo $index++; ?></td>
-                                                <td>
-                                                    <div class="table-cell-content">
-                                                        <div><strong><?php echo $t1['fullname']; ?> <?php echo $t1['department']; ?></strong></div>
-                                                        <div><?php echo $t1['email']; ?> <?php echo $t1['tel']; ?></div>
-                                                    </div>
-                                                </td>
-                                                <td>
-                                                    <div class="table-cell-content">
-                                                        <textarea class="form-control" style="height: 150px; width: 250px; border: none; resize: none;" disabled><?php echo $t1['communicate']; ?></textarea>
-                                                    </div>
-                                                </td>
-                                                <td>
-                                                    <div class="table-cell-content">
-                                                        <a href="../files/<?php echo $t1['production_file']; ?>" target="_blank"> <i class="bi bi-filetype-pdf"></i><span><?php echo $t1['production_file']; ?></span></a>
-                                                    </div>
-                                                </td>
-                                                <td>
-                                                    <a class="btn btn-primary" href="../service/ccfn-form-online-status-p?id=<?php echo $t1['id']; ?>&ref=<?php echo $t1['ref']; ?>?lang=<?php echo $_SESSION['lang']; ?>" role="button">ตรวจสอบ</a>
-                                                </td>
-                                            </tr>
-                                        <?php } ?>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div> -->
                     </div>
                 </div>
             </div>
