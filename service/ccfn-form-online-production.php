@@ -1,5 +1,5 @@
 <?php
-require_once '../oauth/sessionlogin.php'
+require_once '../oauth/session.php'
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -76,7 +76,6 @@ require_once '../oauth/sessionlogin.php'
                                         <option value="Twitter">ขนาด Twitter</option>
                                         <option value="Instagram">ขนาด Instagram</option>
                                         <option value="Youtube">ขนาด Youtube</option>
-                                        <option value="other">อื่นๆ (โปรดระบุ)</option>
                                     </select>
                                     <input type="text" name="other_social" id="other_social" class="form-control mt-2" placeholder="โปรดระบุ" style="display:none;">
                                 </div>
@@ -143,7 +142,8 @@ require_once '../oauth/sessionlogin.php'
                         </form>
 
 
-                        <?php include_once('save_data_p.php'); ?>
+                        <?php include_once('save_data_p.php');
+                        ?>
                     </div>
 
                 </div>

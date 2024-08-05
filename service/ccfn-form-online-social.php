@@ -1,5 +1,5 @@
 <?php
-require_once '../oauth/sessionlogin.php'
+require_once '../oauth/session.php'
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -168,7 +168,8 @@ require_once '../oauth/sessionlogin.php'
                                 </div>
                             </div>
                         </form>
-                        <?php include_once('save_data_s.php'); ?>
+                        <?php include_once('save_data_s.php');
+                        include_once('notifyservice.php'); ?>
                     </div>
                 </div>
             </div>

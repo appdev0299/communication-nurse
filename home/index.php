@@ -1,5 +1,5 @@
 <?php
-require_once '../oauth/sessionlogin.php'
+require_once '../oauth/session.php'
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -56,7 +56,7 @@ require_once '../oauth/sessionlogin.php'
 
             </div>
 
-        </section><!-- /Features Details Section -->
+        </section>
 
         <!-- Services Section -->
         <section id="services" class="services section">

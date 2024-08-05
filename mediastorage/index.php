@@ -1,5 +1,5 @@
 <?php
-require_once '../oauth/sessionlogin.php'
+require_once '../oauth/session.php'
 ?>
 <!DOCTYPE html>
 <html lang="en">

@@ -1,10 +1,10 @@
 <?php
-session_start();
+
 
 // Set up the login_info data
-// $_SESSION['login_info'] = array(
-//     'cmuitaccount' => 'phatcharapon.p@cmu.ac.th',
-// );
+$_SESSION['login_info'] = array(
+    'cmuitaccount' => 'phatcharapon.p@cmu.ac.th',
+);
 
 // Check if user is logged in
 if (!isset($_SESSION['login_info'])) {

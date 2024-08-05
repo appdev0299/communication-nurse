@@ -2,7 +2,7 @@
     <div class="app-brand demo">
         <a href="../home/index" class="app-brand-link">
             <span class="app-brand-logo demo">
-                <img src="../../assets/img/logo.png" alt="Logo" width="25%">
+                <img src="../../assets/img/logo.png" alt="Logo" width="50%">
             </span>
         </a>
 

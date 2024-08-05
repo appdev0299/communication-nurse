@@ -73,14 +73,14 @@
                                                             <input type="text" class="form-control" id="department" name="department" value="<?= htmlspecialchars($row['department']); ?>" />
                                                         </div>
                                                     </div>
-                                                    <div class="row mb-3">
+                                                    <!-- <div class="row mb-3">
                                                         <label class="col-sm-2 col-form-label" for="basic-default-email">อีเมล</label>
                                                         <div class="col-sm-10">
                                                             <div class="input-group input-group-merge">
                                                                 <input type="text" class="form-control" id="email" name="email" value="<?= htmlspecialchars($row['email']); ?>" />
                                                             </div>
                                                         </div>
-                                                    </div>
+                                                    </div> -->
                                                     <div class="row mb-3">
                                                         <label class="col-sm-2 col-form-label" for="basic-default-phone">โทรศัพท์</label>
                                                         <div class="col-sm-10">
@@ -88,7 +88,7 @@
                                                         </div>
                                                     </div>
                                                     <div class="row mb-3">
-                                                        <label class="col-sm-2 col-form-label" for="basic-default-Social">ช่องทางการประชาสัมพันธ์</label>
+                                                        <label class="col-sm-2 col-form-label" for="basic-default-Social">ขนาดสื่อ</label>
                                                         <div class="col-sm-10">
                                                             <input type="text" class="form-control Social-mask" id="social" name="social" value="<?= htmlspecialchars($row['social']); ?>" />
                                                         </div>
@@ -113,7 +113,12 @@
                                                             <input type="text" class="form-control communicate-mask" id="communicate" name="communicate" value="<?= htmlspecialchars($communicate_text); ?>" />
                                                         </div>
                                                     </div>
-
+                                                    <div class="row mb-3">
+                                                        <label class="col-sm-2 col-form-label" for="basic-default-email">ส่งมอบผ่าน</label>
+                                                        <div class="col-sm-10">
+                                                            <input type="text" class="form-control email-mask" id="email" name="email" value="<?= htmlspecialchars($row['option']); ?> (<?= htmlspecialchars($row['email']); ?>)" />
+                                                        </div>
+                                                    </div>
                                                     <div class="row mb-3">
                                                         <label class="col-sm-2 col-form-label" for="basic-default-date">วันที่ต้องการประชาสัมพันธ์</label>
                                                         <div class="col-sm-10">
